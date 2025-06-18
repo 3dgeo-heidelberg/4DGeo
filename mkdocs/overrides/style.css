@@ -1,0 +1,5 @@
+/* Custom theme colors */
+:root {
+  --md-primary-fg-color: #c92434;
+  --md-accent-fg-color: #881823;
+}
