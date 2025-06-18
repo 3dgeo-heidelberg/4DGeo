@@ -1,4 +1,3 @@
-
 name: Deploy to GitHub Pages
 
 on:
@@ -11,25 +10,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '23'  # Specify the Node.js version
+          node-version: '23'  
 
-      # Step 3: Install dependencies
       - name: Install Dependencies
         run: npm install
 
-      # Step 4: Build the React app
       - name: Build React App
         run: npm run build
+        
 
-      # Step 5: Deploy to GitHub Pages
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install mkdocs
+        run: pip install mkdocs
+
+      - name: Build MkDocs into React build folder
+        run: mkdocs build -d build/docs
+
+
       - name: Deploy to GitHub Pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
