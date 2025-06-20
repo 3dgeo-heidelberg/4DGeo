@@ -30,31 +30,26 @@ export default function View2D({
 
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.svg'];
 
-    // Helper: Check if string ends with known image extensions
     const isImageUrlOrPath = (str) => {
         try {
-        const url = new URL(str);
-        return imageExtensions.some(ext => url.pathname.toLowerCase().endsWith(ext));
+            const url = new URL(str);
+            return imageExtensions.some(ext => url.pathname.toLowerCase().endsWith(ext));
         } catch {
-        // Not a valid URL, maybe just a local path
-        return imageExtensions.some(ext => str.toLowerCase().endsWith(ext));
+            return imageExtensions.some(ext => str.toLowerCase().endsWith(ext));
         }
     };
 
-    // Helper: Check for data:image/...;base64,... format
     const isBase64DataUri = (str) => {
         return /^data:image\/[a-zA-Z]+;base64,/.test(str);
     };
 
-    // Helper: Check if it's a raw base64 string (not prefixed)
     const isRawBase64Image = (str) => {
         try {
-        const decoded = atob(str);
-        // crude check: should be reasonably long and contain binary-like characters
-        // eslint-disable-next-line no-control-regex
-        return decoded.length > 100 && /[\x00-\x08\x0E-\x1F]/.test(decoded.slice(0, 100));
+            const decoded = atob(str);
+            // eslint-disable-next-line no-control-regex
+            return decoded.length > 100 && /[\x00-\x08\x0E-\x1F]/.test(decoded.slice(0, 100));
         } catch {
-        return false;
+            return false;
         }
     };
 
@@ -148,6 +143,24 @@ export default function View2D({
                             }) : "")
                         ).addTo(normalLayer.current)
                         leafletRectangle.addTo(clusteredLayer.current);
+                        return;
+                    case 'Line':
+                        const leafletLine = L.polyline(
+                            geoObject.geometry.coordinates, {
+                                color: typeColors.get(geoObject.type) || "black",
+                                weight: 1,
+                                opacity: 1,
+                                fillOpacity: 0.65,
+                                radius: 4,
+                                crs: L.CRS.Simple
+                            }
+                        ).bindTooltip(
+                            `<b>Type:</b> ${geoObject.type}<br>` +
+                            (geoObject.customEntityData ? Object.entries(geoObject.customEntityData).map((item, i) => {
+                                return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
+                            }) : "")
+                        ).addTo(normalLayer.current)
+                        leafletLine.addTo(clusteredLayer.current);
                         return;
                     default:
                         return;
