@@ -45,9 +45,17 @@ plugins:
 markdown_extensions:
   - attr_list
   - abbr
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
 
 nav:
   - Home: index.md
+  - Application: Application.md
   - Notebook examples:
     - Main AImon5.0 monitoring pipeline: main.ipynb
     - Adaptive monitoring: adaptive_monitoring.ipynb
