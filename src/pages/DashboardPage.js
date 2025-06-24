@@ -7,6 +7,7 @@ import { Button, Divider, styled } from "@mui/material";
 import { addDays } from "date-fns";
 import ColorAssignment from "../components/dashboard-creation/ColorAssignment";
 import AddIcon from '@mui/icons-material/Add'
+import L from "leaflet";
 
 function DashboardPage() {
     const urlParams = useSearchParams()[0]
@@ -20,6 +21,8 @@ function DashboardPage() {
     const [dateRange, setDateRange] = useState({ startDate: 0, endDate: Date.now()});
     const [sliderRange, setSliderRange] = useState([0, 100]);
     const [dateTimeRange, setDateTimeRange] = useState({ startDate: 0, endDate: Date.now()})
+
+    const [boundingBox, setBoundingBox] = useState(null);
 
     async function fetchCustomHeader() {
         setHtmlHeaderString(await (await fetch(`custom/custom_html/dashboard_page_header.html`)).text());
@@ -138,6 +141,48 @@ function DashboardPage() {
         reader.readAsText(file)
     }
 
+    const downloadFile = ({ data }) => {
+        const blob = new Blob([data], { type: 'application/json' })
+        const a = document.createElement('a')
+        a.download = 'exported_filtered_data.json'
+        a.href = window.URL.createObjectURL(blob)
+        const clickEvt = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+        })
+        a.dispatchEvent(clickEvt)
+        a.remove()
+    }
+
+    const exportVisibleGeoobjects = (e) => {
+        e.preventDefault();
+        var temporalFilteredObservations = Array.from(observations).filter((observation) => {
+            return Date.parse(observation.startDateTime) >= dateTimeRange.startDate && Date.parse(observation.startDateTime) <= dateTimeRange.endDate;
+        }).sort((a, b) => a.startDateTime > b.startDateTime ? 1 : -1);
+
+        console.log(boundingBox)
+        if(boundingBox) {
+            temporalFilteredObservations = temporalFilteredObservations.map((observation) => {
+                return {
+                    ...observation,
+                    geoObjects: observation.geoObjects.filter((geoObject) => {
+                        if(geoObject.geometry.type === 'Polygon') {
+                            const bounds = L.latLngBounds(geoObject.geometry.coordinates.map(coord => L.latLng(coord[1], coord[0])));
+                            return boundingBox.intersects(bounds);
+                        } else if(geoObject.geometry.type === 'Point') {
+                            const point = L.latLng(geoObject.geometry.coordinates[1], geoObject.geometry.coordinates[0]);
+                            return boundingBox.contains(point);
+                        }
+                        return false;
+                    })
+                };
+            }).filter((observation) => observation.geoObjects.length > 0);
+        }
+
+        downloadFile({ data: JSON.stringify(temporalFilteredObservations) });
+    }
+
 
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
@@ -157,6 +202,13 @@ function DashboardPage() {
                 <div className="custom-header" dangerouslySetInnerHTML={{__html: htmlHeaderString}} />
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", gap: "1.2rem"}}>
                     <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} />
+                    <Button 
+                        variant="contained"
+                        startIcon={<AddIcon />}
+                        onClick={exportVisibleGeoobjects}
+                    >
+                        Export
+                    </Button>
                     <Button
                         component="label"
                         variant="contained"
@@ -184,6 +236,7 @@ function DashboardPage() {
                     setSliderRange={setSliderRange}
                     dateTimeRange={dateTimeRange}
                     setDateTimeRange={setDateTimeRange}
+                    setBoundingBox={setBoundingBox}
                 />
             </Box>
         </Box>

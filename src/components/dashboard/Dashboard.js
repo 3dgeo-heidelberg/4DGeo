@@ -8,7 +8,7 @@ import Chart from "../modules/Chart";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange }) {
+function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange, setBoundingBox }) {
 
     const filterObservations = (startDate, endDate) => {
         return Array.from(observations).filter((observation) => {
@@ -151,6 +151,7 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
                                 className="mapview"
                                 observations={filterObservations(dateTimeRange.startDate, dateTimeRange.endDate)}
                                 typeColors={typeColors}
+                                setBoundingBox={setBoundingBox}
                             />
                         </div>
                     );

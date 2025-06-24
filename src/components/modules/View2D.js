@@ -18,7 +18,8 @@ L.Icon.Default.mergeOptions({
 
 export default function View2D({ 
     observations,
-    typeColors
+    typeColors,
+    setBoundingBox
  }) {
     const clusteredLayer = useRef(null);
     const normalLayer = useRef(null);
@@ -180,6 +181,12 @@ export default function View2D({
             maxZoom={5}
             zoom={-2}
             scrollWheelZoom={true}
+            eventHandlers={{
+                moveend: (e) => {
+                    const bounds = e.target.getPixelBounds();
+                    setBoundingBox(bounds)
+                }
+            }}
         >
             <ImageOverlay
                 url={getImageSrc(backgroundImageData.url)}
@@ -188,6 +195,12 @@ export default function View2D({
                     [0, backgroundImageData.width]]
                 }
                 opacity={0.9}
+                eventHandlers={{
+                    moveend: (e) => {
+                        const bounds = e.target.getPixelBounds();
+                        setBoundingBox(bounds)
+                    }
+                }}
             />
             <LayersControl position="topright">
                 <LayersControl.BaseLayer checked name="Clustered geoobjects">
