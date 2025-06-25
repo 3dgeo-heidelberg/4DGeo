@@ -1,20 +1,27 @@
-import { Avatar, Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText, ListSubheader, Stack } from "@mui/material";
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, List, ListItem, ListItemButton, ListItemText, ListSubheader, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import './LandingPage.css';
 import DashboardCreation from "../components/dashboard-creation/DashboardCreation";
 import LandingPageHeader from "../components/LandingPageHeader";
+import LinkIcon from '@mui/icons-material/Link';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function LandingPage() {
   const [exampleDashboards, setExampleDashboards] = useState([]);
-  const [selectedTemplate, setSelectedTemplate] = useState(1);
+  const [selectedTemplate, setSelectedTemplate] = useState(-1);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [drawerIsClosing, setDrawerIsClosing] = useState(false);
+
+  const [loadFromPermalinkOpen, setLoadFromPermalinkOpen] = useState(false);
+  const [temporaryPermalink, setTemporaryPermalink] = useState("");
+  const [permalinkError, setPermalinkError] = useState(false);
   const drawerWidth = 250;
 
   const [layout, setLayout] = useState([]);
   const [url, setUrl] = useState("");
   const [interval, setInterval] = useState(0);
+  const [typeColors, setTypeColors] = useState(new Map());
 
 
   const handleDrawerClose = () => {
@@ -61,6 +68,31 @@ export default function LandingPage() {
     setInterval(0);
   }
 
+  const handleLoadFromPermalinkSelection = () => {
+    setLoadFromPermalinkOpen(true);
+  };
+
+  const handleLoadFromPermalinkClose = () => {
+    if (temporaryPermalink && temporaryPermalink.length > 0) {
+      try {
+        const url = new URL(temporaryPermalink);
+        console.log("Loading from permalink", url);
+        setLayout(JSON.parse(url.searchParams.get('layout') || []));
+        setUrl(url.searchParams.get('url') || "");
+        setInterval(parseInt(url.searchParams.get('interval')) || 0);
+        setTypeColors(new Map(JSON.parse(url.searchParams.get('typeColors') || new Map())));
+      }
+      catch (e) {
+        setPermalinkError(true);
+        return;
+      }
+    }
+    setLoadFromPermalinkOpen(false);
+    setPermalinkError(false);
+    setTemporaryPermalink("");
+    setSelectedTemplate(-1);
+  };
+
   const sideBarContent = [
     {
       kind: 'header',
@@ -74,7 +106,6 @@ export default function LandingPage() {
       title: example.title,
     });
   });
-
 
   const drawer = (
     <Stack className="example-dashboard-list">
@@ -104,14 +135,55 @@ export default function LandingPage() {
             <ListItemText primary={example.title} />
           </ListItemButton>
         ))}
+
+        <Divider sx={{ my: 1 }} />
+
         <ListItemButton
           selected={selectedTemplate === exampleDashboards.length}
           onClick={() => {
-            handleDashboardCreationSelection();
+            handleLoadFromPermalinkSelection();
             setSelectedTemplate(exampleDashboards.length);
           }}
         >
-          <Avatar variant="square" className="avatar" src="https://cdn-icons-png.flaticon.com/512/1250/1250615.png"/>
+          <Avatar className="avatar">
+            <LinkIcon />
+          </Avatar>
+          <ListItemText primary="Load from permalink" />
+        </ListItemButton>
+        <Dialog
+          open={loadFromPermalinkOpen}
+          onClose={handleLoadFromPermalinkClose}
+        >
+            <DialogTitle>Load Dashboard from Permalink</DialogTitle>
+            <Divider />
+
+            <DialogContent>
+                <TextField
+                  fullWidth
+                  value={temporaryPermalink} 
+                  onChange={e => setTemporaryPermalink(e.target.value)} 
+                  id="permalink-input-popup" 
+                  label="Permalink"
+                  error={permalinkError}
+                  helperText={permalinkError ? "Invalid permalink format." : ""}
+                />
+            </DialogContent>
+
+            <DialogActions>
+                <Button onClick={handleLoadFromPermalinkClose}>Load</Button>
+            </DialogActions>
+        </Dialog>
+
+        <ListItemButton
+          selected={selectedTemplate === exampleDashboards.length + 1}
+          onClick={() => {
+            handleDashboardCreationSelection();
+            setSelectedTemplate(exampleDashboards.length + 1);
+          }}
+        >
+          <Avatar className="avatar">
+            <EditIcon />
+          </Avatar>
           <ListItemText primary="Start from scratch" />
         </ListItemButton>
       </List>
@@ -121,13 +193,6 @@ export default function LandingPage() {
 
   return (
     <Box className="landing-page-container">
-      {/* <Drawer
-        variant="permanent"
-        className="side-bar"
-        sx={{ width: '15%', minWidth: 250 }}
-      >
-        
-      </Drawer> */}
       <Box>
         <Drawer
           variant="temporary"
@@ -183,6 +248,8 @@ export default function LandingPage() {
             setUrl={setUrl}
             interval={interval}
             setInterval={setInterval}
+            typeColors={typeColors}
+            setTypeColors={setTypeColors}
           />
         </Stack>
       </Box>

@@ -16,12 +16,10 @@ const minimumModuleSizes = new Map([
     ["Slider", {w: 2, h: 1}]
   ])
 
-function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterval }) {
+function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterval, typeColors, setTypeColors }) {
     const navigate = useNavigate();
     const [counterForKey, setCounterForKey] = useState(0)
     const [snackbarOpen, setSnackbarOpen] = useState(false);
-
-    const [typeColors, setTypeColors] = useState(new Map());
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
