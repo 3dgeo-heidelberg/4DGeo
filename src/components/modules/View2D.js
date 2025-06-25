@@ -144,7 +144,7 @@ export default function View2D({
                         ).addTo(normalLayer.current)
                         leafletRectangle.addTo(clusteredLayer.current);
                         return;
-                    case 'Line':
+                    case 'LineString':
                         const leafletLine = L.polyline(
                             geoObject.geometry.coordinates, {
                                 color: typeColors.get(geoObject.type) || "black",
