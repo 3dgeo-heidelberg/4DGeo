@@ -56,7 +56,7 @@ export default function ObservationSlider({ includedDateTimes, sliderRange, hand
                 min={Math.min(...includedDateTimes)}
                 max={Math.max(...includedDateTimes)}
                 value={sliderRange}
-                onChangeCommitted={(_, newValue) => handleSliderRangeChange(newValue)}
+                onChange={(_, newValue) => handleSliderRangeChange(newValue)}
                 disableSwap
                 className='observation-slider'
             />
