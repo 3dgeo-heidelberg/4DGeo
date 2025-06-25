@@ -7,6 +7,7 @@ import { Button, Divider, styled } from "@mui/material";
 import { addDays } from "date-fns";
 import ColorAssignment from "../components/dashboard-creation/ColorAssignment";
 import AddIcon from '@mui/icons-material/Add'
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import L from "leaflet";
 
 function DashboardPage() {
@@ -209,10 +210,10 @@ function DashboardPage() {
                     <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} />
                     <Button 
                         variant="contained"
-                        startIcon={<AddIcon />}
+                        startIcon={<ArrowOutwardIcon />}
                         onClick={exportVisibleGeoobjects}
                     >
-                        Export
+                        Export by map extent
                     </Button>
                     <Button
                         component="label"
