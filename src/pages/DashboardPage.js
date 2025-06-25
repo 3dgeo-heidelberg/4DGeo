@@ -168,7 +168,7 @@ function DashboardPage() {
                 return {
                     ...observation,
                     geoObjects: observation.geoObjects.filter((geoObject) => {
-                        if(geoObject.geometry.type === 'Polygon') {
+                        if(geoObject.geometry.type === 'Polygon' || geoObject.geometry.type === 'LineString') {
                             for (let i = 0; i < geoObject.geometry.coordinates.length; i++) {
                                 if (boundingBox.contains(L.latLng(geoObject.geometry.coordinates[i][0], geoObject.geometry.coordinates[i][1]))) {
                                     return true;

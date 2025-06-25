@@ -1,6 +1,7 @@
-import { ImageOverlay, useMapEvent, useMapEvents } from "react-leaflet";
+import { ImageOverlay, useMapEvents } from "react-leaflet";
 
 export default function BackgroundImage({ backgroundImageData, setBoundingBox }) {
+    // eslint-disable-next-line no-unused-vars
     const map = useMapEvents({
         moveend: (e) => {
             const bounds = e.target.getBounds();
@@ -12,11 +13,10 @@ export default function BackgroundImage({ backgroundImageData, setBoundingBox })
     
     const isImageUrlOrPath = (str) => {
         try {
-        const url = new URL(str);
-        return imageExtensions.some(ext => url.pathname.toLowerCase().endsWith(ext));
+            const url = new URL(str);
+            return imageExtensions.some(ext => url.pathname.toLowerCase().endsWith(ext));
         } catch {
-        // Not a valid URL, maybe just a local path
-        return imageExtensions.some(ext => str.toLowerCase().endsWith(ext));
+            return imageExtensions.some(ext => str.toLowerCase().endsWith(ext));
         }
     };
 
@@ -46,9 +46,6 @@ export default function BackgroundImage({ backgroundImageData, setBoundingBox })
 
     return (
         <ImageOverlay
-            eventHandlers={{
-                
-            }}
             url={getImageSrc(backgroundImageData.url)}
             bounds={
                 [[(-backgroundImageData.height), 0],
