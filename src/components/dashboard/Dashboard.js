@@ -1,4 +1,4 @@
-import MapView from "../modules/View2D";
+import MapView from "../modules/2D-view/View2D";
 import "./Dashboard.css"
 
 import { Responsive, WidthProvider } from "react-grid-layout";

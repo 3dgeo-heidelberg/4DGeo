@@ -161,18 +161,23 @@ function DashboardPage() {
             return Date.parse(observation.startDateTime) >= dateTimeRange.startDate && Date.parse(observation.startDateTime) <= dateTimeRange.endDate;
         }).sort((a, b) => a.startDateTime > b.startDateTime ? 1 : -1);
 
-        console.log(boundingBox)
+        console.log("bounding box", boundingBox);
+        
         if(boundingBox) {
             temporalFilteredObservations = temporalFilteredObservations.map((observation) => {
                 return {
                     ...observation,
                     geoObjects: observation.geoObjects.filter((geoObject) => {
                         if(geoObject.geometry.type === 'Polygon') {
-                            const bounds = L.latLngBounds(geoObject.geometry.coordinates.map(coord => L.latLng(coord[1], coord[0])));
-                            return boundingBox.intersects(bounds);
+                            for (let i = 0; i < geoObject.geometry.coordinates.length; i++) {
+                                if (boundingBox.contains(L.latLng(geoObject.geometry.coordinates[i][0], geoObject.geometry.coordinates[i][1]))) {
+                                    return true;
+                                }
+                            }
+                            return false;
                         } else if(geoObject.geometry.type === 'Point') {
-                            const point = L.latLng(geoObject.geometry.coordinates[1], geoObject.geometry.coordinates[0]);
-                            return boundingBox.contains(point);
+                            console.log("Point coordinates", geoObject.geometry.coordinates);
+                            return boundingBox.contains(L.latLng(geoObject.geometry.coordinates[0], geoObject.geometry.coordinates[1]));
                         }
                         return false;
                     })

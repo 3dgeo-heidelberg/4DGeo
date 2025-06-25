@@ -1,4 +1,4 @@
-import { MapContainer, ImageOverlay, LayersControl, LayerGroup } from "react-leaflet"; // Import Leaflet components for rendering the map and layers
+import { MapContainer, LayersControl, LayerGroup } from "react-leaflet"; // Import Leaflet components for rendering the map and layers
 import L from "leaflet"; // Import Leaflet library to access its utility methods
 
 import "leaflet/dist/leaflet.css";
@@ -6,6 +6,7 @@ import 'react-leaflet-markercluster/styles'
 import { useRef } from "react";
 import 'leaflet.markercluster';
 import 'Leaflet.Deflate'
+import BackgroundImage from "./BackgroundImage";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -29,54 +30,18 @@ export default function View2D({
         backgroundImageData = observations.find(observation => observation.backgroundImageData).backgroundImageData
     }
 
-    const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp', '.tiff', '.svg'];
-
-    const isImageUrlOrPath = (str) => {
-        try {
-            const url = new URL(str);
-            return imageExtensions.some(ext => url.pathname.toLowerCase().endsWith(ext));
-        } catch {
-            return imageExtensions.some(ext => str.toLowerCase().endsWith(ext));
-        }
-    };
-
-    const isBase64DataUri = (str) => {
-        return /^data:image\/[a-zA-Z]+;base64,/.test(str);
-    };
-
-    const isRawBase64Image = (str) => {
-        try {
-            const decoded = atob(str);
-            // eslint-disable-next-line no-control-regex
-            return decoded.length > 100 && /[\x00-\x08\x0E-\x1F]/.test(decoded.slice(0, 100));
-        } catch {
-            return false;
-        }
-    };
-
-    const getImageSrc = (imageData) => {
-        if (isImageUrlOrPath(imageData) || isBase64DataUri(imageData)) {
-            return imageData;
-        } else if (isRawBase64Image(imageData)) {
-            return `data:image/ong;base64,${imageData}`;
-        } else {
-            console.error("Invalid image data format. Expected a valid URL, base64 data URI, or raw base64 string.");
-        }
-    }
-
     L.polygonClusterable = L.Polygon.extend({
         _originalInitialize: L.Polygon.prototype.initialize,
 
         initialize: function (bounds, options) {
             this._originalInitialize(bounds, options);
-            this._latlng = this.getBounds().getCenter(); // Define the polygon "center".
+            this._latlng = this.getBounds().getCenter();
         },
 
         getLatLng: function () {
             return this._latlng;
         },
 
-        // dummy method.
         setLatLng: function () {}
     })
 
@@ -111,7 +76,7 @@ export default function View2D({
                         return;
                     case 'Point':
                         const leafletCircle = L.circle(
-                            geoObject.geometry.coordinates[0], {
+                            geoObject.geometry.coordinates, {
                                 color: typeColors.get(geoObject.type) || "black",
                                 weight: 1,
                                 opacity: 1,
@@ -181,26 +146,11 @@ export default function View2D({
             maxZoom={5}
             zoom={-2}
             scrollWheelZoom={true}
-            eventHandlers={{
-                moveend: (e) => {
-                    const bounds = e.target.getPixelBounds();
-                    setBoundingBox(bounds)
-                }
-            }}
+            zoomControl={true}
         >
-            <ImageOverlay
-                url={getImageSrc(backgroundImageData.url)}
-                bounds={
-                    [[(-backgroundImageData.height), 0],
-                    [0, backgroundImageData.width]]
-                }
-                opacity={0.9}
-                eventHandlers={{
-                    moveend: (e) => {
-                        const bounds = e.target.getPixelBounds();
-                        setBoundingBox(bounds)
-                    }
-                }}
+            <BackgroundImage
+                backgroundImageData={backgroundImageData}
+                setBoundingBox={setBoundingBox}
             />
             <LayersControl position="topright">
                 <LayersControl.BaseLayer checked name="Clustered geoobjects">
