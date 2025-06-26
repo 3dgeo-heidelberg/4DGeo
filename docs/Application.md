@@ -35,7 +35,7 @@ The idea of populating the creation section with data from a permalink is expand
 
 
 ## Dashboard Page
-This page is the main visualisation page. A dashboard is generated via the stored information in the permalink with its layout, data source, refresh rate and color assignment. It is then populated with data automatically read from the given data source. Each module of the dashboard has its own functionality and will be further explained [later](#modules). 
+This page is the main visualisation page. A dashboard is generated via the stored information in the permalink with its layout, data source, refresh rate and color assignment. It is then populated with data automatically read from the given data source. Each module of the dashboard has its own functionality and will be further explained [later](#modules). Based on your specified refresh interval, the dashboard rereads the data from your data source and updates the content if anything changed.
 
 ![](DashboardPageWorkflow.jpg)
 
@@ -107,7 +107,62 @@ This is a skeleton overview of how the finished data should look like:
 
 <a name="modules"></a>
 
-### Modules
+## Modules
+
+### Visualisation Modules
+With these modules, your data will be visualised in different ways so that you can analyse them to your liking.
+
+#### 2D View Map
+In the 2D View, all the geoobjects inside of your data will be rendered with a leaflet map infront of the specified background image. When multiple observations are selected, the background image is taken from the first. For now, only Polygons, Points and LineStrings are supported. <br>
+There are 2 layers you can choose from: 
+
+- Normal Layer: All the filtered geoobjects will be shown as their original geometry
+- Clustered Laye: For a better performance, objects that are near each other can be automatically grouped into a cluster that will be shown as a point indicating the number of objects inside it. In this layer, polygons that are very small on your current zoom level will also be deflated into markers for better visibility.
+
+![](2DViewMap.png)
+
+![](2DViewMapClustered.png)
+
+
+#### Chart Visualisations
+Additionally to the 2D View Module, this module can visualise the custom attributes of your objects.
+
+For now, only the bar chart is implemented.<br>
+Here, all your selected observations are shown as a bar. The value of this bar is calculated with the chosen operator and field. The field has to be a number value to be calculated correctly. Each bar is divided into all available geoobject types for a more detailed view. For operators, the following are included:
+
+- Add: All values of the chosen attribute are summed up.
+- Average: The average value of the chosen attribute.
+- Min: Only the smallest value of the attribute will be shown.
+- Max: Only the biggest value of the attribute will be shown.
+- Count: The total count of objects. If a field is selected, the only objects that have the chosen field are counted.
+
+
+### User Input
+Next to the visualisation modules, user input modules are important to guarantee a responsive dashboard. They support functionality to filter your observations with time-based selection options.
+
+#### Date Range Calendar
+With this module, you can choose a date range so that only observations that fall into this time-interval will be shown. Inside of the calendar, all days where an observation took place are marked with a small dot for better navigation. For this, only the start datetime of each observation is used.
+
+<img src="Calendar.png" alt="drawing" width="200"/>
+
+#### Observation Slider
+Other than the date range module that takes care of a broad selection, the observation slider lets you define a more detailed selection. All the observations that fall into your chosen date range are shown on the slider. You have the option to then choose between the <i>Single</i> and <i>Range</i> mode:
+
+- Single: Only one observation is selected at a time.
+- Range: You can specify a start- and end-observation.
+
+![](Slider.png)
+
+## Other functionality
+
+### Color assignment
+On the dashboard page, you can also freely adjust the colors of each type of geoobject with the "Assign Colors" button.
+
+### File Upload
+If you have a file that you quickly want to visualise with the dashboard, instead of setting up and uploading to a server, you can temporarily upload the file into the dashboard directly. This file is not saved and will be lost on refresh or if you share the permalink.
+
+### Export by map extent
+With this button, you can download a subset of you data. Only geoobjects that you selected and that are currently visible in the 2D View Map will be exported in the correct data format of the dashboard.
 
 # Example Dataflows
 You can look at a few tutorials and example dataflows to make your own data compatible with the dashboard
