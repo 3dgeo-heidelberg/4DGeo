@@ -1,4 +1,3 @@
-import React from "react";
 import "./DashboardPreview.css";
 
 import { Responsive, WidthProvider } from "react-grid-layout";
@@ -11,7 +10,7 @@ function DashboardPreview({ layout, onLayoutChange, minimumModuleSizes }) {
         return Array.from(layout).map((layoutItem) => {
             return (
                 <div
-                    className={`reactGridItem ${layoutItem["i"].toString()}`}
+                    className={`grid-item ${layoutItem["i"].toString()}`}
                     key={layoutItem["i"]}
                     data-grid={{
                         x: layoutItem["x"],
