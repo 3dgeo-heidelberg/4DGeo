@@ -408,79 +408,73 @@ class ProjectChange:
         - project_gis_layer: Helper function to handle GIS layer projection.
     """
 
-    def __init__(self, change_event_file, project_name, projected_image_path, projected_events_folder, epsg=None, create_kml=False):
+    def __init__(self, observation, project_name, projected_image_path, projected_events_folder, epsg=None, create_kml=False):
         ##############################
         ### INITIALIZING VARIABLES ###
         self.project = project_name
         self.bg_img_path = projected_image_path
-        self.path_change_events = change_event_file
+        self.observation = observation
         self.img = None
         self.pts = []
-        self.geojson_name = os.path.join(projected_events_folder,"%s_change_events_pixel.geojson"%self.project)
-        self.geojson_name_gis = os.path.join(projected_events_folder,"%s_change_events_gis.geojson"%self.project)
+        self.geojson_name = os.path.join(projected_events_folder,"%s_observations_pixel.geojson"%self.project)
+        self.geojson_name_gis = os.path.join(projected_events_folder,"%s_observations_gis.geojson"%self.project)
         self.epsg = epsg
         self.create_kml = create_kml
         ##############################
 
 
     def project_change(self):
-        
-        # Get change events dictionnary in json file
-        # change_events = utilities.read_json_file(self.path_change_events)
-        change_events = ChangeEventCollection()
-        change_events = change_events.load_from_file(self.path_change_events)
-        schema = None
+        if type(self.observation) is dict:
+            observation = self.observation
+        else:
+            # Get change events dictionnary in json file
+            observation = utilities.read_json_file(self.observation)
 
-        for change_event in change_events.events:
+        for event in observation["events"]:
             # Fetch points
-            change_event_pts_og = change_event.convex_hull["points_building"]
-            change_event_pts_og = np.asarray(change_event_pts_og)
-            
-            # Handle the empty array, if any
-            if change_event_pts_og.shape[0] == 0:
-                continue
-            if schema is None:
-                # GIS layer
-                geom = self.project_gis_layer(change_event_pts_og)
-                # Create the schema for the attributes of the geojson
-                schema = {
-                    'geometry': geom,
-                    'properties': {
-                        'event_type': 'str',
-                        'object_id': 'str',
-                        'X_centroid': 'float',
-                        'Y_centroid': 'float',
-                        'Z_centroid': 'float',
-                        't_min': 'str',
-                        't_max': 'str',
-                        'change_magnitudes_mean': 'float',
-                        'volumes_from_convex_hulls': 'float',
-                        'cluster_point_cloud': 'str',
-                        'cluster_point_cloud_chull': 'str'
-                        }
+            observation_pts_og = event["motion_vector_points"]
+            observation_pts_og = np.asarray(observation_pts_og)
+
+            # GIS layer
+            geom = self.project_gis_layer(observation_pts_og)
+            # Create the schema for the attributes of the geojson
+            schema = {
+                'geometry': geom,
+                'properties': {
+                    'event_type': 'str',
+                    'object_id': 'str',
+                    'X_centroid': 'float',
+                    'Y_centroid': 'float',
+                    'Z_centroid': 'float',
+                    't_min': 'str',
+                    't_max': 'str',
+                    'change_magnitude': 'float',
+                    'motion_vector_points': 'list'
                     }
+                }
+            
             # Open the shapefile to be able to write each polygon in it
             geojson = fiona.open(self.geojson_name, 'w', 'GeoJSON', schema, None, 'binary')
             if self.epsg is not None:
                 geojson_gis = fiona.open(self.geojson_name_gis, 'w', 'GeoJSON', schema, fiona.crs.CRS.from_epsg(self.epsg))
                 # Add the polygon to the main geojson file
                 geojson_gis.write({
-                    'geometry': mapping(self.geom_gis),
+                    'geometry': mapping(geom),
                     'properties': {
-                        'event_type': str(change_event.event_type),
-                        'object_id': str(change_event.object_id),
-                        'X_centroid': float(self.centroid_gis[0]),
-                        'Y_centroid': float(self.centroid_gis[1]),
-                        'Z_centroid': float(self.centroid_gis[2]),
-                        't_min': str(change_event.t_min),
-                        't_max': str(change_event.t_max),
-                        'change_magnitudes_mean': float(change_event.change_magnitudes["mean"]),
-                        'volumes_from_convex_hulls': float(change_event.convex_hull["volume"]) if "volume" in change_event.convex_hull else 0.0,
-                        'cluster_point_cloud': str(change_event.cluster_point_cloud),
-                        'cluster_point_cloud_chull': str(change_event.cluster_point_cloud_chull)
+                        'event_type': str(event["event_type"]),
+                        'object_id': str(event["object_id"]),
+                        'X_centroid': float(centroid[0]),
+                        'Y_centroid': float(centroid[1]),
+                        'Z_centroid': float(centroid[2]),
+                        't_min': str(event["t_min"]),
+                        't_max': str(event["t_max"]),
+                        'change_magnitude': float(event['change_magnitude']),
+                        'motion_vector_points': list(event['motion_vector_points'])
                     }
                 })
-            else: break
+            else:
+                break
+
         if self.epsg is not None:
             try:
                 geojson_gis.close()
@@ -512,33 +506,27 @@ class ProjectChange:
         res = float(image_metadata_loaded['res'])
         top_view = json.loads(image_metadata_loaded['top_view'].lower()) # Using json.loads() method to convert the string "True"/"False" to a boolean
         
-        for change_event in change_events.events:
-            
 
-            # Fetch contour points
-            change_event_pts_og = change_event.convex_hull["points_building"]
-            change_event_pts_og = np.asarray(change_event_pts_og)
-            
-            # Handle the empty array, if any
-            if change_event_pts_og.shape[0] == 0:
-                continue
-            
-            
+        for event in observation["events"]:
+            # Fetch points
+            observation_pts_og = event["motion_vector_points"]
+            observation_pts_og = np.asarray(observation_pts_og)
+        
             # If top_view is True, rotate the change events the same way the point cloud was rotated to make the top view
             if top_view:
-                change_event_pts = utilities.rotate_to_top_view(change_event_pts_og, 
+                observation_pts = utilities.rotate_to_top_view(observation_pts_og, 
                                                                 pc_mean_x,
                                                                 pc_mean_y,
                                                                 pc_mean_z
                                                                 )
             else:
-                change_event_pts = change_event_pts_og.copy()
+                observation_pts = observation_pts_og.copy()
             
             # Translation of point cloud coordinates for the scanner position of (0, 0, 0)
-            change_event_pts = change_event_pts - np.asarray([camera_position_x, camera_position_y, camera_position_z])
+            observation_pts = observation_pts - np.asarray([camera_position_x, camera_position_y, camera_position_z])
 
             # Transformation from cartesian coordinates (x, y, z) to spherical coordinates (r, θ, φ)
-            r, theta, phi = utilities.xyz_2_spherical(change_event_pts)
+            r, theta, phi = utilities.xyz_2_spherical(observation_pts)
             theta, phi = np.rad2deg(theta), np.rad2deg(phi)
 
             # Discretize angles to image coordinates
@@ -574,25 +562,24 @@ class ProjectChange:
                 geom = Polygon(np.array(list_points))
 
             # Compute centroid
-            centroid = np.mean(change_event_pts_og, axis=0)
+            centroid = np.mean(observation_pts_og, axis=0)
 
             # Add the polygon to the main shapefile
             geojson.write({
                 'geometry': mapping(geom),
                 'properties': {
-                    'event_type': str(change_event.event_type),
-                    'object_id': str(change_event.object_id),
+                    'event_type': str(event["event_type"]),
+                    'object_id': str(event["object_id"]),
                     'X_centroid': float(centroid[0]),
                     'Y_centroid': float(centroid[1]),
                     'Z_centroid': float(centroid[2]),
-                    't_min': str(change_event.t_min),
-                    't_max': str(change_event.t_max),
-                    'change_magnitudes_mean': float(change_event.change_magnitudes["mean"]),
-                    'volumes_from_convex_hulls': float(change_event.convex_hull["volume"]) if "volume" in change_event.convex_hull else 0.0,
-                    'cluster_point_cloud': str(change_event.cluster_point_cloud),
-                    'cluster_point_cloud_chull': str(change_event.cluster_point_cloud_chull)
+                    't_min': str(event["t_min"]),
+                    't_max': str(event["t_max"]),
+                    'change_magnitude': float(event['change_magnitude']),
+                    'motion_vector_points': list(event['motion_vector_points'])
                 }
             })
+
         try:
             geojson.close()
         except:
@@ -606,15 +593,15 @@ class ProjectChange:
                 print("Cannot create kml file. EPSG not specified.")
 
 
-    def project_gis_layer(self, change_event_pts_og):
-        change_event_pts_xy = change_event_pts_og[:,:2]
+    def project_gis_layer(self, observation_pts_og):
+        observation_pts_xy = observation_pts_og[:,:2]
         # Create the convex hull
         try:
-            hull = ConvexHull(change_event_pts_xy)
+            hull = ConvexHull(observation_pts_xy)
             # Order the points anti-clockwise
             list_points = []
             for simplex in hull.vertices:
-                list_points.append([int(change_event_pts_xy[simplex, 1]), -int(change_event_pts_xy[simplex, 0])])
+                list_points.append([int(observation_pts_xy[simplex, 1]), -int(observation_pts_xy[simplex, 0])])
             
             # Create the polygon
             list_points = np.asarray(list_points)
@@ -622,14 +609,14 @@ class ProjectChange:
             list_points[:, 0] *= -1
             self.geom_gis = Polygon(np.array(list_points))
             # Compute centroid
-            self.centroid_gis = np.mean(change_event_pts_og, axis=0)
+            self.centroid_gis = np.mean(observation_pts_og, axis=0)
             return 'Polygon'
 
         except:
             # Create the vector
-            self.geom_gis = LineString(np.array(change_event_pts_xy))
+            self.geom_gis = LineString(np.array(observation_pts_xy))
             # Compute centroid
-            self.centroid_gis = np.mean(change_event_pts_og, axis=0)
+            self.centroid_gis = np.mean(observation_pts_og, axis=0)
             return 'LineString'
 
 
@@ -648,7 +635,7 @@ class ProjectChange:
         # Folder for Placemarks
         folder = SubElement(document, 'Folder')
         folder_name = SubElement(folder, 'name')
-        folder_name.text = "change_events_gis"
+        folder_name.text = "observations_gis"
 
         # Fetch fields
         field_names = list(geojson_data['features'][0]['properties'].keys())
@@ -684,7 +671,7 @@ class ProjectChange:
             fill.text = "0"
             
             extended_data = SubElement(placemark, 'ExtendedData')
-            schema_data = SubElement(extended_data, 'SchemaData', schemaUrl="#change_events_gis")
+            schema_data = SubElement(extended_data, 'SchemaData', schemaUrl="#observations_gis")
             
             # Add properties to SchemaData
             for name, value in fields:
