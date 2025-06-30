@@ -15,8 +15,8 @@ export default function Chart({ observations, typeColors }) {
         const customDataFields = new Set();
         observations.forEach((observation) => {
             observation.geoObjects.forEach((geoObject) => {
-                if (geoObject.customEntityData) {
-                    Object.keys(geoObject.customEntityData).forEach((key) => {
+                if (geoObject.customAttributes) {
+                    Object.keys(geoObject.customAttributes).forEach((key) => {
                         customDataFields.add(key);
                     });
                 }
@@ -42,7 +42,7 @@ export default function Chart({ observations, typeColors }) {
             console.log(observation);
             const dateTime = new Date(Date.parse(observation.startDateTime));
             const collectorPerType = {
-                name: dateTime.toLocaleDateString() + " \n " + dateTime.toLocaleTimeString()
+                name: dateTime.toLocaleDateString() + "\n" + dateTime.toLocaleTimeString()
             };
 
             if(operatorKey === "Count") {
@@ -60,8 +60,8 @@ export default function Chart({ observations, typeColors }) {
                         accumulator[type] = [];
                     }
 
-                    if (geoObject.customEntityData[valueKey] && typeof geoObject.customEntityData[valueKey] === "number") {
-                        accumulator[type].push(geoObject.customEntityData[valueKey]);
+                    if (geoObject.customAttributes[valueKey] && typeof geoObject.customAttributes[valueKey] === "number") {
+                        accumulator[type].push(geoObject.customAttributes[valueKey]);
                     }
 
                     return accumulator;
@@ -155,12 +155,10 @@ export default function Chart({ observations, typeColors }) {
 class CustomizedAxisTick extends PureComponent {
   render() {
     const { x, y, payload } = this.props;
-    // const date = new Date(Date.parse(payload.value)).format('YYYY-MM-DD');
-    // const time = new Date(Date.parse(payload.value)).format('HH:mm');
 
     return (
-      <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} style={{whiteSpace: "pre-line"}} textAnchor="end" fill="#666" transform="rotate(-15)">
+      <g transform={`translate(${x+30},${y})`}>
+        <text x={0} y={0} dy={16} style={{whiteSpace: "pre-line"}} textAnchor="end" fill="#666">
             {payload.value}
         </text>
       </g>
