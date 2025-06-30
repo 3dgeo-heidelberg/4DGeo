@@ -5,7 +5,10 @@
     flex-direction: column;
     align-items: flex-end;
 
-    .field-selector {
+    .selectors {
+        display: flex;
+        flex-direction: row;
+
         position: relative;
         padding-top: 0.4em;
         padding-right: 0.4em;

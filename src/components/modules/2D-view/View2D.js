@@ -68,7 +68,7 @@ export default function View2D({
                             }
                         ).bindTooltip(
                             `<b>Type:</b> ${geoObject.type}<br>` +
-                            (geoObject.customEntityData ? Object.entries(geoObject.customEntityData).map((item, i) => {
+                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).map((item, i) => {
                                 return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
                             }) : ""));
                         leafletPolygon.addTo(normalLayer.current);
@@ -86,7 +86,7 @@ export default function View2D({
                             }
                         ).bindTooltip(
                             `<b>Type:</b> ${geoObject.type}<br>` +
-                            (geoObject.customEntityData ? Object.entries(geoObject.customEntityData).map((item, i) => {
+                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).map((item, i) => {
                                 return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
                             }) : "")
                         ).addTo(normalLayer.current);
@@ -104,7 +104,7 @@ export default function View2D({
                             }
                         ).bindTooltip(
                             `<b>Type:</b> ${geoObject.type}<br>` +
-                            (geoObject.customEntityData ? Object.entries(geoObject.customEntityData).map((item, i) => {
+                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).map((item, i) => {
                                 return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
                             }) : "")
                         ).addTo(normalLayer.current)
@@ -122,7 +122,7 @@ export default function View2D({
                             }
                         ).bindTooltip(
                             `<b>Type:</b> ${geoObject.type}<br>` +
-                            (geoObject.customEntityData ? Object.entries(geoObject.customEntityData).map((item, i) => {
+                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).map((item, i) => {
                                 return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
                             }) : "")
                         ).addTo(normalLayer.current)

@@ -32,7 +32,7 @@
                             [1, 2, 1]
                         ]
                     },
-                    "customEntityData": {
+                    "customAttribute": {
                         "customKey": "",
                         "customKey2": ""
                     }
