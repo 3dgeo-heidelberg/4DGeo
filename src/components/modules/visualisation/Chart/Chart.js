@@ -133,7 +133,7 @@ export default function Chart({ observations, typeColors }) {
 
             <div className='chart-container'>
                 <ResponsiveContainer width="95%" height="95%" className={"chart-responsive-container"}>
-                    { data === null ? ("") : (
+                    { data === null || observations.length === 0 ? ("") : (
                         <BarChart width="85%" height="70%" data={data} className='chart'>
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" height={70} tick={<CustomizedAxisTick /> } />

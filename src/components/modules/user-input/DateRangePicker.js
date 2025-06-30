@@ -9,7 +9,6 @@ import {
   FieldError,
   Group,
   Heading,
-  Label,
   Popover,
   RangeCalendar,
   OverlayArrow,
@@ -32,7 +31,6 @@ export default function DateRangePicker({ includedDates, dateRange, handleDateRa
             })}
             granularity="day"
         >
-            <Label>Date Range</Label>
             <Group>
                 <DateInput slot="start">
                 {(segment) => <DateSegment segment={segment} />}

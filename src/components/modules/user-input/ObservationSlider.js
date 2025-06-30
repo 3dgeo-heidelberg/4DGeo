@@ -62,6 +62,6 @@ export default function ObservationSlider({ includedDateTimes, sliderRange, hand
             />
         </div>
     ) : (
-        <Slider disabled/>
+        <Slider className='slider-container' disabled/>
     )
 }
