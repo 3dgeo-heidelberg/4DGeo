@@ -23,6 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 *.pyc
+*py4dgeo.log
 package-lock.json
 **/.ipynb_checkpoints
 

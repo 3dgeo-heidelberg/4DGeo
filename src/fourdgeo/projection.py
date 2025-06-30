@@ -147,17 +147,6 @@ class PCloudProjection:
 
 
     def save_image(self):
-        resolution_m = self.resolution_cm# / 100.0
-        u_west = self.delta_u#/1000
-        v_north = -self.delta_v#/1000
-
-        transform = from_origin(
-            west=u_west,
-            north=v_north,
-            xsize=resolution_m,  # pixel width in meters
-            ysize=resolution_m   # pixel height in meters
-        )
-
         # Save image with the current time
         if not os.path.exists(self.projected_image_folder):
             os.makedirs(self.projected_image_folder)
@@ -176,8 +165,7 @@ class PCloudProjection:
             'width': self.shaded_image.shape[1],
             'count': 3,  # number of bands
             "tiled": False,
-            "compress": 'lzw',
-            'transform': transform
+            "compress": 'lzw'
         }
         
         custom_tags = {
@@ -416,8 +404,8 @@ class ProjectChange:
         self.observation = observation
         self.img = None
         self.pts = []
-        self.geojson_name = os.path.join(projected_events_folder,"%s_observations_pixel.geojson"%self.project)
-        self.geojson_name_gis = os.path.join(projected_events_folder,"%s_observations_gis.geojson"%self.project)
+        self.geojson_name = os.path.join(projected_events_folder,"%s_pixel.geojson"%self.project)
+        self.geojson_name_gis = os.path.join(projected_events_folder,"%s_gis.geojson"%self.project)
         self.epsg = epsg
         self.create_kml = create_kml
         ##############################
@@ -430,56 +418,53 @@ class ProjectChange:
             # Get change events dictionnary in json file
             observation = utilities.read_json_file(self.observation)
 
-        for event in observation["events"]:
+        for geoObject in observation["geoObjects"]:
             # Fetch points
-            observation_pts_og = event["motion_vector_points"]
+            observation_pts_og = geoObject["geometry"]["coordinates"]
             observation_pts_og = np.asarray(observation_pts_og)
 
             # GIS layer
             geom = self.project_gis_layer(observation_pts_og)
             # Create the schema for the attributes of the geojson
+            
             schema = {
                 'geometry': geom,
                 'properties': {
-                    'event_type': 'str',
-                    'object_id': 'str',
-                    'X_centroid': 'float',
-                    'Y_centroid': 'float',
-                    'Z_centroid': 'float',
-                    't_min': 'str',
-                    't_max': 'str',
-                    'change_magnitude': 'float',
-                    'motion_vector_points': 'list'
+                    'startDateTime': 'str',
+                    'endDateTime': 'str',
+                    'id': 'str',
+                    'type': 'str',
+                    'dateTime': 'str',
+                    'customEntityData': 'str'
                     }
                 }
             
             # Open the shapefile to be able to write each polygon in it
             geojson = fiona.open(self.geojson_name, 'w', 'GeoJSON', schema, None, 'binary')
-            if self.epsg is not None:
+            if self.epsg is None:
+                break
+            else:
                 geojson_gis = fiona.open(self.geojson_name_gis, 'w', 'GeoJSON', schema, fiona.crs.CRS.from_epsg(self.epsg))
                 # Add the polygon to the main geojson file
+                customEntityData = list(geoObject['customEntityData'])
+                customEntityData.append([float(centroid[0]), float(centroid[1]), float(centroid[2])])
                 geojson_gis.write({
                     'geometry': mapping(geom),
                     'properties': {
-                        'event_type': str(event["event_type"]),
-                        'object_id': str(event["object_id"]),
-                        'X_centroid': float(centroid[0]),
-                        'Y_centroid': float(centroid[1]),
-                        'Z_centroid': float(centroid[2]),
-                        't_min': str(event["t_min"]),
-                        't_max': str(event["t_max"]),
-                        'change_magnitude': float(event['change_magnitude']),
-                        'motion_vector_points': list(event['motion_vector_points'])
+                        'startDateTime': str(observation["startDateTime"]),
+                        'endDateTime': str(observation["endDateTime"]),
+                        'id': str(geoObject["id"]),
+                        'type': str(geoObject["type"]),
+                        'dateTime': str(geoObject["dateTime"]),
+                        'customEntityData': json.dumps(customEntityData)
                     }
                 })
-            else:
-                break
 
         if self.epsg is not None:
             try:
                 geojson_gis.close()
             except:
-                print("No change event detected")
+                print("No observation detected")
 
         # Load EXIF data from an image
         try:
@@ -490,7 +475,7 @@ class ProjectChange:
             print("Problem when reading the input image background:\n", e)
             return
 
-        # Get metadata of the image. Necessary for the projection of the change event points
+        # Get metadata of the image. Necessary for the projection of the observation points
         pc_mean_x = float(image_metadata_loaded['pc_mean_x'])
         pc_mean_y = float(image_metadata_loaded['pc_mean_y'])
         pc_mean_z = float(image_metadata_loaded['pc_mean_z'])
@@ -506,19 +491,19 @@ class ProjectChange:
         res = float(image_metadata_loaded['res'])
         top_view = json.loads(image_metadata_loaded['top_view'].lower()) # Using json.loads() method to convert the string "True"/"False" to a boolean
         
-
-        for event in observation["events"]:
+        for geoObject in observation["geoObjects"]:
             # Fetch points
-            observation_pts_og = event["motion_vector_points"]
+            observation_pts_og = geoObject["geometry"]["coordinates"]
             observation_pts_og = np.asarray(observation_pts_og)
         
-            # If top_view is True, rotate the change events the same way the point cloud was rotated to make the top view
+            # If top_view is True, rotate the observations the same way the point cloud was rotated to make the top view
             if top_view:
-                observation_pts = utilities.rotate_to_top_view(observation_pts_og, 
-                                                                pc_mean_x,
-                                                                pc_mean_y,
-                                                                pc_mean_z
-                                                                )
+                observation_pts = utilities.rotate_to_top_view(
+                    observation_pts_og, 
+                    pc_mean_x,
+                    pc_mean_y,
+                    pc_mean_z
+                )
             else:
                 observation_pts = observation_pts_og.copy()
             
@@ -563,20 +548,20 @@ class ProjectChange:
 
             # Compute centroid
             centroid = np.mean(observation_pts_og, axis=0)
+            geoObject['customEntityData']['centroid_X'] = float(centroid[0])
+            geoObject['customEntityData']['centroid_­Y'] = float(centroid[1])
+            geoObject['customEntityData']['centroid_Z'] = float(centroid[2])
 
             # Add the polygon to the main shapefile
             geojson.write({
                 'geometry': mapping(geom),
                 'properties': {
-                    'event_type': str(event["event_type"]),
-                    'object_id': str(event["object_id"]),
-                    'X_centroid': float(centroid[0]),
-                    'Y_centroid': float(centroid[1]),
-                    'Z_centroid': float(centroid[2]),
-                    't_min': str(event["t_min"]),
-                    't_max': str(event["t_max"]),
-                    'change_magnitude': float(event['change_magnitude']),
-                    'motion_vector_points': list(event['motion_vector_points'])
+                    'startDateTime': str(observation["startDateTime"]),
+                    'endDateTime': str(observation["endDateTime"]),
+                    'id': str(geoObject["id"]),
+                    'type': str(geoObject["type"]),
+                    'dateTime': str(geoObject["dateTime"]),
+                    'customEntityData': json.dumps(geoObject['customEntityData'])
                 }
             })
 

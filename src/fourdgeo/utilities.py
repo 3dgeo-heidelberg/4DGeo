@@ -181,6 +181,11 @@ def setup_configuration(config_file,t1_file,t2_file, timestamp):
 
 ############################################################################################################
 
+# Helper to parse timestamp → ISO string
+def iso_timestamp(fname):
+    ts = os.path.splitext(fname)[0]  # "230101_120000"
+    return datetime.strptime(ts, "%y%m%d_%H%M%S").isoformat()
+
 def date_str2datetime(my_date):
     return datetime.strptime(my_date, "%y%m%d_%H")
 
