@@ -1,6 +1,6 @@
-# 4dGeo
+# 4DGeo
 
-4dGeo is a modular web-based dashboard application for visualizing geospatial data over time. Built with React, it enables users to interact with and analyze 4D geodata (spatial and temporal) using various visualization modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations.
+4DGeo is a modular web-based dashboard application for visualizing geospatial data over time. Built with React, it enables users to interact with and analyze 4D geodata (spatial and temporal) using various visualization modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations.
 
 
 ## Features
@@ -11,7 +11,7 @@
 
 ## Data Model
 
-4dGeo utilizes a structured data model to visualize geospatial and temporal data. The model is designed around observations, where each observation represents a snapshot of an area with detected geoobjects and their properties at a specific point in time.
+4DGeo utilizes a structured data model to visualize geospatial and temporal data. The model is designed around observations, where each observation represents a snapshot of an area with detected geoobjects and their properties at a specific point in time.
 
 ### JSON Structure
 ```
@@ -62,13 +62,13 @@
 
 ## Installation
 
-To run 4dGeo locally, follow these steps:
+To run 4DGeo locally, follow these steps:
 
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/3dgeo-heidelberg/4dgeo.git
-   cd 4dGeo
+   git clone https://github.com/3dgeo-heidelberg/4DGeo.git
+   cd 4DGeo
    ```
 
 2. Install dependencies (Check if Node.js is installed on your computer. If not, download it from this [link](https://nodejs.org/en/download)):
