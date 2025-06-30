@@ -88,6 +88,7 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
                     <MapView
                         className="mapview"
                         observations={filterObservations(dateTimeRange.startDate, dateTimeRange.endDate)}
+                        setBoundingBox={setBoundingBox}
                         typeColors={typeColors}
                     />
                 );

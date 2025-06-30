@@ -9,7 +9,6 @@ import {
   FieldError,
   Group,
   Heading,
-  Label,
   Popover,
   RangeCalendar,
   OverlayArrow,
