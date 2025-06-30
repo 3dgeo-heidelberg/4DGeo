@@ -9,8 +9,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <link rel="icon" href="./4dgeo/3dgeo.ico" />
-    <BrowserRouter basename='/4dgeo'>
+    <link rel="icon" href="./4DGeo/3dgeo.ico" />
+    <BrowserRouter basename='/4DGeo'>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />

@@ -111,7 +111,7 @@ export default function LandingPage() {
     <Stack className="example-dashboard-list">
       <List dense>
         <ListItem>
-          <Avatar className="avatar" src="/4dgeo/3dgeo.ico" alt="4DGeo Logo" />
+          <Avatar className="avatar" src="/4DGeo/3dgeo.ico" alt="4DGeo Logo" />
           <ListItemText primary="4DGeo Dashboard" />
         </ListItem>
       </List>

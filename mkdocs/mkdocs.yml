@@ -1,8 +1,8 @@
-site_name: 4dGeo
-repo_url: https://github.com/3dgeo-heidelberg/4dgeo
+site_name: 4DGeo
+repo_url: https://github.com/3dgeo-heidelberg/4DGeo
 docs_dir: ../docs
 site_dir: ../build/docs
-site_url: https://3dgeo-heidelberg.github.io/4dgeo/docs/
+site_url: https://3dgeo-heidelberg.github.io/4DGeo/docs/
 
 theme:
   logo: img/3DGeo_globe_white.svg     # light mode logo
