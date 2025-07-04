@@ -68,7 +68,7 @@ A geoobject includes the following attributes:
 
 
 This is a skeleton overview of how the finished data should look like:
-```
+```json
 {
     "observations": [
         {
@@ -153,15 +153,15 @@ Other than the date range module that takes care of a broad selection, the obser
 
 ![](Slider.png)
 
-## 4 Other functionality
+## 4 Other Functionality
 
-### 4.1 Color assignment
+### 4.1 Color Assignment
 On the dashboard page, you can also freely adjust the colors of each type of geoobject with the "Assign Colors" button.
 
 ### 4.2 File Upload
 If you have a file that you quickly want to visualise with the dashboard, instead of setting up and uploading to a server, you can temporarily upload the file into the dashboard directly. This file is not saved and will be lost on refresh or if you share the permalink.
 
-### 4.3 Export by map extent
+### 4.3 Export by Map Extent
 With this button, you can download a subset of you data. Only geoobjects that you selected and that are currently visible in the 2D View Map will be exported in the correct data format of the dashboard.
 
 ## 5 Example Dataflows
