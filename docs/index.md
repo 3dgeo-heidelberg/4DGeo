@@ -2,8 +2,7 @@
 
 ## About
 
-4DGeo is a modular web-based interactive dashboard application for visualizing geospatial, temporal data. Built with React, it enables users to create their own dashboard layout to visualize their custom 4D geodata using various visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It is designed to be hosted on a simple server or with Github Pages. The data is read from a custom user-defined data source and refreshes automatically based on a custom refresh timer. With this, the 4DGeo dashboard works really well with continously updated data like with monitoring systems that cover a specified area over different scans. 
-
+4DGeo is a modular web-based interactive dashboard application for visualizing geospatial, temporal data. Built with React, it enables users to create their own dashboard layout to visualize their custom 4D geodata using various visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be hosted on a simple server or with Github Pages. The data is read from a user-defined data source and refreshes automatically based on the specified refresh timer. With this, the 4DGeo dashboard works really well with continously updated data like with monitoring systems that repeatdly scan an area of interest. 
 
 <video width="100%" controls>
   <source src="./4DGeoDemo.mp4" type="video/mp4">
@@ -43,4 +42,4 @@ To run 4dGeo locally, follow these steps:
 ## Setup
 
 To host this application on your own, you can either copy our Github Action workflow for deploying it to Github Pages.
-For a simple locally hosted server, you can also use a static web server setup with for example the python http.server.
+For a simple locally hosted server, you can also use a static web server setup with, for example, the buil-in Python library http.server.
