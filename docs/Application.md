@@ -62,7 +62,7 @@ A geoobject includes the following attributes:
 - `type` (String): The type of geoobject. This is very use-case dependent and can be set as you want.
 - `datetime` (String ISO 8601 format): This specifies the specific point in time inside of the interval of its observation. It has to be a string in ISO 8601 format.
 - `geometry`: In order to visualise a geoobject, they need to specify their geometry. This is comparable to the geometry object in the [GeoJSON definition](https://datatracker.ietf.org/doc/html/rfc7946#page-7)
-    - `type` (String): The type of geometry. Inspired by the GeoJSON [geometry type](https://datatracker.ietf.org/doc/html/rfc7946#section-1.4). As of now, Polygons, Points and Lines are supported.
+    - `type` (String): The type of geometry. Inspired by the GeoJSON [geometry type](https://datatracker.ietf.org/doc/html/rfc7946#section-1.4). As of now, Polygons, Points and LineStrings are supported.
     - `coordinates` (Array): The exact coordinates of a geoobject. The structure of the values are based on the defined geometry type. These coordinates serve to correctly locate the position of the geoobjects in the 2D Viewer Module. The geoobjects will be visualised in front of the background image. The coordinates thus have to be in pixel values with [0, 0] being in the top-left hand corner and [-imageHeight, imageWidth] being in the bottom-right hand corner.
 - `customAttributes` (Dictionary key-value): These custom attributes cover your use-case dependent information. They represent additional information bound to a specific geoobject. These attributes are the basis for the Chart Module. In our rockfall example, the custom attributes could include data like the rockfall magnitude or total volume.
 
