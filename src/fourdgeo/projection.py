@@ -8,7 +8,7 @@ from fourdgeo import utilities, change
 import os
 import numpy as np
 from scipy.spatial import ConvexHull
-from shapely import Polygon, LineString
+from shapely import Polygon, LineString, Point
 import rasterio
 from shapely.geometry import mapping, Polygon
 import fiona
@@ -224,6 +224,98 @@ class PCloudProjection:
 
 
     def main_projection(self):
+        # Shift the point cloud by the camera position' coordinates so the latter is positionned on the origin
+        self.xyz -= self.camera_position
+        # Range between camera and the mean point of the point cloud
+        range = np.sqrt(
+            (
+                (self.camera_position[0] - self.anchor_point_xyz[0]) ** 2
+                + (self.camera_position[1] - self.anchor_point_xyz[1]) ** 2
+                + (self.camera_position[2] - self.anchor_point_xyz[2]) ** 2
+            )
+        )
+        # Getting vertical and horizontal resolutions in degrees. Both calculated with the range and the pixel dimension
+        alpha_rad = np.arctan2(self.resolution_cm / 100, range)
+        self.v_res = self.h_res = np.rad2deg(alpha_rad)
+
+        # Get spherical coordinates
+        r, theta, phi = utilities.xyz_2_spherical(self.xyz)  # Outputs r, theta (radians), phi (radians)
+        # Convert radians to degrees
+        theta_deg, phi_deg = np.rad2deg(theta), np.rad2deg(phi)
+
+        # Wrap negative angles to [0, 360) if range crosses -180/180
+        if np.any(theta_deg < 0):
+            theta_deg = np.mod(theta_deg, 360)
+        self.h_fov = (np.floor(np.min(theta_deg)), np.ceil(np.max(theta_deg)))
+
+        if np.any(phi_deg < 0):
+            phi_deg = np.mod(phi_deg, 360)
+        self.v_fov = (np.floor(np.min(phi_deg)), np.ceil(np.max(phi_deg)))
+
+        self.h_img_res = int((self.h_fov[1] - self.h_fov[0]) / self.h_res)
+        self.v_img_res = int((self.v_fov[1] - self.v_fov[0]) / self.v_res)
+
+        # Initialize range and color image
+        self.range_image = np.full(
+            (self.h_img_res, self.v_img_res, 3), 0, dtype=np.float32
+        )
+        self.color_image = np.full(
+            (self.h_img_res, self.v_img_res, 3), 0, dtype=np.uint8
+        )
+
+        # Map angles to pixel indices
+        u_og = np.round((theta_deg - self.h_fov[0]) / self.h_res).astype(int)
+        v_og = np.round((phi_deg - self.v_fov[0]) / self.v_res).astype(int)
+
+        valid_uv = (
+            (u_og >= 0) & (u_og < self.h_img_res) &
+            (v_og >= 0) & (v_og < self.v_img_res)
+        )
+
+        u_valid = u_og[valid_uv]
+        v_valid = v_og[valid_uv]
+        r_valid = r[valid_uv]
+
+        if self.make_color_image:
+            red_valid = self.red[valid_uv]
+            green_valid = self.green[valid_uv]
+            blue_valid = self.blue[valid_uv]
+
+        # Initialize range image
+        r_img = np.full((self.h_img_res, self.v_img_res), np.inf, dtype=r.dtype)
+        np.minimum.at(r_img, (u_valid, v_valid), r_valid)
+
+        # Extract final indices where pixels received valid values
+        valid_pixels = np.isfinite(r_img)
+        u_final, v_final = np.nonzero(valid_pixels)
+        r_final = r_img[u_final, v_final]
+
+        # Now extract only matching RGB points
+        self.u = u_final
+        self.v = v_final
+        self.r = (r_final - np.min(r_final)) * 255 / np.max(r_final - np.min(r_final))
+
+        if self.make_color_image:
+            # Match RGB to final (u,v)
+            rgb_valid_final = valid_uv.nonzero()[0]
+            self.red = red_valid[:len(self.u)]
+            self.green = green_valid[:len(self.u)]
+            self.blue = blue_valid[:len(self.u)]
+
+        if self.ref_theta != 0.0 and self.ref_phi != 0.0:
+            delta_theta = self.ref_theta - self.h_fov[0]
+            delta_phi = self.ref_phi - self.v_fov[0]
+            self.delta_u = np.round(delta_theta / self.h_res).astype(int)
+            self.delta_v = np.round(delta_phi / self.v_res).astype(int)
+        else:
+            self.delta_u = 0
+            self.delta_v = 0
+
+        # Shift the point cloud back to its original coordinates
+        self.xyz += self.camera_position
+
+
+    def main_projection_old(self):
         # Shift the point cloud by the camera position' coordinates so the latter is positionned on the origin
         self.xyz -= self.camera_position
         # Range between camera and the mean point of the point cloud
@@ -530,7 +622,11 @@ class ProjectChange:
 
             # Create the geometry
             list_points = []
-            if change_points_uv.shape[0] < 3:   # If there are less than 3 points, create a LineString
+            if change_points_uv.shape[0] == 1:   # If ther
+                list_points.append([int(v_img_res - change_points_uv[0, 1]), -int(change_points_uv[0, 0])])
+                geom = Point(np.array(list_points))
+            
+            elif change_points_uv.shape[0] < 3:   # If there are less than 3 points, create a LineString
                 for i in range(change_points_uv.shape[0]):
                     list_points.append([int(v_img_res - change_points_uv[i, 1]), -int(change_points_uv[i, 0])])
 
@@ -598,11 +694,19 @@ class ProjectChange:
             return 'Polygon'
 
         except:
-            # Create the vector
-            self.geom_gis = LineString(np.array(observation_pts_xy))
-            # Compute centroid
-            self.centroid_gis = np.mean(observation_pts_og, axis=0)
-            return 'LineString'
+            if np.array(observation_pts_xy).shape[0] > 1:
+                # Create the vector
+                self.geom_gis = LineString(np.array(observation_pts_xy))
+                # Compute centroid
+                self.centroid_gis = np.mean(observation_pts_og, axis=0)
+                return 'LineString'
+            else:
+                # Create the point
+                self.geom_gis = Point(np.array(observation_pts_xy))
+                # Compute centroid
+                self.centroid_gis = np.mean(observation_pts_og, axis=0)
+                return 'Point'
+
 
 
     def geojson2kml(self):
