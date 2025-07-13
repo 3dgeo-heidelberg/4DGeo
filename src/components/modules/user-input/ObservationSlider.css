@@ -1,0 +1,14 @@
+@import url("../../../styles/main_theme.css");
+
+.slider-container {
+  width:100%;
+  margin: 1rem 3rem ;
+
+  .observation-slider {
+    color: var(--clr-primary-a30);
+  }
+
+  .MuiSlider-markLabel {
+    white-space: pre-line;
+  }
+}

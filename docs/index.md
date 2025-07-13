@@ -12,13 +12,13 @@
 
 Have you found a bug or have specific request for a new feature? Please open a new issue in the online code repository on Github. Also for general questions please use the issue system.
 
-To run 4dGeo locally, follow these steps:
+To run 4DGeo locally, follow these steps:
 
 1. Clone the repository:
 
     ``` sh
         git clone https://github.com/3dgeo-heidelberg/4dgeo.git
-        cd 4dGeo
+        cd 4dgeo
     ```
 
 2. Install dependencies (Check if Node.js is installed on your computer. If not, download it from this [link](https://nodejs.org/en/download)):

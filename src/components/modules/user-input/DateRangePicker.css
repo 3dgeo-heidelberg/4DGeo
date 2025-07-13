@@ -1,0 +1,231 @@
+@import url("../../../styles/main_theme.css");
+
+.react-aria-DateRangePicker {
+  color: var(--clr-dark-a0);
+
+  .react-aria-Group {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    min-width: 220px;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+    position: relative;
+    padding: 4px 4px 4px 8px;
+    border: 1px solid var(--clr-surface-a30);
+    border-radius: 6px;
+    background: var(--clr-surface-a20);
+    white-space: nowrap;
+
+    &[data-pressed] {
+      box-shadow: none;
+      background: var(--clr-surface-a50);
+    }
+
+    /* &[data-focus-within] {
+      outline: 2px solid var(--focus-ring-color);
+      outline-offset: -1px;
+    } */
+  }
+
+  [slot=start] + span {
+    padding: 0 4px;
+  }
+
+  [slot=end] {
+    margin-right: 2rem;
+    flex: 1;
+  }
+
+  .react-aria-Button {
+    background: var(--clr-primary-a20);
+    color: var(--clr-dark-a0);
+    forced-color-adjust: none;
+    border-radius: 4px;
+    border: none;
+    margin-left: auto;
+    width: 1.429rem;
+    height: 1.429rem;
+    padding: 0;
+    font-size: 0.857rem;
+    box-sizing: content-box;
+    flex-shrink: 0;
+    position: sticky;
+    right: 0;
+
+    &[data-focus-visible] {
+      outline: 2px solid var(--clr-primary-a40);
+      outline-offset: 2px;
+    }
+  }
+
+  .react-aria-DateInput {
+    width: unset;
+    min-width: unset;
+    padding: unset;
+    border: unset;
+    outline: unset;
+  }
+}
+
+.react-aria-Popover[data-trigger=DateRangePicker] {
+    --background-color: var(--clr-surface-a10);
+
+    border: 1px solid var(--clr-surface-a30);
+    box-shadow: 0 8px 20px rgba(0 0 0 / 0.1);
+    border-radius: 6px;
+    background: var(--background-color);
+    color: var(--clr-dark-a0);
+    outline: none;
+    max-width: 300px;
+    transition: transform 200ms, opacity 200ms;
+
+    .react-aria-OverlayArrow svg {
+        display: block;
+        fill: var(--background-color);
+        stroke: var(--clr-surface-a50);
+        stroke-width: 1px;
+    }
+    
+    &[data-entering],
+    &[data-exiting] {
+    transform: var(--origin);
+    opacity: 0;
+    }
+
+    &[data-placement=top] {
+    --origin: translateY(8px);
+
+    &:has(.react-aria-OverlayArrow) {
+        margin-bottom: 6px;
+    }
+    }
+
+    &[data-placement=bottom] {
+    --origin: translateY(-8px);
+
+    &:has(.react-aria-OverlayArrow) {
+        margin-top: 6px;
+    }
+
+    .react-aria-OverlayArrow svg {
+        transform: rotate(180deg);
+    }
+    }
+
+    &[data-placement=right] {
+    --origin: translateX(-8px);
+
+    &:has(.react-aria-OverlayArrow) {
+        margin-left: 6px;
+    }
+
+    .react-aria-OverlayArrow svg {
+        transform: rotate(90deg);
+    }
+    }
+
+    &[data-placement=left] {
+    --origin: translateX(8px);
+
+    &:has(.react-aria-OverlayArrow) {
+        margin-right: 6px;
+    }
+
+    .react-aria-OverlayArrow svg {
+        transform: rotate(-90deg);
+    }
+    }
+
+    .react-aria-RangeCalendar {
+      padding: 8px 8px 8px 8px;
+      width:fit-content;
+      max-width: 100%;
+      color: var(--clr-dark-a0);
+    
+      & header {
+        display: flex;
+        align-items: center;
+        margin: 0 4px .5rem 4px;
+    
+        .react-aria-Heading {
+          flex: 1;
+          margin: 0;
+          text-align: center;
+          font-size: 1.375rem;
+        }
+      }
+    
+      .react-aria-Button {
+        width: 2rem;
+        height: 2rem;
+        padding: 0;
+      }
+    
+      & table {
+        border-collapse: collapse;
+    
+        & td {
+          padding: 2px 0;
+        }
+      }
+    
+      .react-aria-CalendarCell {
+        width: 2.286rem;
+        line-height: 2.286rem;
+        text-align: center;
+        border-radius: 6px;
+        cursor: default;
+        outline: none;
+        forced-color-adjust: none;
+    
+        &[data-outside-month] {
+          display: none;
+        }
+    
+        &[data-pressed] {
+          background: var(--clr-surface-a10);
+        }
+    
+        &[data-focus-visible] {
+          outline: 40px solid var(--clr-primary-a30);
+          outline-offset: -2px;
+        }
+    
+        &[data-selected] {
+          background: var(--clr-primary-a30);
+          color: var(--clr-light-a0);
+          border-radius: 0;
+    
+          &[data-focus-visible] {
+            outline-color: var(--clr-light-a0);
+            outline-offset: -3px;
+          }
+        }
+
+        &.available::after {
+          content:"\A";
+          width:0.4em;
+          height:0.4em;
+          border-radius:80%;
+          background: #515051;
+          position: relative;
+          bottom: 0.7em;
+          left: 0.2em;
+          display:inline-flex;
+          
+        }
+    
+        &[data-selection-start] {
+          border-start-start-radius: 6px;
+          border-end-start-radius: 6px;
+        }
+    
+        &[data-selection-end] {
+          border-start-end-radius: 6px;
+          border-end-end-radius: 6px;
+        }
+      }
+    }
+}

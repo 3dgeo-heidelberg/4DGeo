@@ -3,13 +3,13 @@
         {
             "backgroundImageData": {
                 "height": 1091,
-                "url": "/4dgeo/testing_data/rockfall_monitoring_trier/Trier_RangeImage.png",
+                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Trier_RangeImage.png",
                 "width": 5186
             },
             "endDateTime": "2024-08-26T00:00:00Z",
             "geoObjects": [
                 {
-                    "customEntityData": {
+                    "customAttributes": {
                         "X_centroid": 330657.3937686828,
                         "Y_centroid": 5516129.316761044,
                         "Z_centroid": 166.0149002626619,
@@ -102,7 +102,7 @@
                     "type": "Rockfall"
                 },
                 {
-                    "customEntityData": {
+                    "customAttributes": {
                         "X_centroid": 330666.220270121,
                         "Y_centroid": 5516129.316761044,
                         "Z_centroid": 166.0149002626619,
@@ -155,7 +155,7 @@
                     "type": "Rockfall"
                 },
                 {
-                    "customEntityData": {
+                    "customAttributes": {
                         "X_centroid": 330669.5211995447,
                         "Y_centroid": 5516129.316761044,
                         "Z_centroid": 166.0149002626619,
@@ -216,7 +216,7 @@
                     "type": "Rockfall"
                 },
                 {
-                    "customEntityData": {
+                    "customAttributes": {
                         "X_centroid": 330670.4838669231,
                         "Y_centroid": 5516129.316761044,
                         "Z_centroid": 166.0149002626619,
@@ -281,7 +281,7 @@
                     "type": "Rockfall"
                 },
                 {
-                    "customEntityData": {
+                    "customAttributes": {
                         "X_centroid": 330663.6455244591,
                         "Y_centroid": 5516129.316761044,
                         "Z_centroid": 166.0149002626619,
@@ -334,7 +334,7 @@
                     "type": "Rockfall"
                 },
                 {
-                    "customEntityData": {
+                    "customAttributes": {
                         "X_centroid": 330649.68475385726,
                         "Y_centroid": 5516129.316761044,
                         "Z_centroid": 166.0149002626619,

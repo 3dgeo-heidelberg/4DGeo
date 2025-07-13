@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+*.pyc
+*py4dgeo.log
+package-lock.json
+**/.ipynb_checkpoints
+
+# data
+/docs/data*
+/docs/out*
+**/*.zip
