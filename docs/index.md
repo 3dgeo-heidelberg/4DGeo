@@ -2,7 +2,17 @@
 
 ## About
 
-4DGeo is a modular web-based interactive dashboard application for visualizing geospatial, temporal data. Built with React, it enables users to create their own dashboard layout to visualize their custom 4D geodata using various visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be hosted on a simple server or with Github Pages. The data is read from a user-defined data source and refreshes automatically based on the specified refresh timer. With this, the 4DGeo dashboard works really well with continously updated data like with monitoring systems that repeatdly scan an area of interest. 
+4DGeo is a modular web-based interactive dashboard application for visualizing geospatial, temporal data. Built with React, it enables users to create their own dashboard layout to visualize their custom 4D geodata using various visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be hosted on a simple server or with Github Pages. The data is read from a user-defined data source and refreshes automatically based on the specified refresh timer. With this, the 4DGeo dashboard works really well with continously updated data like with monitoring systems that repeatdly scan an area of interest.
+
+Key Features:
+
+- Controlled visualisation
+- React-based modular UI
+- Time-series support
+- Customizable and shareable dashboards
+- Automatic data refreshs
+- Easy integration with your data
+
 
 <video width="100%" controls>
   <source src="./4DGeoDemo.mp4" type="video/mp4">
@@ -39,7 +49,12 @@ To run 4DGeo locally, follow these steps:
         http://localhost:3000
     ```
 
-## Setup
+## Hosting Options
 
 To host this application on your own, you can either copy our Github Action workflow for deploying it to Github Pages.
 For a simple locally hosted server, you can also use a static web server setup with, for example, the buil-in Python library http.server.
+Further, we established a automatic CI/CD workflow with Github Pages.
+
+## Documentation
+
+The main features of this software are described in the Application page. As a starting point to understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there.

@@ -57,9 +57,6 @@ nav:
   - Home: index.md
   - Application: Application.md
   - Notebook examples:
-    - Main AImon5.0 monitoring pipeline: main.ipynb
-    - Adaptive monitoring: adaptive_monitoring.ipynb
-    - Rule-based classification of change events: classification_of_change_events_rule_based.ipynb
-    - Rule-based filtering of change events: filtering_of_change_events_rule_based.ipynb
-    - Random forest classification of change events: classification_of_change_events_using_random_forest_classifier.ipynb
-    - Configuration description: configuration_description.md
+    - Bee monitoring: beehive.ipynb
+    - Rockfall monitoring: rockfall_monitoring.ipynb
+    - Branch evolution: branch_evolution.ipynb

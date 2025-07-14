@@ -164,5 +164,18 @@ If you have a file that you quickly want to visualise with the dashboard, instea
 ### 4.3 Export by Map Extent
 With this button, you can download a subset of you data. Only geoobjects that you selected and that are currently visible in the 2D View Map will be exported in the correct data format of the dashboard.
 
-## 5 Example Dataflows
-You can look at a few tutorials and example dataflows to make your own data compatible with the dashboard
+
+## 5 Project Structure
+This project is organized into several main directories and files, each serving a specific purpose:
+
+- /src: Contains the main source code for the application
+    - /components: The React components, including the different dashboard modules.
+    - /fourdgeo: Python backend utilities and functions needed for the example notebooks.
+    - /pages: The 2 pages of the application.
+    - /styles: Includes the main theme of the dashboard.
+    - /utils: Utility functions for the dashboard like the http fetcher.
+- /public: Contains different public files for the dashboard for simple customization of the dashboard.
+
+
+## 6 Example Dataflows
+You can look at a few tutorials and example dataflows in the Example Notebook section of this documentation to make your own data compatible with the dashboard
