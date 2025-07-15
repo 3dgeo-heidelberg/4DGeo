@@ -527,7 +527,7 @@ class ProjectChange:
                     'id': 'str',
                     'type': 'str',
                     'dateTime': 'str',
-                    'customEntityData': 'str'
+                    'customAttributes': 'str'
                     }
                 }
             
@@ -538,8 +538,8 @@ class ProjectChange:
             else:
                 geojson_gis = fiona.open(self.geojson_name_gis, 'w', 'GeoJSON', schema, fiona.crs.CRS.from_epsg(self.epsg))
                 # Add the polygon to the main geojson file
-                customEntityData = list(geoObject['customEntityData'])
-                customEntityData.append([float(centroid[0]), float(centroid[1]), float(centroid[2])])
+                customAttributes = list(geoObject['customAttributes'])
+                customAttributes.append([float(centroid[0]), float(centroid[1]), float(centroid[2])])
                 geojson_gis.write({
                     'geometry': mapping(geom),
                     'properties': {
@@ -548,7 +548,7 @@ class ProjectChange:
                         'id': str(geoObject["id"]),
                         'type': str(geoObject["type"]),
                         'dateTime': str(geoObject["dateTime"]),
-                        'customEntityData': json.dumps(customEntityData)
+                        'customAttributes': json.dumps(customAttributes)
                     }
                 })
 
@@ -644,9 +644,9 @@ class ProjectChange:
 
             # Compute centroid
             centroid = np.mean(observation_pts_og, axis=0)
-            geoObject['customEntityData']['centroid_X'] = float(centroid[0])
-            geoObject['customEntityData']['centroid_­Y'] = float(centroid[1])
-            geoObject['customEntityData']['centroid_Z'] = float(centroid[2])
+            geoObject['customAttributes']['centroid_X'] = float(centroid[0])
+            geoObject['customAttributes']['centroid_­Y'] = float(centroid[1])
+            geoObject['customAttributes']['centroid_Z'] = float(centroid[2])
 
             # Add the polygon to the main shapefile
             geojson.write({
@@ -657,7 +657,7 @@ class ProjectChange:
                     'id': str(geoObject["id"]),
                     'type': str(geoObject["type"]),
                     'dateTime': str(geoObject["dateTime"]),
-                    'customEntityData': json.dumps(geoObject['customEntityData'])
+                    'customAttributes': json.dumps(geoObject['customAttributes'])
                 }
             })
 

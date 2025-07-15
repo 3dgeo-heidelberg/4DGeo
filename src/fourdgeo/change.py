@@ -63,7 +63,7 @@ def extract_geoObjects_from_clusters(all_changes_with_labels, endDateTime_, file
         # Type is "unknown", as we don't apply any classifier here
         type_ = "unknown"
 
-        customEntityData_ = {
+        customAttributes_ = {
             "X_centroid": np.mean(xyz[:, 0]),
             "Y_centroid": np.mean(xyz[:, 1]),
             "Z_centroid": np.mean(xyz[:, 2]),
@@ -84,7 +84,7 @@ def extract_geoObjects_from_clusters(all_changes_with_labels, endDateTime_, file
             "type": type_,
             "dateTime": dateTime_,
             "geometry": geometry_,
-            "customEntityData": customEntityData_
+            "customAttributes": customAttributes_
         })
     return geoObjects_
 

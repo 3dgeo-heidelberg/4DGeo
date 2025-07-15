@@ -508,15 +508,15 @@ def plot_change_events(change_event_file, img_path, event_type_col=None, colors=
 class Geometry:
     def __init__(self, type: str, coordinates: list[list[float]]):
         self.type = type
-        self.coordinates = np.flip(coordinates[0], axis=1).tolist()  # Reverse the order of coordinates from [X,Y] to [Y,X] to match data model format
+        self.coordinates = np.fliplr(coordinates).tolist() if np.array(coordinates).ndim >= 2 else coordinates[::-1]  # Reverse the order of coordinates from [X,Y] to [Y,X] to match data model format
 
 class GeoObject:
-    def __init__(self, id: str, type: str, dateTime: str, geometry: Geometry, customEntityData: dict[str, str]):
+    def __init__(self, id: str, type: str, dateTime: str, geometry: Geometry, customAttributes: dict[str, str]):
         self.id = id
         self.type = type
         self.dateTime = dateTime
         self.geometry = geometry
-        self.customEntityData = customEntityData
+        self.customAttributes = customAttributes
 
 class ImageData:
     def __init__(self, url: str, width: int, height: int):
@@ -544,24 +544,33 @@ class DataModel:
     
 
 def convert_geojson_to_datamodel(geojson: dict, bg_img: str=None, width: int=None, height: int=None) -> DataModel:
-    # Group features by timestamp
+    """
+    Converts a list of geojson objects to the data format used in the dashboard. Each geojson feature has to contain all needed attributes contained in the GeoObject class with their respective namings.
+    
+    Parameters:
+        geojson (dict): The geojson objects to convert.
+        bg_img (str): The URL to the wanted background image.
+        width (int): The width of the background image.
+        height (int): The height of the background image.
+        
+    Returns:
+        DataModel: An Object that contains all the converted observations. Call toJSON() to convert to JSON string.
+    """
+    
     grouped_features = defaultdict(list)
     if geojson is None:
-        print("No change events found")
         return None
     
     for feature in geojson.get("features", []):
         props = feature.get("properties", {})
-        t_min_raw = props.get("t_min")
-        t_max_raw = props.get("t_max")
-        # Convert t_min and t_max to ISO 8601 format
-        t_min = datetime.strptime(t_min_raw, "%y%m%d_%H%M%S").strftime("%Y-%m-%dT%H:%M:%SZ")
-        t_max = datetime.strptime(t_max_raw, "%y%m%d_%H%M%S").strftime("%Y-%m-%dT%H:%M:%SZ")
-        if t_min and t_max:
-            grouped_features[(t_min, t_max)].append(feature)
+        startDateTime = props.get("startDateTime")
+        endDateTime = props.get("endDateTime")
+        if startDateTime and endDateTime:
+            grouped_features[(startDateTime, endDateTime)].append(feature)
 
     observations = []
-    for (t_min, t_max), features in grouped_features.items():
+    items = grouped_features.items()
+    for (startDateTime, endDateTime), features in items:
         geo_objects = []
         for i, feature in enumerate(features):
             geometry_data = feature.get("geometry", {})
@@ -571,28 +580,27 @@ def convert_geojson_to_datamodel(geojson: dict, bg_img: str=None, width: int=Non
             )
             props = feature.get("properties", {})
             geo_object = GeoObject(
-                id=props.get("object_id", f"obj_{i}"),
+                id=props.get("id", f"obj_{i}"),
                 type=props.get("type", "undefined"),
-                dateTime=t_min,
+                dateTime=props.get("dateTime"),
                 geometry=geometry,
-                customEntityData={k: str(v) for k, v in props.items() if k not in {"object_id", "event_type", "t_min", "t_max", "geometry"}} # Add any properties you want to exclude from customEntityData
+                customAttributes=props.get("customAttributes")
             )
             geo_objects.append(geo_object)
 
-        image_data = ImageData(bg_img, width, height)  # Replace with actual image data if available
+        image_data = ImageData(bg_img, width, height)
 
         observation = Observation(
-            startDateTime=t_min,
-            endDateTime=t_max,
+            startDateTime=startDateTime,
+            endDateTime=endDateTime,
             geoObjects=geo_objects,
             backgroundImageData=image_data
         )
         observations.append(observation)
 
     data_model = DataModel(observations=observations)
-    datamodel_json = data_model.toJSON()
 
-    return datamodel_json
+    return data_model
 
 
 def add_min_max(las_file, merged_file):
