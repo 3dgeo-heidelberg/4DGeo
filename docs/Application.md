@@ -1,14 +1,14 @@
 # 4DGeo Application
 
-For better understanding and easier usage of the 4DGeo Dashboard, its functionalities, structure and concepts will be explained here. The Application is split into two parts: the dashboard creation page and the dashboard view page.
+For better understanding and easier usage of the 4DGeo Dashboard, its functionalities, structure, and concepts will be explained here. The Application is split into **two parts**: the [dashboard creation page](#1-creation-page) (XXX which contains .... XXX) and the [dashboard view page](#2-dashboard-view-page) (XXX which contains .... XXX).
 
 ## 1 Creation Page
-On the dashboard creation page, you can design your own dashboard with a custom layout including all the modules you want to add, the data source, refresh interval and color assignment.
+On the dashboard creation page, you can design your own dashboard with a **custom layout** including all the modules you want to add, the data source, refresh interval, and color assignment.
 
 ![Creation Page](CreationPage.png)
 
 ### 1.1 Data Source
-The data source is an integral part of the design of a dashboard. It defines the location of the data that should be read. This has to be a concrete link or URL to a specific file in the correct [format](#datamodel).
+The data source is an integral part of the design of a dashboard. It defines the location of the data that should be read. This has to be a concrete link or URL to a specific file in the [correct format](#21-data-model).
 
 ### 1.2 Refresh Interval
 You have the option to specify the frequency of refreshes for the dashboard. At every refresh, the data from your given data source is read and checked for updates. For example if you have a new analysed scan that you want to include into the dashboard, you just have to update the file in your data source and the dashboard will automatically show this new content on the next refresh.
@@ -35,7 +35,7 @@ The idea of populating the creation section with data from a permalink is expand
 
 
 ## 2 Dashboard View Page
-This page is the main visualisation page. A dashboard is generated via the stored information in the permalink with its layout, data source, refresh rate and color assignment. It is then populated with data automatically read from the given data source. Each module of the dashboard has its own functionality and will be further explained [later](#modules). Based on your specified refresh interval, the dashboard rereads the data from your data source and updates the content if anything changed.
+This page is the main visualisation page. A dashboard is generated via the stored information in the permalink with its layout, data source, refresh rate, and color assignment. It is then populated with data automatically read from the given data source. Each module of the dashboard has its own functionality and will be [further explained](#3-modules). Based on your specified refresh interval, the dashboard rereads the data from your data source and updates the content if anything changed.
 
 ![Dashboard Page](DashboardPageWorkflow.jpg)
 
@@ -50,7 +50,7 @@ Our data model mainly serves the purpose to make the dashboard use-case independ
 
 It is designed around <b>observations</b>. An observation can be described as a snapshot of the real world over a specified area at a specific short interval in time.
 <br>
-For example, a use-case could be to monitor rockfalls and landslides on a mountain slope with a powerful LiDAR scanner. In this example, an observation would be a single scan of the area.
+For example, a use-case could be to monitor rockfalls and landslides on a mountain slope with a LiDAR scanner. In this example, an observation would be a single scan of the area.
 
 Each observation includes a <b>start</b>- and <b>end-datetime</b> (in ISO 8601 format) for specifying the exact point in time. Additionally, it contains information for a <b>2D background image</b> to represent the environment at the time of the scan. This information consists of the URL to the image file as well as its width and height in pixels. With each observation having their own respective background image, changes in the environment can be visualized.
 
@@ -64,7 +64,7 @@ A geoobject includes the following attributes:
 - `geometry`: In order to visualise a geoobject, they need to specify their geometry. This is comparable to the geometry object in the [GeoJSON definition](https://datatracker.ietf.org/doc/html/rfc7946#page-7)
     - `type` (String): The type of geometry. Inspired by the GeoJSON [geometry type](https://datatracker.ietf.org/doc/html/rfc7946#section-1.4). As of now, Polygons, Points and LineStrings are supported.
     - `coordinates` (Array): The exact coordinates of a geoobject. The structure of the values are based on the defined geometry type. These coordinates serve to correctly locate the position of the geoobjects in the 2D Viewer Module. The geoobjects will be visualised in front of the background image. The coordinates thus have to be in pixel values with [0, 0] being in the top-left hand corner and [-imageHeight, imageWidth] being in the bottom-right hand corner.
-- `customAttributes` (Dictionary key-value): These custom attributes cover your use-case dependent information. They represent additional information bound to a specific geoobject. These attributes are the basis for the Chart Module. In our rockfall example, the custom attributes could include data like the rockfall magnitude or total volume.
+- `customAttributes` (Dictionary key-value): These custom attributes cover your use-case dependent information. They represent additional information bound to a specific geoobject. These attributes are the basis for the [Chart Module](#chart-visualisations). In our rockfall example, the custom attributes could include data like the rockfall magnitude or total volume.
 
 
 This is a skeleton overview of how the finished data should look like:
@@ -113,15 +113,18 @@ This is a skeleton overview of how the finished data should look like:
 With these modules, your data will be visualised in different ways so that you can analyse them to your liking.
 
 #### 2D View Map
-In the 2D View, all the geoobjects inside of your data will be rendered with a leaflet map infront of the specified background image. When multiple observations are selected, the background image is taken from the first. For now, only Polygons, Points and LineStrings are supported. <br>
+(XXX ADD description that you can also color change events by attribute if selected XXX)
+
+In the 2D View, all the geoobjects inside of your data will be rendered with a leaflet map infront of the specified background image. When multiple observations are selected, the background image is taken from the first. For now, only Polygons, Points, and LineStrings are supported. <br>
 There are 2 layers you can choose from: 
 
 - Normal Layer: All the filtered geoobjects will be shown as their original geometry
 - Clustered Laye: For a better performance, objects that are near each other can be automatically grouped into a cluster that will be shown as a point indicating the number of objects inside it. In this layer, polygons that are very small on your current zoom level will also be deflated into markers for better visibility.
 
-![](2DViewMap.png)
+|       2D View Map (Normal Layer)        |   2D View Map Clustered    |
+|:------------------------:|:--------------------------:|
+|    ![](2DViewMap.png)    |  ![](2DViewMapClustered.png)|
 
-![](2DViewMapClustered.png)
 
 
 #### Chart Visualisations
@@ -130,11 +133,11 @@ Additionally to the 2D View Module, this module can visualise the custom attribu
 For now, only the bar chart is implemented.<br>
 Here, all your selected observations are shown as a bar. The value of this bar is calculated with the chosen operator and field. The field has to be a number value to be calculated correctly. Each bar is divided into all available geoobject types for a more detailed view. For operators, the following are included:
 
-- Add: All values of the chosen attribute are summed up.
+- Add: All values of the chosen attribute are summed up. (XXX How about using Sum here? XXX)
 - Average: The average value of the chosen attribute.
 - Min: Only the smallest value of the attribute will be shown.
 - Max: Only the biggest value of the attribute will be shown.
-- Count: The total count of objects. If a field is selected, the only objects that have the chosen field are counted.
+- Count: The total count of objects. If a field is selected, only objects that have the chosen field are counted.
 
 
 ### 3.2 User Input
@@ -148,8 +151,8 @@ With this module, you can choose a date range so that only observations that fal
 #### Observation Slider
 Other than the date range module that takes care of a broad selection, the observation slider lets you define a more detailed selection. All the observations that fall into your chosen date range are shown on the slider. You have the option to then choose between the <i>Single</i> and <i>Range</i> mode:
 
-- Single: Only one observation is selected at a time.
-- Range: You can specify a start- and end-observation.
+- Single: Only one observation is selected at a time. (XXX add example, e.g., usefull if you are interested in the number of objects at a selected point in time such as bees at a certain time)
+- Range: You can specify a start- and end-observation. (XXX add example, e.g., usefull if you are interested in all objects detected within a time frame such as rockfalls within a month)
 
 ![](Slider.png)
 
@@ -164,7 +167,6 @@ If you have a file that you quickly want to visualise with the dashboard, instea
 ### 4.3 Export by Map Extent
 With this button, you can download a subset of you data. Only geoobjects that you selected and that are currently visible in the 2D View Map will be exported in the correct data format of the dashboard.
 
-
 ## 5 Project Structure
 This project is organized into several main directories and files, each serving a specific purpose:
 
@@ -178,4 +180,4 @@ This project is organized into several main directories and files, each serving 
 
 
 ## 6 Example Dataflows
-You can look at a few tutorials and example dataflows in the Example Notebook section of this documentation to make your own data compatible with the dashboard
+You can look at a few tutorials and example dataflows in the Example Notebooks (XXX Add link here XXX) section of this documentation to make your own data compatible with the dashboard

@@ -1,26 +1,23 @@
 # 4DGeo
 
 ## About
+(XXX Very important to state somewhere in the first few sentences that it is open source XXX)
+4DGeo is a modular web-based interactive dashboard application for visualizing geospatial, temporal data. Built with React, it enables users to create their own dashboard layout to visualize their custom 4D geodata using various visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be [hosted on a simple server or with Github Pages](#hosting-options). The data is read from a user-defined data source and is updated automatically at regular intervals, as specified in the refresh timer. This enables the 4DGeo dashboard to work particularly well with continuously updated data, such as that from monitoring systems that repeatedly scan an area of interest. (XXX But also if we do not update but still want to investigate our results? XXX)
 
-4DGeo is a modular web-based interactive dashboard application for visualizing geospatial, temporal data. Built with React, it enables users to create their own dashboard layout to visualize their custom 4D geodata using various visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be hosted on a simple server or with Github Pages. The data is read from a user-defined data source and refreshes automatically based on the specified refresh timer. With this, the 4DGeo dashboard works really well with continously updated data like with monitoring systems that repeatdly scan an area of interest.
+**Key Features:**
+- Controlled **visualisation** (XXX of what? Results from different methods of 3D and 4D change analysis or similar? XXX)
+- **Time-series** support
+- **Customizable** and **shareable dashboards**
+- React-based **modular UI**
+- **Automatic** data **refreshs**
+- Easy integration with **your data** (XXX link here to where it is explained how to do it XXX)
 
-Key Features:
-
-- Controlled visualisation
-- React-based modular UI
-- Time-series support
-- Customizable and shareable dashboards
-- Automatic data refreshs
-- Easy integration with your data
-
-
+(XXX great video, but it needs either some text explaining OR a voice over that does something similar)
 <video width="100%" controls>
   <source src="./4DGeoDemo.mp4" type="video/mp4">
 </video>
 
 ## Development & Installation
-
-Have you found a bug or have specific request for a new feature? Please open a new issue in the online code repository on Github. Also for general questions please use the issue system.
 
 To run 4DGeo locally, follow these steps:
 
@@ -49,12 +46,23 @@ To run 4DGeo locally, follow these steps:
         http://localhost:3000
     ```
 
-## Hosting Options
+## Hosting Options 
+(XXX needs links/sources XXX)
+(XXX either link to an existing example of how to do it or create one and reference it here. Is it in Hosting Options? If so, there is little to no links XXX)
 
-To host this application on your own, you can either copy our Github Action workflow for deploying it to Github Pages.
+To **host** this application **on your own**, you can either copy our Github Action workflow for deploying it to Github Pages. (XXX either ... OR is missing? XXX)
 For a simple locally hosted server, you can also use a static web server setup with, for example, the buil-in Python library http.server.
 Further, we established a automatic CI/CD workflow with Github Pages.
+(XXX in general i think this section could also benefit from linking to where these things are described XXX)
 
 ## Documentation
 
-The main features of this software are described in the Application page. As a starting point to understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there.
+The **main features** of this software are described in the <a href = "">Application page </a>. As a starting point to understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there.
+
+## Contact / bugs / feature requests
+
+Have you found a bug or have specific request for a new feature? Please open a <a href="https://github.com/3dgeo-heidelberg/4dgeo/issues">new issue in the online code repository on Github </a>. Also for general questions please use the issue system.
+
+Scientific requests can be directed to the 
+<a href="https://www.geog.uni-heidelberg.de/en/3dgeo">3DGeo Research Group Heidelberg</a> and its respective members.
+</div>
