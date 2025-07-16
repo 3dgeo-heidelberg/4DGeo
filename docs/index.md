@@ -51,18 +51,22 @@ To run 4DGeo locally, follow these steps:
 (XXX either link to an existing example of how to do it or create one and reference it here. Is it in Hosting Options? If so, there is little to no links XXX)
 
 To **host** this application **on your own**, you can either copy our Github Action workflow for deploying it to Github Pages. (XXX either ... OR is missing? XXX)
-For a simple locally hosted server, you can also use a static web server setup with, for example, the buil-in Python library http.server.
+For a simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library `http.server`.
 Further, we established a automatic CI/CD workflow with Github Pages.
 (XXX in general i think this section could also benefit from linking to where these things are described XXX)
 
 ## Documentation
 
-The **main features** of this software are described in the <a href = "">Application page </a>. As a starting point to understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there.
+The **main features** of this software are described in the <a href="Application.html">Application page</a>. As a starting point to understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there.
 
-## Contact / bugs / feature requests
+- [Beehive monitoring](beehive.html)
+- [Rockfall monitoring](rockfall_monitoring.html)
+- [Branch evolution](branch_evolution.html)
 
-Have you found a bug or have specific request for a new feature? Please open a <a href="https://github.com/3dgeo-heidelberg/4dgeo/issues">new issue in the online code repository on Github </a>. Also for general questions please use the issue system.
+## Contact / Bugs / Feature Requests
+
+Have you found a bug or have specific request for a new feature? Please open a <a href="https://github.com/3dgeo-heidelberg/4dgeo/issues">new issue in the online code repository on Github</a>. Also for general questions please use the issue system.
 
 Scientific requests can be directed to the 
-<a href="https://www.geog.uni-heidelberg.de/en/3dgeo">3DGeo Research Group Heidelberg</a> and its respective members.
+<a href="https://www.uni-heidelberg.de/3dgeo">3DGeo Research Group Heidelberg</a> and its respective members.
 </div>
