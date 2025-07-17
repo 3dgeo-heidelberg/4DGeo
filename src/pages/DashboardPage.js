@@ -102,7 +102,10 @@ function DashboardPage() {
 
     const resetDashboardState = (observations) => {
         let tempStartEnd = {
-            startDate: Math.min(...observations.map(observation => Date.parse(observation.startDateTime))), 
+            startDate: Math.min(...observations.map(observation => {
+                console.log("startdatetime", observation);
+                return Date.parse(observation.startDateTime);
+            })), 
             endDate: Math.max(...observations.map(observation => Date.parse(observation.startDateTime)))
         }
         setDateRange({startDate: getDateFromDateTime(tempStartEnd.startDate), endDate: addDays(getDateFromDateTime(tempStartEnd.endDate), 1) - 1});

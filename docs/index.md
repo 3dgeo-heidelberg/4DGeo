@@ -1,7 +1,16 @@
 # 4DGeo
 
+4DGeo is an open-source, modular web-based interactive dashboard application for visualizing geospatial, temporal data. 
+
+(XXX great video, but it needs either some text explaining OR a voice over that does something similar)
+<video width="100%" controls>
+  <source src="./4DGeoDemo.mp4" type="video/mp4">
+</video>
+
+
 ## About
-4DGeo is an open-source, modular web-based interactive dashboard application for visualizing geospatial, temporal data. Built with React, it enables users to create their own dashboard layout to visualize their custom 4D geodata using various visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be [hosted on a simple server or with Github Pages](#hosting-options). The data is read from a user-defined data source and is updated automatically at regular intervals, as specified in the refresh timer. This enables the 4DGeo dashboard to work particularly well with continuously updated data, such as that from monitoring systems that repeatedly scan an area of interest in addition to static data that does not need constant refreshing.
+
+Built with React, it enables users to create their own dashboard layout to visualize their custom 4D geodata using various visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be [hosted on a simple server or with Github Pages](#hosting-options). The data is read from a user-defined data source and is updated automatically at regular intervals, as specified in the refresh timer. This enables the 4DGeo dashboard to work particularly well with continuously updated data, such as that from monitoring systems that repeatedly scan an area of interest in addition to static data that does not need constant refreshing.
 
 **Key Features:**
 
@@ -12,10 +21,6 @@
 - **Automatic** data **refreshs**
 - Easy integration with **your data** using a self-designed [data model](Application.md#21-data-model)
 
-(XXX great video, but it needs either some text explaining OR a voice over that does something similar)
-<video width="100%" controls>
-  <source src="./4DGeoDemo.mp4" type="video/mp4">
-</video>
 
 ## Development & Installation
 
@@ -50,7 +55,7 @@ To run 4DGeo locally, follow these steps:
 (XXX needs links/sources XXX)
 (XXX either link to an existing example of how to do it or create one and reference it here. Is it in Hosting Options? If so, there is little to no links XXX)
 
-To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4dgeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. Or for a simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library `http.server` like described [here](https://docs.python.org/3.4/library/http.server.html) via the command line if you want a quick and easy solution.
+To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4dgeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library `http.server` [(link)](https://docs.python.org/3.4/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
 
 ## Documentation
 

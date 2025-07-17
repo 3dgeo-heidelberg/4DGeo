@@ -69,7 +69,7 @@ export default function Chart({ observations, typeColors }) {
 
                 Object.entries(valuesByType).forEach(([type, values]) => {
                     switch (operatorKey) {
-                        case "Add":
+                        case "Sum":
                             collectorPerType[type] = values.reduce((accumulator, value) => accumulator + value, 0)
                             break;
                         case "Average":
@@ -105,7 +105,7 @@ export default function Chart({ observations, typeColors }) {
                         label="Operator"
                         onChange={handleOperatorSelected}
                     >
-                        <MenuItem value="Add">Add</MenuItem>
+                        <MenuItem value="Sum">Sum</MenuItem>
                         <MenuItem value="Average">Average</MenuItem>
                         <MenuItem value="Min">Min</MenuItem>
                         <MenuItem value="Max">Max</MenuItem>

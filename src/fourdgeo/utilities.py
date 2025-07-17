@@ -365,6 +365,14 @@ def build_pipeline_command(folder_path, config_file, default_cmd, use_every_xth_
     print(command_str)
     return command_str
 
+def tif_to_png(input_tif, output_png):
+    with Image.open(input_tif) as src:
+        data = src.read()
+
+        img = Image.fromarray(array)
+        img.save(output_png)
+        print(f"Saved PNG to {output_png}")
+
 
 def plot_change_events(change_event_file, img_path, event_type_col=None, colors=None, figsize=(8,6)):
     # Load the background image (as array)
