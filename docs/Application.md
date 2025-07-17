@@ -1,6 +1,7 @@
 # 4DGeo Application
 
-For better understanding and easier usage of the 4DGeo Dashboard, its functionalities, structure, and concepts will be explained here. The Application is split into **two parts**: the [dashboard creation page](#1-creation-page) (XXX which contains .... XXX) and the [dashboard view page](#2-dashboard-view-page) (XXX which contains .... XXX).
+For better understanding and easier usage of the 4DGeo Dashboard, its functionalities, structure, and concepts will be explained here. The Application is split into **two parts**: firstly, the [dashboard creation page](#1-creation-page), where you can create and configure your own dashboard or load predefined examples and adjust their structure to your needs. And secondly, the [dashboard view page](#2-dashboard-view-page) which contains the actual dashboard with all the specified [modules](#3-modules) combined with your data.
+
 
 ## 1 Creation Page
 On the dashboard creation page, you can design your own dashboard with a **custom layout** including all the modules you want to add, the data source, refresh interval, and color assignment.
@@ -113,13 +114,11 @@ This is a skeleton overview of how the finished data should look like:
 With these modules, your data will be visualised in different ways so that you can analyse them to your liking.
 
 #### 2D View Map
-(XXX ADD description that you can also color change events by attribute if selected XXX)
-
-In the 2D View, all the geoobjects inside of your data will be rendered with a leaflet map infront of the specified background image. When multiple observations are selected, the background image is taken from the first. For now, only Polygons, Points, and LineStrings are supported. <br>
+In the 2D View, all the geoobjects inside of your data will be rendered with a leaflet map infront of the specified background image. When multiple observations are selected, the background image is taken from the first. For now, only Polygons, Points, and LineStrings are supported. Each geoobject is [assigned a specific color](#41-color-assignment) based on their **type** which you can adjust easily <br>
 There are 2 layers you can choose from: 
 
 - Normal Layer: All the filtered geoobjects will be shown as their original geometry
-- Clustered Laye: For a better performance, objects that are near each other can be automatically grouped into a cluster that will be shown as a point indicating the number of objects inside it. In this layer, polygons that are very small on your current zoom level will also be deflated into markers for better visibility.
+- Clustered Layer: For a better performance, objects that are near each other can be automatically grouped into a cluster that will be shown as a point indicating the number of objects inside it. In this layer, polygons that are very small on your current zoom level will also be deflated into markers for better visibility.
 
 |       2D View Map (Normal Layer)        |   2D View Map Clustered    |
 |:------------------------:|:--------------------------:|
@@ -133,7 +132,7 @@ Additionally to the 2D View Module, this module can visualise the custom attribu
 For now, only the bar chart is implemented.<br>
 Here, all your selected observations are shown as a bar. The value of this bar is calculated with the chosen operator and field. The field has to be a number value to be calculated correctly. Each bar is divided into all available geoobject types for a more detailed view. For operators, the following are included:
 
-- Add: All values of the chosen attribute are summed up. (XXX How about using Sum here? XXX)
+- Sum: All values of the chosen attribute are summed up.
 - Average: The average value of the chosen attribute.
 - Min: Only the smallest value of the attribute will be shown.
 - Max: Only the biggest value of the attribute will be shown.
@@ -151,8 +150,8 @@ With this module, you can choose a date range so that only observations that fal
 #### Observation Slider
 Other than the date range module that takes care of a broad selection, the observation slider lets you define a more detailed selection. All the observations that fall into your chosen date range are shown on the slider. You have the option to then choose between the <i>Single</i> and <i>Range</i> mode:
 
-- Single: Only one observation is selected at a time. (XXX add example, e.g., usefull if you are interested in the number of objects at a selected point in time such as bees at a certain time)
-- Range: You can specify a start- and end-observation. (XXX add example, e.g., usefull if you are interested in all objects detected within a time frame such as rockfalls within a month)
+- Single: Only one observation is selected at a time. This can be usefull if you are interested in the number and attributes of objects at this specific point in time such as bees at a certain time for example.
+- Range: You can specify a start- and end-observation. For example if you are interested in visualising all objects detected within a time fram such as rockfalls within a given month, this can be used.
 
 ![](Slider.png)
 
@@ -176,8 +175,12 @@ This project is organized into several main directories and files, each serving 
     - /pages: The 2 pages of the application.
     - /styles: Includes the main theme of the dashboard.
     - /utils: Utility functions for the dashboard like the http fetcher.
-- /public: Contains different public files for the dashboard for simple customization of the dashboard.
+- /public: Contains different files for simple customization of the dashboard, like the example templates and some html files.
 
 
 ## 6 Example Dataflows
-You can look at a few tutorials and example dataflows in the Example Notebooks (XXX Add link here XXX) section of this documentation to make your own data compatible with the dashboard
+You can look at a few tutorials and example dataflows in the Example Notebooks section of this documentation to make your own data compatible with the dashboard:
+
+- [Beehive monitoring](beehive.ipynb)
+- [Rockfall monitoring](rockfall_monitoring.ipynb)
+- [Branch evolution](branch_evolution.ipynb)
