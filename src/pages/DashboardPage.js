@@ -10,6 +10,8 @@ import AddIcon from '@mui/icons-material/Add'
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import L from "leaflet";
 
+import './DashboardPage.css'
+
 function DashboardPage() {
     const urlParams = useSearchParams()[0]
     const [observations, setObservations] = useState([])
@@ -204,7 +206,7 @@ function DashboardPage() {
 
     return (
         <Box className="dashboard-container" sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', maxHeight: '5%', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 4rem'}}>
+            <Box sx={{ display: 'flex', maxHeight: '5rem', boxSizing: 'border-box', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 3rem'}}>
                 <div className="custom-header" dangerouslySetInnerHTML={{__html: htmlHeaderString}} />
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", gap: "1.2rem"}}>
                     <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} />

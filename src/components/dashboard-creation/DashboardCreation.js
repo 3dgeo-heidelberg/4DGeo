@@ -1,4 +1,4 @@
-import { Paper, TextField, Button, Menu, MenuItem, Box, Snackbar } from "@mui/material";
+import { TextField, Button, Menu, MenuItem, Box, Snackbar } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import DashboardPreview from "./DashboardPreview";
@@ -92,10 +92,60 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
         })
     }
 
+    const getAspectRatioOfScreen = () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight - (window.innerHeight*0.05 - 2*(parseFloat(getComputedStyle(document.documentElement).fontSize)));
+
+        return width/height;
+    }
+
+    const aspectRatio = getAspectRatioOfScreen();
+
     return (
-        <Paper elevation={3} className="container">
+        <div className="container">
             <div className="header">
-                <h2 className="headline">Customize your Dashboard</h2>
+                <div className="headline-buttons">
+                    <h2 className="headline">Customize your Dashboard</h2>
+
+                    <div className="buttons">
+                        <Button 
+                            id="moduleSelectButton"
+                            color="primary"
+                            aria-label="add" 
+                            variant="contained" 
+                            onClick={handleClick}
+                            aria-controls={open ? 'demo-positioned-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={open ? 'true' : undefined} 
+                            startIcon={<AddIcon/>}
+                        >                        
+                            Add Module
+                        </Button>
+
+                        <Menu
+                            id="moduleSelect"
+                            aria-labelledby="moduleSelectButton"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={() => setAnchorEl(null)}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                        >
+                            <MenuItem onClick={handleClose}>2D View</MenuItem>
+                            <MenuItem onClick={handleClose}>Chart</MenuItem>
+                            <MenuItem onClick={handleClose}>DateRangePicker</MenuItem>
+                            <MenuItem onClick={handleClose}>Slider</MenuItem>
+                        </Menu>
+
+                        <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} preloadTypes={preloadTypes} />
+                    </div>
+                </div>
                 <Box className="input-area">
                     <TextField id="url-input" label="Link to your data source" variant="outlined" onChange={(event) => {
                             setUrl(event.target.value);
@@ -109,56 +159,16 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
                             }}
                             value={interval}
                         />
-
-                        <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} preloadTypes={preloadTypes} />
                     </Box>
-                    
-
-                    
-                    <Button 
-                        id="moduleSelectButton"
-                        color="primary"
-                        aria-label="add" 
-                        variant="contained" 
-                        onClick={handleClick}
-                        aria-controls={open ? 'demo-positioned-menu' : undefined}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : undefined} 
-                        startIcon={<AddIcon/>}
-                    >                        
-                        Add Module
-                    </Button>
-
-                    <Menu
-                        id="moduleSelect"
-                        aria-labelledby="moduleSelectButton"
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={() => setAnchorEl(null)}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'left',
-                        }}
-                    >
-                        <MenuItem onClick={handleClose}>2D View</MenuItem>
-                        <MenuItem onClick={handleClose}>Chart</MenuItem>
-                        <MenuItem onClick={handleClose}>DateRangePicker</MenuItem>
-                        <MenuItem onClick={handleClose}>Slider</MenuItem>
-                    </Menu>
                 </Box>
             </div>
 
-            <div className="dashboard-preview">
-                <DashboardPreview
-                    layout={layout}
-                    onLayoutChange={onLayoutChange}
-                    minimumModuleSizes={minimumModuleSizes}
-                />
-            </div>
+            <DashboardPreview
+                layout={layout}
+                onLayoutChange={onLayoutChange}
+                minimumModuleSizes={minimumModuleSizes}
+                style={{aspectRatio: aspectRatio, height: '40px', background: 'white', position: 'relative'}}
+            />
 
             <div className="footer">
                 <Button 
@@ -186,7 +196,7 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
                     Go  
                 </Button>
             </div>
-        </Paper>
+        </div>
     );
 };
 

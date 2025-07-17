@@ -129,8 +129,10 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
     return (
         <ResponsiveGridLayout
             layout={layout}
+            cols={{ lg: 12, md: 12, sm: 10, xs: 8, xxs: 6 }}
+            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
             onLayoutChange={() => {}}
-            className= "layout"
+            className= "layout-dashboard"
         >
             {generateDOM()}
         </ResponsiveGridLayout>

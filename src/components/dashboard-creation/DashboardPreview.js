@@ -30,23 +30,25 @@ function DashboardPreview({ layout, onLayoutChange, minimumModuleSizes }) {
 
     const getAspectRatioOfScreen = () => {
         const width = window.innerWidth;
-        const height = window.innerHeight - (window.innerHeight*0.05 - 2*(parseFloat(getComputedStyle(document.documentElement).fontSize)));
+        const height = window.innerHeight - (5*(parseFloat(getComputedStyle(document.documentElement).fontSize)));
 
         return width/height;
     }
 
-    const aspectRatio = getAspectRatioOfScreen();
+    let aspectRatio = getAspectRatioOfScreen();
+    window.addEventListener("resize", () => {aspectRatio = getAspectRatioOfScreen()})
 
     return (
-        <Box className="layout-container" sx={{aspectRatio: aspectRatio}}>
             <ResponsiveGridLayout
+                // style={{ width: aspectRatio*600, alignSelf: 'center', maxWidth: '100%' }}
                 layout={layout}
+                cols={{ lg: 12, md: 12, sm: 12, xs: 12, xxs: 6 }}
+                breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
                 onLayoutChange={onLayoutChange}
-                className= "layout"
+                className= "layout-preview"
             >
                 {generateDOM()}
             </ResponsiveGridLayout>
-        </Box>
     );
 };
 

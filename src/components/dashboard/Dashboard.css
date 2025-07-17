@@ -5,9 +5,10 @@
     transition: height 200ms ease;
 }
 
-.layout {
+.layout-dashboard {
   width: 100%;
   height: 100%;
+  border: none;
 }
 
 .grid-item {
@@ -15,7 +16,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background: rgba(221, 221, 221, 0.4);
+    border: solid;
+    border-width: 2px;
+    border-color: var(--clr-primary-a50);
     text-align: center;
     block-size: fit-content;
 

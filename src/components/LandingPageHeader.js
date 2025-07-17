@@ -2,7 +2,7 @@ import { IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import './LandingPageHeader.css';
 
-export default function LandingPageHeader({ handleDrawerToggle }) {
+export default function LandingPageHeader({ handleDrawerToggle, config }) {
     return (
         <div className="landing-page-header">
             <IconButton
@@ -13,9 +13,10 @@ export default function LandingPageHeader({ handleDrawerToggle }) {
                 sx={{ mr: 2, display: { sm: 'none' } }}
             >
                 <MenuIcon />
-          </IconButton>
-            <h1>Welcome to the 4DGeo Dashboard!</h1>
-            <p>Create your own custom Dashboard for monitoring 4D Data</p>
+            </IconButton>
+            <h1 className='header'>
+                {config?.APP_HEADER}
+            </h1>
         </div>
     )
 }

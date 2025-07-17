@@ -1,6 +1,5 @@
 @import url("../styles/main_theme.css");
 
-.landing-page-header > h1 {
+.custom-header {
     color: var(--clr-primary-a30);
-    font-size: 1.4rem;
 }

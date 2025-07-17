@@ -4,13 +4,9 @@
     justify-content: center;
     height: 100%;
     width: 100%;
-    background-color: darkgrey;
+    background-color: #dfdfdf;
 }
 
-.react-grid-layout {
-    position: relative;
-    transition: height 200ms ease;
-  }
   .grid-item {
     transition: all 200ms ease;
     transition-property: left, top, width, height;
@@ -127,6 +123,12 @@
     transform: rotate(45deg);
   }
 
-.layout-container {
-    border: solid;
-}
+ .layout-preview {
+    flex: 1 1;
+    background: white;
+    border-radius: 1px;
+    border: 2px dashed #d1d8ff;
+    padding: .2rem;
+    transition: border-color 0.3s ease;
+    overflow: scroll;
+  }
