@@ -152,7 +152,7 @@ export default function View2D({
                 backgroundImageData={backgroundImageData}
                 setBoundingBox={setBoundingBox}
             />
-            <LayersControl position="topright">
+            <LayersControl position="topright" collapsed={false}>
                 <LayersControl.BaseLayer checked name="Clustered geoobjects">
                     <LayerGroup ref={clusteredLayer}
                         eventHandlers={{
