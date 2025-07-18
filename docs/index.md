@@ -4,9 +4,8 @@
 
 (XXX great video, but it needs either some text explaining OR a voice over that does something similar)
 <video width="100%" controls>
-  <source src="./4DGeoDemo.mp4" type="video/mp4">
+  <source src="img/index/4DGeoDemo.mp4" type="video/mp4">
 </video>
-
 
 ## About
 

@@ -6,7 +6,7 @@ For better understanding and easier usage of the 4DGeo Dashboard, its functional
 ## 1 Creation Page
 On the dashboard creation page, you can design your own dashboard with a **custom layout** including all the modules you want to add, the data source, refresh interval, and color assignment.
 
-![Creation Page](CreationPage.png)
+![Creation Page](./img/application/CreationPage.png)
 
 ### 1.1 Data Source
 The data source is an integral part of the design of a dashboard. It defines the location of the data that should be read. This has to be a concrete link or URL to a specific file in the [correct format](#21-data-model).
@@ -19,7 +19,7 @@ The Color Assignment feature helps create a more appealing and customized visual
 
 If you dont use this option when creating a dashboard, a random color assignment will be generated.
 
-![Color Assignment](ColorAssignment.png)
+![Color Assignment](./img/application/ColorAssignment.png)
 
 ### 1.4 Layout
 The layout of a dashboard is defined as a map of each instance of a module and their position and size in the dashboard. This map approach makes it possible to save this layout information for example as a simple json string.
@@ -37,7 +37,7 @@ The idea of populating the creation section with data from a permalink is expand
 ## 2 Dashboard View Page
 This page is the main visualisation page. A dashboard is generated via the stored information in the permalink with its layout, data source, refresh rate, and color assignment. It is then populated with data automatically read from the given data source. Each module of the dashboard has its own functionality and will be [further explained](#3-modules). Based on your specified refresh interval, the dashboard rereads the data from your data source and updates the content if anything changed.
 
-![Dashboard Page](DashboardPageWorkflow.jpg)
+![Dashboard Page](./img/application/DashboardPageWorkflow.jpg)
 
 The dashboard is built around our self-designed data model.
 
@@ -46,7 +46,7 @@ The dashboard is built around our self-designed data model.
 ### 2.1 Data Model
 Our data model mainly serves the purpose to make the dashboard use-case independent. This way, the app can be used in a variety of scenarios that have their own data format but need to convert it into this data model.
 
-![Data Model](DataModel.jpg)
+![Data Model](./img/application/DataModel.jpg)
 
 It is designed around <b>observations</b>. An observation can be described as a snapshot of the real world over a specified area at a specific short interval in time.
 <br>
@@ -121,7 +121,7 @@ There are 2 layers you can choose from:
 
 |       2D View Map (Normal Layer)        |   2D View Map Clustered    |
 |:------------------------:|:--------------------------:|
-|    ![](2DViewMap.png)    |  ![](2DViewMapClustered.png)|
+|    ![](./img/application/2DViewMap.png)    |  ![](./img/application/2DViewMapClustered.png)|
 
 
 

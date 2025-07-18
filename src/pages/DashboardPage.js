@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Box from '@mui/material/Box';
 import { fetchJsonData } from "../utils/http_fetcher";
 import { Button, Divider, styled } from "@mui/material";
@@ -16,8 +16,7 @@ function DashboardPage() {
     const urlParams = useSearchParams()[0]
     const [observations, setObservations] = useState([])
     const [wasFileUploaded, setWasFileUploaded] = useState(false);
-
-    const [htmlHeaderString, setHtmlHeaderString] = useState();
+    const [config, setConfig] = useState({})
 
     const [typeColors, setTypeColors] = useState(new Map());
 
@@ -26,10 +25,6 @@ function DashboardPage() {
     const [dateTimeRange, setDateTimeRange] = useState({ startDate: 0, endDate: Date.now()})
 
     const [boundingBox, setBoundingBox] = useState(null);
-
-    async function fetchCustomHeader() {
-        setHtmlHeaderString(await (await fetch(`custom/custom_html/dashboard_page_header.html`)).text());
-    }
 
     const getAllTypes = (observations) => {
         const allTypes = new Set();
@@ -77,10 +72,23 @@ function DashboardPage() {
         }
     }
 
+    async function fetchConfig() {
+        const json = await (await fetch(`config.json`, {
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+        })).json();
+        setConfig(json);
+    }
+
+    useEffect(() => {
+        fetchConfig();
+    }, []);
+
     useEffect(() => {
         if(!wasFileUploaded) {
             loadData(true);
-            fetchCustomHeader();
 
             const intervalResolution = urlParams.get('interval') == null ? 60 : urlParams.get('interval');
             const interval = setInterval(() => {
@@ -210,7 +218,7 @@ function DashboardPage() {
     return (
         <Box className="dashboard-container" sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', maxHeight: '5rem', boxSizing: 'border-box', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 3rem'}}>
-                <div className="custom-header" dangerouslySetInnerHTML={{__html: htmlHeaderString}} />
+                <h2>{config.APP_TITLE}</h2>
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", gap: "1.2rem"}}>
                     <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} />
                     <Button 
