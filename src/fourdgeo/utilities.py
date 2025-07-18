@@ -516,7 +516,7 @@ def plot_change_events(change_event_file, img_path, event_type_col=None, colors=
 class Geometry:
     def __init__(self, type: str, coordinates: list[list[float]]):
         self.type = type
-        self.coordinates = np.fliplr(coordinates).tolist() if np.array(coordinates).ndim >= 2 else coordinates[::-1]  # Reverse the order of coordinates from [X,Y] to [Y,X] to match data model format
+        self.coordinates = np.flip(coordinates, axis=1).tolist() if np.array(coordinates).ndim == 2 else np.flip(coordinates[0], axis=1).tolist() if np.array(coordinates).ndim == 3 else coordinates[::-1]  # Reverse the order of coordinates from [X,Y] to [Y,X] to match data model format
 
 class GeoObject:
     def __init__(self, id: str, type: str, dateTime: str, geometry: Geometry, customAttributes: dict[str, str]):
