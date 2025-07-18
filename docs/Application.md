@@ -144,7 +144,7 @@ Next to the visualisation modules, user input modules are important to guarantee
 #### Date Range Calendar
 With this module, you can choose a date range so that only observations that fall into this time-interval will be shown. Inside of the calendar, all days where an observation took place are marked with a small dot for better navigation. For this, only the start datetime of each observation is used.
 
-<img src="Calendar.png" alt="drawing" width="200"/>
+<img src="./img/application/Calendar.png" alt="drawing" width="400"/>
 
 #### Observation Slider
 Other than the date range module that takes care of a broad selection, the observation slider lets you define a more detailed selection. All the observations that fall into your chosen date range are shown on the slider. You have the option to then choose between the <i>Single</i> and <i>Range</i> mode:
@@ -152,7 +152,7 @@ Other than the date range module that takes care of a broad selection, the obser
 - Single: Only one observation is selected at a time. This can be usefull if you are interested in the number and attributes of objects at this specific point in time such as bees at a certain time for example.
 - Range: You can specify a start- and end-observation. For example if you are interested in visualising all objects detected within a time fram such as rockfalls within a given month, this can be used.
 
-![](Slider.png)
+![](./img/application/Slider.png)
 
 ## 4 Other Functionality
 
