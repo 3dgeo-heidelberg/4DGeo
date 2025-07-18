@@ -4,6 +4,7 @@ import numpy as np
 import cv2
 import rasterio
 from fourdgeo import utilities, change
+import pandas as pd
 
 import os
 import numpy as np
@@ -243,98 +244,6 @@ class PCloudProjection:
         # Convert radians to degrees
         theta_deg, phi_deg = np.rad2deg(theta), np.rad2deg(phi)
 
-        # Wrap negative angles to [0, 360) if range crosses -180/180
-        if np.any(theta_deg < 0):
-            theta_deg = np.mod(theta_deg, 360)
-        self.h_fov = (np.floor(np.min(theta_deg)), np.ceil(np.max(theta_deg)))
-
-        if np.any(phi_deg < 0):
-            phi_deg = np.mod(phi_deg, 360)
-        self.v_fov = (np.floor(np.min(phi_deg)), np.ceil(np.max(phi_deg)))
-
-        self.h_img_res = int((self.h_fov[1] - self.h_fov[0]) / self.h_res)
-        self.v_img_res = int((self.v_fov[1] - self.v_fov[0]) / self.v_res)
-
-        # Initialize range and color image
-        self.range_image = np.full(
-            (self.h_img_res, self.v_img_res, 3), 0, dtype=np.float32
-        )
-        self.color_image = np.full(
-            (self.h_img_res, self.v_img_res, 3), 0, dtype=np.uint8
-        )
-
-        # Map angles to pixel indices
-        u_og = np.round((theta_deg - self.h_fov[0]) / self.h_res).astype(int)
-        v_og = np.round((phi_deg - self.v_fov[0]) / self.v_res).astype(int)
-
-        valid_uv = (
-            (u_og >= 0) & (u_og < self.h_img_res) &
-            (v_og >= 0) & (v_og < self.v_img_res)
-        )
-
-        u_valid = u_og[valid_uv]
-        v_valid = v_og[valid_uv]
-        r_valid = r[valid_uv]
-
-        if self.make_color_image:
-            red_valid = self.red[valid_uv]
-            green_valid = self.green[valid_uv]
-            blue_valid = self.blue[valid_uv]
-
-        # Initialize range image
-        r_img = np.full((self.h_img_res, self.v_img_res), np.inf, dtype=r.dtype)
-        np.minimum.at(r_img, (u_valid, v_valid), r_valid)
-
-        # Extract final indices where pixels received valid values
-        valid_pixels = np.isfinite(r_img)
-        u_final, v_final = np.nonzero(valid_pixels)
-        r_final = r_img[u_final, v_final]
-
-        # Now extract only matching RGB points
-        self.u = u_final
-        self.v = v_final
-        self.r = (r_final - np.min(r_final)) * 255 / np.max(r_final - np.min(r_final))
-
-        if self.make_color_image:
-            # Match RGB to final (u,v)
-            rgb_valid_final = valid_uv.nonzero()[0]
-            self.red = red_valid[:len(self.u)]
-            self.green = green_valid[:len(self.u)]
-            self.blue = blue_valid[:len(self.u)]
-
-        if self.ref_theta != 0.0 and self.ref_phi != 0.0:
-            delta_theta = self.ref_theta - self.h_fov[0]
-            delta_phi = self.ref_phi - self.v_fov[0]
-            self.delta_u = np.round(delta_theta / self.h_res).astype(int)
-            self.delta_v = np.round(delta_phi / self.v_res).astype(int)
-        else:
-            self.delta_u = 0
-            self.delta_v = 0
-
-        # Shift the point cloud back to its original coordinates
-        self.xyz += self.camera_position
-
-
-    def main_projection_old(self):
-        # Shift the point cloud by the camera position' coordinates so the latter is positionned on the origin
-        self.xyz -= self.camera_position
-        # Range between camera and the mean point of the point cloud
-        range = np.sqrt(
-            (
-                (self.camera_position[0] - self.anchor_point_xyz[0]) ** 2
-                + (self.camera_position[1] - self.anchor_point_xyz[1]) ** 2
-                + (self.camera_position[2] - self.anchor_point_xyz[2]) ** 2
-            )
-        )
-        # Getting vertical and horizontal resolutions in degrees. Both calculated with the range and the pixel dimension
-        alpha_rad = np.arctan2(self.resolution_cm / 100, range)
-        self.v_res = self.h_res = np.rad2deg(alpha_rad)
-
-        # Get spherical coordinates
-        r, theta, phi = utilities.xyz_2_spherical(self.xyz)  # Outputs r, theta (radians), phi (radians)
-        # Convert radians to degrees
-        theta_deg, phi_deg = np.rad2deg(theta), np.rad2deg(phi)
-
         # Discretize angles to image coordinates
         if np.floor(min(theta_deg)) == -180 or np.floor(max(theta_deg)) == 180:
             mask = theta_deg < 0
@@ -367,10 +276,17 @@ class PCloudProjection:
         u = np.round((theta_deg - self.h_fov[0]) / self.h_res).astype(int)
         v = np.round((phi_deg - self.v_fov[0]) / self.v_res).astype(int)
 
-        # Filter points within range
-        valid_indices = (
-            (u >= 0) & (u < self.h_img_res) & (v >= 0) & (v < self.v_img_res)
-        )
+        # At each pixel (u, v), we keep the point with the smallest radius (r)
+        df = pd.DataFrame({'u': u, 'v': v, 'r': r})
+        df['idx'] = np.arange(len(u))
+        min_idx = df.loc[df.groupby(['u', 'v'])['r'].idxmin(), 'idx'].values
+
+        # valid_indices = np.zeros(len(df), dtype=bool)
+        valid_indices = np.zeros(len(df), dtype=bool)
+        # valid_indices[min_idx] = False
+        valid_indices[min_idx] = True
+
+
         self.u = u[valid_indices]
         self.v = v[valid_indices]
         self.r = r[valid_indices]
@@ -379,15 +295,6 @@ class PCloudProjection:
             self.red = self.red[valid_indices]
             self.green = self.green[valid_indices]
             self.blue = self.blue[valid_indices]
-
-        if self.ref_theta != 0.0 and self.ref_phi != 0.0:
-            delta_theta = self.ref_theta - self.h_fov[0]
-            delta_phi = self.ref_phi - self.v_fov[0]
-            self.delta_u = np.round(delta_theta / self.h_res).astype(int)
-            self.delta_v = np.round(delta_phi / self.v_res).astype(int)
-        else:
-            self.delta_u = 0
-            self.delta_v = 0
 
         # Shift the point cloud back to its original coordinates
         self.xyz += self.camera_position
@@ -645,7 +552,7 @@ class ProjectChange:
             # Compute centroid
             centroid = np.mean(observation_pts_og, axis=0)
             geoObject['customEntityData']['centroid_X'] = float(centroid[0])
-            geoObject['customEntityData']['centroid_­Y'] = float(centroid[1])
+            geoObject['customEntityData']['centroid_Y'] = float(centroid[1])
             geoObject['customEntityData']['centroid_Z'] = float(centroid[2])
 
             # Add the polygon to the main shapefile
