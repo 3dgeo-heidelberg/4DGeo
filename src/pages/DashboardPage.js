@@ -111,7 +111,6 @@ function DashboardPage() {
     const resetDashboardState = (observations) => {
         let tempStartEnd = {
             startDate: Math.min(...observations.map(observation => {
-                console.log("startdatetime", observation);
                 return Date.parse(observation.startDateTime);
             })), 
             endDate: Math.max(...observations.map(observation => Date.parse(observation.startDateTime)))
@@ -174,8 +173,6 @@ function DashboardPage() {
         var temporalFilteredObservations = Array.from(observations).filter((observation) => {
             return Date.parse(observation.startDateTime) >= dateTimeRange.startDate && Date.parse(observation.startDateTime) <= dateTimeRange.endDate;
         }).sort((a, b) => a.startDateTime > b.startDateTime ? 1 : -1);
-
-        console.log("bounding box", boundingBox);
         
         if(boundingBox) {
             temporalFilteredObservations = temporalFilteredObservations.map((observation) => {
@@ -190,7 +187,6 @@ function DashboardPage() {
                             }
                             return false;
                         } else if(geoObject.geometry.type === 'Point') {
-                            console.log("Point coordinates", geoObject.geometry.coordinates);
                             return boundingBox.contains(L.latLng(geoObject.geometry.coordinates[0], geoObject.geometry.coordinates[1]));
                         }
                         return false;

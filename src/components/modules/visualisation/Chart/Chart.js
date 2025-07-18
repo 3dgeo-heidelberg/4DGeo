@@ -39,7 +39,6 @@ export default function Chart({ observations, typeColors }) {
         }
 
         return observations.map((observation, index) => {
-            console.log(observation);
             const dateTime = new Date(Date.parse(observation.startDateTime));
             const collectorPerType = {
                 name: dateTime.toLocaleDateString() + "\n" + dateTime.toLocaleTimeString()
@@ -86,7 +85,6 @@ export default function Chart({ observations, typeColors }) {
                     }
                 })
             }
-            console.log(collectorPerType)
             return collectorPerType;
         })
     }
