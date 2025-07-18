@@ -94,7 +94,7 @@ To run 4DGeo locally, follow these steps:
 For using this Web-Application, there are two options:
 
 - Use the standard app with all its functionalities via the Github Pages URL
-- Fork this repository and customize contents and features to you liking. Inside the ```/public``` folder are some configurations and html files for easy accessibility. After customizing, you can easily host your own Github Pages with your repo and your changes are live at your own URL!
+- Fork this repository and customize contents and features to you liking. Inside the ```/public``` folder is also the `config.json` for easy accessibility. After customizing, you can easily host your own Github Pages with your repo and your changes are live at your own URL!
 
 ## Contributing
 

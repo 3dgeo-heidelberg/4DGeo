@@ -32,8 +32,7 @@ A permalink hashes all the values into a base64-String. This string is appended 
 With the <b>Read from permalink</b> button, you can also read all the configurations of a design inside of the creation page and adjust it to your needs before going to the dashboard page.
 
 ### 1.6 Templates
-The idea of populating the creation section with data from a permalink is expanded with a list of <b>templates</b>. A template is a predefined (example-)dashboard with sample data connected. For now, each template is defined in the `public/example_dashboards/example_dashboards.json` file as a json object with every design option predefined. In the future, this json file will be replaced with a list of permalinks because every information needed is also in there. 
-
+The idea of populating the creation section with data from a permalink is expanded with a list of <b>templates</b>. A template is a predefined (example-)dashboard with sample data connected. Each template is defined in the `public/config.json` file as a permalink with every design option predefined.
 
 ## 2 Dashboard View Page
 This page is the main visualisation page. A dashboard is generated via the stored information in the permalink with its layout, data source, refresh rate, and color assignment. It is then populated with data automatically read from the given data source. Each module of the dashboard has its own functionality and will be [further explained](#3-modules). Based on your specified refresh interval, the dashboard rereads the data from your data source and updates the content if anything changed.
@@ -175,7 +174,7 @@ This project is organized into several main directories and files, each serving 
     - /pages: The 2 pages of the application.
     - /styles: Includes the main theme of the dashboard.
     - /utils: Utility functions for the dashboard like the http fetcher.
-- /public: Contains different files for simple customization of the dashboard, like the example templates and some html files.
+- /public: Contains the `config.json` file for easy customization and some sample data.
 
 
 ## 6 Example Dataflows
