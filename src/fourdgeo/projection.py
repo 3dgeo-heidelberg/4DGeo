@@ -551,9 +551,9 @@ class ProjectChange:
 
             # Compute centroid
             centroid = np.mean(observation_pts_og, axis=0)
-            geoObject['customEntityData']['centroid_X'] = float(centroid[0])
-            geoObject['customEntityData']['centroid_Y'] = float(centroid[1])
-            geoObject['customEntityData']['centroid_Z'] = float(centroid[2])
+            geoObject['customAttributes']['centroid_X'] = float(centroid[0])
+            geoObject['customAttributes']['centroid_Y'] = float(centroid[1])
+            geoObject['customAttributes']['centroid_Z'] = float(centroid[2])
 
             # Add the polygon to the main shapefile
             geojson.write({
