@@ -5,20 +5,18 @@ dependencies:
 - jupyterlab
 - laspy
 - matplotlib
-- numpy<2.0.0
-#- opencv
+- numpy
+- opencv
 - pandas
 - pip
 - pyproj
 - pyside6
-- python=3.10
-# - pillow=9.0.0
+- python=3.13
 - scikit-learn
 - scipy
 - shapely
 - tqdm
 - pip:
-  - opencv-python
   - fiona
   - rasterio
   - py4dgeo
