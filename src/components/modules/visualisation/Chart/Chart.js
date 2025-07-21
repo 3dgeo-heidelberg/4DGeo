@@ -9,7 +9,7 @@ import './Chart.css';
 
 export default function Chart({ observations, typeColors }) {
     const [valueKey, setValueKey] = useState("");
-    const [operatorKey, setOperatorKey] = useState("Add");
+    const [operatorKey, setOperatorKey] = useState("Sum");
 
     const getCustomDataFields = () => {
         const customDataFields = new Set();

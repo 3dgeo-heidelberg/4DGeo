@@ -240,7 +240,7 @@ function DashboardPage() {
 
             <Divider />
 
-            <Box sx={{ flexGrow: 1, overflowY: 'auto', padding: '2rem' }}>
+            <Box sx={{ flexGrow: 1, overflowY: 'auto', padding: '1em' }}>
                 <Dashboard
                     layout={JSON.parse(urlParams.get('layout'))}
                     observations={observations}

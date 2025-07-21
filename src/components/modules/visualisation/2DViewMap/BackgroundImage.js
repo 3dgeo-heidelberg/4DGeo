@@ -16,7 +16,6 @@ export default function BackgroundImage({ backgroundImageData, setBoundingBox })
                 [[(-backgroundImageData.height), 0],
                 [0, backgroundImageData.width]]
             }
-            opacity={0.9}
         />
     );
 }
