@@ -142,7 +142,7 @@ export default function View2D({
             center={[-(backgroundImageData.height/2), backgroundImageData.width/2]}
             crs={L.CRS.Simple}
             style={{ height: "100%", width: "100%" }}
-            minZoom={-3}
+            minZoom={-2}
             maxZoom={5}
             bounds={[[(-backgroundImageData.height), 0],
                 [0, backgroundImageData.width]]}
