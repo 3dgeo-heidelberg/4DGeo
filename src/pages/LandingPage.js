@@ -93,8 +93,7 @@ export default function LandingPage() {
     <Stack className="example-dashboard-list">
       <List dense>
         <ListItem>
-          <Avatar className="avatar" src={config?.APP_ICON} alt="App Logo" />
-          <ListItemText primary={config?.APP_TITLE} />
+          <img src={config?.APP_ICON} alt="App-Logo" width={200} />
         </ListItem>
       </List>
       <Divider />
