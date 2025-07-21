@@ -3,7 +3,7 @@
         {
             "backgroundImageData": {
                 "height": 460,
-                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_0_1.png",
+                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_1_2.png",
                 "width": 691
             },
             "endDateTime": "2024-08-25T23:00:05Z",
@@ -13,7 +13,7 @@
         {
             "backgroundImageData": {
                 "height": 460,
-                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_1_2.png",
+                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_2_3.png",
                 "width": 691
             },
             "endDateTime": "2024-08-26T00:00:05Z",
@@ -23,7 +23,7 @@
         {
             "backgroundImageData": {
                 "height": 460,
-                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_2_3.png",
+                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_3_4.png",
                 "width": 691
             },
             "endDateTime": "2024-08-26T01:00:06Z",
@@ -1489,7 +1489,7 @@
         {
             "backgroundImageData": {
                 "height": 461,
-                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_3_4.png",
+                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_4_5.png",
                 "width": 692
             },
             "endDateTime": "2024-08-26T02:00:05Z",
@@ -1499,7 +1499,7 @@
         {
             "backgroundImageData": {
                 "height": 461,
-                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_4_5.png",
+                "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_5_6.png",
                 "width": 691
             },
             "endDateTime": "2024-08-26T03:00:05Z",

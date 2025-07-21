@@ -42,6 +42,7 @@
     "react-timepicker": "^2.0.2",
     "recharts": "^2.13.2",
     "supercluster": "^8.0.1",
+    "tqdm": "^2.0.3",
     "turf": "^3.0.14",
     "use-supercluster": "^1.2.0",
     "uuid": "^11.1.0",
