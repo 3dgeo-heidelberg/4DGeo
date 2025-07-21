@@ -37,7 +37,7 @@ The idea of populating the creation section with data from a permalink is expand
 ## 2 Dashboard View Page
 This page is the main visualisation page. A dashboard is generated via the stored information in the permalink with its layout, data source, refresh rate, and color assignment. It is then populated with data automatically read from the given data source. Each module of the dashboard has its own functionality and will be [further explained](#3-modules). Based on your specified refresh interval, the dashboard rereads the data from your data source and updates the content if anything changed.
 
-![Dashboard Page](./img/application/DashboardPageWorkflow.jpg)
+![Dashboard Page](./img/application/DashboardPageWorkflow.png)
 
 The dashboard is built around our self-designed data model.
 
@@ -46,7 +46,7 @@ The dashboard is built around our self-designed data model.
 ### 2.1 Data Model
 Our data model mainly serves the purpose to make the dashboard use-case independent. This way, the app can be used in a variety of scenarios that have their own data format but need to convert it into this data model.
 
-![Data Model](./img/application/DataModel.jpg)
+![Data Model](./img/application/DataModel.png)
 
 It is designed around <b>observations</b>. An observation can be described as a snapshot of the real world over a specified area at a specific short interval in time.
 <br>
