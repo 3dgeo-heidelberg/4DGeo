@@ -60,7 +60,7 @@
 - **backgroundImageData** - Image source for the background Image of the 2D View Module.
 
 
-## Installation
+## Dashboard installation
 
 To run 4DGeo locally, follow these steps:
 
@@ -88,6 +88,22 @@ To run 4DGeo locally, follow these steps:
    ```
    http://localhost:3000
    ```
+## Conda environment installation
+
+1. Clone the GitHub repository in a local folder
+    ```
+    git clone -b development  https://github.com/3dgeo-heidelberg/4DGeo.git
+    ```
+2. create the Conda environment with the provided .yml file
+    ```
+    cd 4dgeo/docs
+    conda env create -n 4dgeo --file '4dgeo_doc.yml'
+    ```
+3. Activate the environment
+    ```
+    conda activate 4dgeo
+    ```
+
 
 ## Usage
 
