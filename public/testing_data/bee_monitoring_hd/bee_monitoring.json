@@ -27,7 +27,7 @@
                         "type": "Point"
                     },
                     "id": "00000",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -531,7 +531,7 @@
                         "type": "Point"
                     },
                     "id": "00024",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -930,7 +930,7 @@
                         "type": "Point"
                     },
                     "id": "00043",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -1098,7 +1098,7 @@
                         "type": "Point"
                     },
                     "id": "00051",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -1287,7 +1287,7 @@
                         "type": "Point"
                     },
                     "id": "00060",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -2442,7 +2442,7 @@
                         "type": "Point"
                     },
                     "id": "00115",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -3051,7 +3051,7 @@
                         "type": "Point"
                     },
                     "id": "00144",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -4521,7 +4521,7 @@
                         "type": "Point"
                     },
                     "id": "00214",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -4647,7 +4647,7 @@
                         "type": "Point"
                     },
                     "id": "00220",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -6432,7 +6432,7 @@
                         "type": "Point"
                     },
                     "id": "00305",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -6579,7 +6579,7 @@
                         "type": "Point"
                     },
                     "id": "00312",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -6642,7 +6642,7 @@
                         "type": "Point"
                     },
                     "id": "00315",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -6978,7 +6978,7 @@
                         "type": "Point"
                     },
                     "id": "00331",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -7377,7 +7377,7 @@
                         "type": "Point"
                     },
                     "id": "00350",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -7713,7 +7713,7 @@
                         "type": "Point"
                     },
                     "id": "00366",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -7734,7 +7734,7 @@
                         "type": "Point"
                     },
                     "id": "00367",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -7881,7 +7881,7 @@
                         "type": "Point"
                     },
                     "id": "00374",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -7986,7 +7986,7 @@
                         "type": "Point"
                     },
                     "id": "00379",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -8154,7 +8154,7 @@
                         "type": "Point"
                     },
                     "id": "00387",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -8238,7 +8238,7 @@
                         "type": "Point"
                     },
                     "id": "00391",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -8847,7 +8847,7 @@
                         "type": "Point"
                     },
                     "id": "00420",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -9015,7 +9015,7 @@
                         "type": "Point"
                     },
                     "id": "00428",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -10055,7 +10055,7 @@
                         "type": "Point"
                     },
                     "id": "10005",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -10118,7 +10118,7 @@
                         "type": "Point"
                     },
                     "id": "10008",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -10286,7 +10286,7 @@
                         "type": "Point"
                     },
                     "id": "10016",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -11210,7 +11210,7 @@
                         "type": "Point"
                     },
                     "id": "10060",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -11378,7 +11378,7 @@
                         "type": "Point"
                     },
                     "id": "10068",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -12449,7 +12449,7 @@
                         "type": "Point"
                     },
                     "id": "10119",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -12533,7 +12533,7 @@
                         "type": "Point"
                     },
                     "id": "10123",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -12785,7 +12785,7 @@
                         "type": "Point"
                     },
                     "id": "10135",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -12953,7 +12953,7 @@
                         "type": "Point"
                     },
                     "id": "10143",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -12974,7 +12974,7 @@
                         "type": "Point"
                     },
                     "id": "10144",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -12995,7 +12995,7 @@
                         "type": "Point"
                     },
                     "id": "10145",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -13709,7 +13709,7 @@
                         "type": "Point"
                     },
                     "id": "10179",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -15011,7 +15011,7 @@
                         "type": "Point"
                     },
                     "id": "10241",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -16334,7 +16334,7 @@
                         "type": "Point"
                     },
                     "id": "10304",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -18119,7 +18119,7 @@
                         "type": "Point"
                     },
                     "id": "10389",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -18140,7 +18140,7 @@
                         "type": "Point"
                     },
                     "id": "10390",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -18161,7 +18161,7 @@
                         "type": "Point"
                     },
                     "id": "10391",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -18182,7 +18182,7 @@
                         "type": "Point"
                     },
                     "id": "10392",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -18245,7 +18245,7 @@
                         "type": "Point"
                     },
                     "id": "10395",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -18350,7 +18350,7 @@
                         "type": "Point"
                     },
                     "id": "10400",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -18581,7 +18581,7 @@
                         "type": "Point"
                     },
                     "id": "10411",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -19138,7 +19138,7 @@
                         "type": "Point"
                     },
                     "id": "20024",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -19222,7 +19222,7 @@
                         "type": "Point"
                     },
                     "id": "20028",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -19684,7 +19684,7 @@
                         "type": "Point"
                     },
                     "id": "20050",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -19747,7 +19747,7 @@
                         "type": "Point"
                     },
                     "id": "20053",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -20566,7 +20566,7 @@
                         "type": "Point"
                     },
                     "id": "20092",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -20608,7 +20608,7 @@
                         "type": "Point"
                     },
                     "id": "20094",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -20692,7 +20692,7 @@
                         "type": "Point"
                     },
                     "id": "20098",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -21112,7 +21112,7 @@
                         "type": "Point"
                     },
                     "id": "20118",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -21343,7 +21343,7 @@
                         "type": "Point"
                     },
                     "id": "20129",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -23611,7 +23611,7 @@
                         "type": "Point"
                     },
                     "id": "20237",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -23674,7 +23674,7 @@
                         "type": "Point"
                     },
                     "id": "20240",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -23884,7 +23884,7 @@
                         "type": "Point"
                     },
                     "id": "20250",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -24493,7 +24493,7 @@
                         "type": "Point"
                     },
                     "id": "20279",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -24640,7 +24640,7 @@
                         "type": "Point"
                     },
                     "id": "20286",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -25669,7 +25669,7 @@
                         "type": "Point"
                     },
                     "id": "20335",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -25858,7 +25858,7 @@
                         "type": "Point"
                     },
                     "id": "20344",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -26677,7 +26677,7 @@
                         "type": "Point"
                     },
                     "id": "20383",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -28452,7 +28452,7 @@
                         "type": "Point"
                     },
                     "id": "30024",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -28662,7 +28662,7 @@
                         "type": "Point"
                     },
                     "id": "30034",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -28683,7 +28683,7 @@
                         "type": "Point"
                     },
                     "id": "30035",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -28914,7 +28914,7 @@
                         "type": "Point"
                     },
                     "id": "30046",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -29334,7 +29334,7 @@
                         "type": "Point"
                     },
                     "id": "30066",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -29712,7 +29712,7 @@
                         "type": "Point"
                     },
                     "id": "30084",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -31350,7 +31350,7 @@
                         "type": "Point"
                     },
                     "id": "30162",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -31392,7 +31392,7 @@
                         "type": "Point"
                     },
                     "id": "30164",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -31602,7 +31602,7 @@
                         "type": "Point"
                     },
                     "id": "30174",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -31770,7 +31770,7 @@
                         "type": "Point"
                     },
                     "id": "30182",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -32967,7 +32967,7 @@
                         "type": "Point"
                     },
                     "id": "30239",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -33240,7 +33240,7 @@
                         "type": "Point"
                     },
                     "id": "30252",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -33534,7 +33534,7 @@
                         "type": "Point"
                     },
                     "id": "30266",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -33576,7 +33576,7 @@
                         "type": "Point"
                     },
                     "id": "30268",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -33723,7 +33723,7 @@
                         "type": "Point"
                     },
                     "id": "30275",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -34185,7 +34185,7 @@
                         "type": "Point"
                     },
                     "id": "30297",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -36222,7 +36222,7 @@
                         "type": "Point"
                     },
                     "id": "30394",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -37283,7 +37283,7 @@
                         "type": "Point"
                     },
                     "id": "40041",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -38690,7 +38690,7 @@
                         "type": "Point"
                     },
                     "id": "40108",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -38795,7 +38795,7 @@
                         "type": "Point"
                     },
                     "id": "40113",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -39089,7 +39089,7 @@
                         "type": "Point"
                     },
                     "id": "40127",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -40118,7 +40118,7 @@
                         "type": "Point"
                     },
                     "id": "40176",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -40580,7 +40580,7 @@
                         "type": "Point"
                     },
                     "id": "40198",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -41546,7 +41546,7 @@
                         "type": "Point"
                     },
                     "id": "40244",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -41567,7 +41567,7 @@
                         "type": "Point"
                     },
                     "id": "40245",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -42260,7 +42260,7 @@
                         "type": "Point"
                     },
                     "id": "40278",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -42302,7 +42302,7 @@
                         "type": "Point"
                     },
                     "id": "40280",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -42470,7 +42470,7 @@
                         "type": "Point"
                     },
                     "id": "40288",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -42764,7 +42764,7 @@
                         "type": "Point"
                     },
                     "id": "40302",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -42785,7 +42785,7 @@
                         "type": "Point"
                     },
                     "id": "40303",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -44024,7 +44024,7 @@
                         "type": "Point"
                     },
                     "id": "40362",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -44318,7 +44318,7 @@
                         "type": "Point"
                     },
                     "id": "40376",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -44360,7 +44360,7 @@
                         "type": "Point"
                     },
                     "id": "40378",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -45190,7 +45190,7 @@
                         "type": "Point"
                     },
                     "id": "50012",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -45694,7 +45694,7 @@
                         "type": "Point"
                     },
                     "id": "50036",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -45778,7 +45778,7 @@
                         "type": "Point"
                     },
                     "id": "50040",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -45862,7 +45862,7 @@
                         "type": "Point"
                     },
                     "id": "50044",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -46198,7 +46198,7 @@
                         "type": "Point"
                     },
                     "id": "50060",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -46240,7 +46240,7 @@
                         "type": "Point"
                     },
                     "id": "50062",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -46366,7 +46366,7 @@
                         "type": "Point"
                     },
                     "id": "50068",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -46555,7 +46555,7 @@
                         "type": "Point"
                     },
                     "id": "50077",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -46681,7 +46681,7 @@
                         "type": "Point"
                     },
                     "id": "50083",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -47731,7 +47731,7 @@
                         "type": "Point"
                     },
                     "id": "50133",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -48676,7 +48676,7 @@
                         "type": "Point"
                     },
                     "id": "50178",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -49117,7 +49117,7 @@
                         "type": "Point"
                     },
                     "id": "50199",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -49222,7 +49222,7 @@
                         "type": "Point"
                     },
                     "id": "50204",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -49495,7 +49495,7 @@
                         "type": "Point"
                     },
                     "id": "50217",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -49516,7 +49516,7 @@
                         "type": "Point"
                     },
                     "id": "50218",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -49579,7 +49579,7 @@
                         "type": "Point"
                     },
                     "id": "50221",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -50734,7 +50734,7 @@
                         "type": "Point"
                     },
                     "id": "50276",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -50944,7 +50944,7 @@
                         "type": "Point"
                     },
                     "id": "50286",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -51091,7 +51091,7 @@
                         "type": "Point"
                     },
                     "id": "50293",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -51280,7 +51280,7 @@
                         "type": "Point"
                     },
                     "id": "50302",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -51490,7 +51490,7 @@
                         "type": "Point"
                     },
                     "id": "50312",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -51868,7 +51868,7 @@
                         "type": "Point"
                     },
                     "id": "50330",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
@@ -53128,7 +53128,7 @@
                         "type": "Point"
                     },
                     "id": "50390",
-                    "type": "Bee"
+                    "type": "Hornet"
                 },
                 {
                     "customAttributes": {
