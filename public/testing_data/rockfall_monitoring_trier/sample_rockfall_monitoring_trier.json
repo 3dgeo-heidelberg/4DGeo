@@ -22,9 +22,9 @@
         },
         {
             "backgroundImageData": {
-                "height": 460,
+                "height": 461,
                 "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_3_4.png",
-                "width": 691
+                "width": 692
             },
             "endDateTime": "2024-08-26T01:00:06Z",
             "geoObjects": [
@@ -34,8 +34,8 @@
                         "Y_centroid": 158.48924782608697,
                         "Z_centroid": 5.991530434782609,
                         "centroid_X": -259.6865714285714,
+                        "centroid_Y": 158.46291428571425,
                         "centroid_Z": 5.85542857142857,
-                        "centroid_\u00c2\u00adY": 158.46291428571425,
                         "cluster_size_points": 230,
                         "m3c2_magnitude_abs_average_per_cluster": 1.0733661294671384,
                         "surface_area": 11.436782819482161,
@@ -92,7 +92,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "3afd42aa320646959fe013e80d06077b",
+                    "id": "46399ecfa4aa4edcbfc6ee5b405a94b1",
                     "type": "unknown"
                 },
                 {
@@ -101,8 +101,8 @@
                         "Y_centroid": 161.27732167832167,
                         "Z_centroid": 9.41537762237762,
                         "centroid_X": -266.1415769230769,
+                        "centroid_Y": 161.30169230769235,
                         "centroid_Z": 9.28973076923077,
-                        "centroid_\u00c2\u00adY": 161.30169230769235,
                         "cluster_size_points": 143,
                         "m3c2_magnitude_abs_average_per_cluster": 0.5632060607257093,
                         "surface_area": 7.1769161467972555,
@@ -159,7 +159,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "2ab4161792e84dfca0ea0136ecbd8872",
+                    "id": "e97a67013dac4f79a01f774077c3884c",
                     "type": "unknown"
                 },
                 {
@@ -168,8 +168,8 @@
                         "Y_centroid": 159.1311440677966,
                         "Z_centroid": 8.024302259887007,
                         "centroid_X": -264.6559705882352,
+                        "centroid_Y": 159.17667647058823,
                         "centroid_Z": 8.166735294117647,
-                        "centroid_\u00c2\u00adY": 159.17667647058823,
                         "cluster_size_points": 354,
                         "m3c2_magnitude_abs_average_per_cluster": 0.7916445742482331,
                         "surface_area": 17.319365292482566,
@@ -230,7 +230,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "d5108131a2b842f881cd387e671e3108",
+                    "id": "551f733e3ae64d099dc6e144295f85fe",
                     "type": "unknown"
                 },
                 {
@@ -239,8 +239,8 @@
                         "Y_centroid": 158.6653691813804,
                         "Z_centroid": 14.081360888175492,
                         "centroid_X": -275.7172698412698,
+                        "centroid_Y": 158.52076190476186,
                         "centroid_Z": 13.40536507936508,
-                        "centroid_\u00c2\u00adY": 158.52076190476186,
                         "cluster_size_points": 3738,
                         "m3c2_magnitude_abs_average_per_cluster": 1.0404311325069935,
                         "surface_area": 238.3900924506905,
@@ -317,7 +317,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "7e3f48ef3b8e46b1bc431bda6c25f175",
+                    "id": "7a510a3e42e8478386c40d49628a0436",
                     "type": "unknown"
                 },
                 {
@@ -326,8 +326,8 @@
                         "Y_centroid": 148.32354882454754,
                         "Z_centroid": 14.137747752440808,
                         "centroid_X": -278.77993377483443,
+                        "centroid_Y": 148.50635761589396,
                         "centroid_Z": 14.085456953642378,
-                        "centroid_\u00c2\u00adY": 148.50635761589396,
                         "cluster_size_points": 59509,
                         "m3c2_magnitude_abs_average_per_cluster": 0.9524305817732601,
                         "surface_area": 2089.6913825286774,
@@ -436,7 +436,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "b7e16619d7a74ad28ac40c0bd8fd906c",
+                    "id": "d0aff1c427934543931c246bbf2f147d",
                     "type": "unknown"
                 },
                 {
@@ -445,8 +445,8 @@
                         "Y_centroid": 162.5110550458716,
                         "Z_centroid": 13.772862385321101,
                         "centroid_X": -275.73696,
+                        "centroid_Y": 162.51080000000002,
                         "centroid_Z": 13.762400000000003,
-                        "centroid_\u00c2\u00adY": 162.51080000000002,
                         "cluster_size_points": 109,
                         "m3c2_magnitude_abs_average_per_cluster": 0.5188641338014636,
                         "surface_area": 5.3236945529809585,
@@ -499,7 +499,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "8f4ac527be1e4846994c9c54da432f1e",
+                    "id": "96615ac950d04dd8adb67af628642c69",
                     "type": "unknown"
                 },
                 {
@@ -508,8 +508,8 @@
                         "Y_centroid": 160.75147995283018,
                         "Z_centroid": 14.654399764150943,
                         "centroid_X": -276.6458863636364,
+                        "centroid_Y": 160.74679545454543,
                         "centroid_Z": 14.435249999999998,
-                        "centroid_\u00c2\u00adY": 160.74679545454543,
                         "cluster_size_points": 848,
                         "m3c2_magnitude_abs_average_per_cluster": 0.8310643109939702,
                         "surface_area": 41.621027645241334,
@@ -578,7 +578,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "b3f0aa0d2cec46248672d7b35c9a186f",
+                    "id": "4a0902dc52634364b16a39e1dd890731",
                     "type": "unknown"
                 },
                 {
@@ -587,8 +587,8 @@
                         "Y_centroid": 161.5172774566474,
                         "Z_centroid": 17.71605202312139,
                         "centroid_X": -282.9338571428571,
+                        "centroid_Y": 161.4975428571429,
                         "centroid_Z": 17.5122,
-                        "centroid_\u00c2\u00adY": 161.4975428571429,
                         "cluster_size_points": 173,
                         "m3c2_magnitude_abs_average_per_cluster": 0.7696776635575401,
                         "surface_area": 8.015285071108858,
@@ -649,7 +649,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "69b4f5f75f9c46698a3922b66a761755",
+                    "id": "af70d956e6a040bc841738c9e3b2cfd3",
                     "type": "unknown"
                 },
                 {
@@ -658,8 +658,8 @@
                         "Y_centroid": 162.10728402366865,
                         "Z_centroid": 20.369825443786983,
                         "centroid_X": -287.9780930232557,
+                        "centroid_Y": 162.08586046511627,
                         "centroid_Z": 20.224302325581398,
-                        "centroid_\u00c2\u00adY": 162.08586046511627,
                         "cluster_size_points": 338,
                         "m3c2_magnitude_abs_average_per_cluster": 1.0019658319075795,
                         "surface_area": 18.499516767105714,
@@ -728,7 +728,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "cf658730c2f54dcfb5f7695f86017cbf",
+                    "id": "78b3ca0a8e624913acd2ba9b18079b6a",
                     "type": "unknown"
                 },
                 {
@@ -737,8 +737,8 @@
                         "Y_centroid": 162.7120373831776,
                         "Z_centroid": 23.037841121495326,
                         "centroid_X": -293.1857857142856,
+                        "centroid_Y": 162.6961428571428,
                         "centroid_Z": 23.03260714285715,
-                        "centroid_\u00c2\u00adY": 162.6961428571428,
                         "cluster_size_points": 107,
                         "m3c2_magnitude_abs_average_per_cluster": 0.8132412586860355,
                         "surface_area": 5.0566877695898915,
@@ -791,7 +791,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "b53afebcd9714b7e9000137254b088bb",
+                    "id": "73b22e8837e144f58305cbb847f3cd9b",
                     "type": "unknown"
                 },
                 {
@@ -800,8 +800,8 @@
                         "Y_centroid": 161.19785000000002,
                         "Z_centroid": 24.79639375,
                         "centroid_X": -296.8726249999999,
+                        "centroid_Y": 161.24062500000002,
                         "centroid_Z": 24.825843749999994,
-                        "centroid_\u00c2\u00adY": 161.24062500000002,
                         "cluster_size_points": 160,
                         "m3c2_magnitude_abs_average_per_cluster": 1.0365744811894992,
                         "surface_area": 9.144617859042084,
@@ -854,7 +854,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "4b5567d699e64fb39570bc5cc96cbdf0",
+                    "id": "b7b43807f7984a40a74612893bea806e",
                     "type": "unknown"
                 },
                 {
@@ -863,8 +863,8 @@
                         "Y_centroid": 161.48562500000003,
                         "Z_centroid": 25.886345588235294,
                         "centroid_X": -298.9880769230769,
+                        "centroid_Y": 161.4722307692308,
                         "centroid_Z": 25.825000000000006,
-                        "centroid_\u00c2\u00adY": 161.4722307692308,
                         "cluster_size_points": 136,
                         "m3c2_magnitude_abs_average_per_cluster": 0.7401630230748415,
                         "surface_area": 6.7258448328476,
@@ -913,7 +913,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "5f7db601ae14421c99b2671cd1abc570",
+                    "id": "34defd0569b34f009e3b3232c206c97b",
                     "type": "unknown"
                 },
                 {
@@ -922,8 +922,8 @@
                         "Y_centroid": 159.12672318339102,
                         "Z_centroid": 24.804304498269897,
                         "centroid_X": -297.37333333333345,
+                        "centroid_Y": 159.15362962962968,
                         "centroid_Z": 24.91107407407407,
-                        "centroid_\u00c2\u00adY": 159.15362962962968,
                         "cluster_size_points": 289,
                         "m3c2_magnitude_abs_average_per_cluster": 0.9425470633905869,
                         "surface_area": 16.121707571720364,
@@ -980,7 +980,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "b2727db570d34bff97c9194e1ba68ad8",
+                    "id": "5af936436b534b77a35ad7014d2f7a8e",
                     "type": "unknown"
                 },
                 {
@@ -989,8 +989,8 @@
                         "Y_centroid": 161.65669743589743,
                         "Z_centroid": 38.3,
                         "centroid_X": -313.24826666666667,
+                        "centroid_Y": 161.645,
                         "centroid_Z": 37.99786666666668,
-                        "centroid_\u00c2\u00adY": 161.645,
                         "cluster_size_points": 195,
                         "m3c2_magnitude_abs_average_per_cluster": 2.8041589355526635,
                         "surface_area": 10.875997135544576,
@@ -1035,7 +1035,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "4b706bfec11642dcb870276a3381f750",
+                    "id": "57d7e992e6654c91b8878f120cc675ab",
                     "type": "unknown"
                 },
                 {
@@ -1044,8 +1044,8 @@
                         "Y_centroid": 152.65071289017342,
                         "Z_centroid": 34.91100196531792,
                         "centroid_X": -312.51454054054057,
+                        "centroid_Y": 152.15691891891893,
                         "centroid_Z": 34.24289189189191,
-                        "centroid_\u00c2\u00adY": 152.15691891891893,
                         "cluster_size_points": 17300,
                         "m3c2_magnitude_abs_average_per_cluster": 2.525166565653003,
                         "surface_area": 537.401445348895,
@@ -1130,7 +1130,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "62ce0f377f6b489ab4faab55f5f58f86",
+                    "id": "edabee54d7484247b92df7dc7b27b437",
                     "type": "unknown"
                 },
                 {
@@ -1139,8 +1139,8 @@
                         "Y_centroid": 159.99297641509438,
                         "Z_centroid": 44.16728301886793,
                         "centroid_X": -314.8783571428571,
+                        "centroid_Y": 159.86057142857143,
                         "centroid_Z": 44.21535714285715,
-                        "centroid_\u00c2\u00adY": 159.86057142857143,
                         "cluster_size_points": 212,
                         "m3c2_magnitude_abs_average_per_cluster": 2.0021091089167937,
                         "surface_area": 11.93036972451057,
@@ -1197,7 +1197,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "6b06beacc1634b52b3c3ef643fddcf05",
+                    "id": "895441df2f43457e8dd76d14fabb8053",
                     "type": "unknown"
                 },
                 {
@@ -1206,8 +1206,8 @@
                         "Y_centroid": 156.9241826923077,
                         "Z_centroid": 44.96534134615385,
                         "centroid_X": -315.0839333333334,
+                        "centroid_Y": 156.6128,
                         "centroid_Z": 45.22356666666666,
-                        "centroid_\u00c2\u00adY": 156.6128,
                         "cluster_size_points": 208,
                         "m3c2_magnitude_abs_average_per_cluster": 1.327268628545922,
                         "surface_area": 11.846482144276484,
@@ -1256,7 +1256,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "d4c380b068be4294aaa75f75f55ec8f1",
+                    "id": "96027948a20d4c988a1772c79121af89",
                     "type": "unknown"
                 },
                 {
@@ -1265,8 +1265,8 @@
                         "Y_centroid": 155.20483695652175,
                         "Z_centroid": 45.393130434782606,
                         "centroid_X": -316.3226,
+                        "centroid_Y": 155.1968,
                         "centroid_Z": 45.30545000000001,
-                        "centroid_\u00c2\u00adY": 155.1968,
                         "cluster_size_points": 92,
                         "m3c2_magnitude_abs_average_per_cluster": 2.851069328723247,
                         "surface_area": 2.899379284467333,
@@ -1303,7 +1303,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "eab1df3c5aaf42f48827ce234a83a0ac",
+                    "id": "21bb5abe098e40acae3823b38610347f",
                     "type": "unknown"
                 },
                 {
@@ -1312,8 +1312,8 @@
                         "Y_centroid": 149.23238970588238,
                         "Z_centroid": 30.64193382352941,
                         "centroid_X": -309.6318571428571,
+                        "centroid_Y": 149.25242857142854,
                         "centroid_Z": 30.577928571428572,
-                        "centroid_\u00c2\u00adY": 149.25242857142854,
                         "cluster_size_points": 136,
                         "m3c2_magnitude_abs_average_per_cluster": 2.862771092919535,
                         "surface_area": 4.426737053428847,
@@ -1358,7 +1358,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "cf3cdb975991462b94fce90e0857b537",
+                    "id": "d09a7bcd60524675a25d7cf2e5a8473b",
                     "type": "unknown"
                 },
                 {
@@ -1367,8 +1367,8 @@
                         "Y_centroid": 147.3622142857143,
                         "Z_centroid": 28.701294642857142,
                         "centroid_X": -308.37678947368414,
+                        "centroid_Y": 147.30784210526318,
                         "centroid_Z": 28.80336842105263,
-                        "centroid_\u00c2\u00adY": 147.30784210526318,
                         "cluster_size_points": 112,
                         "m3c2_magnitude_abs_average_per_cluster": 0.9834708296954281,
                         "surface_area": 6.073185879354333,
@@ -1417,7 +1417,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "ab618808a0f04dceb5c64b501ed52460",
+                    "id": "edd0e708f6a542bc962a371e88582cd6",
                     "type": "unknown"
                 },
                 {
@@ -1426,8 +1426,8 @@
                         "Y_centroid": 126.71088826815644,
                         "Z_centroid": 6.727787709497207,
                         "centroid_X": -267.78907407407405,
+                        "centroid_Y": 126.75925925925925,
                         "centroid_Z": 6.6996666666666655,
-                        "centroid_\u00c2\u00adY": 126.75925925925925,
                         "cluster_size_points": 179,
                         "m3c2_magnitude_abs_average_per_cluster": 0.9408999777651087,
                         "surface_area": 9.430714044463242,
@@ -1480,7 +1480,7 @@
                         ],
                         "type": "Polygon"
                     },
-                    "id": "c95c82dbc69b4627af14c76685085f4f",
+                    "id": "2572a59c77ff49c08aaa434f6574ae2e",
                     "type": "unknown"
                 }
             ],
@@ -1490,7 +1490,7 @@
             "backgroundImageData": {
                 "height": 461,
                 "url": "/4DGeo/testing_data/rockfall_monitoring_trier/Rockfall_monitoring_RangeImage_4_5.png",
-                "width": 692
+                "width": 691
             },
             "endDateTime": "2024-08-26T02:00:05Z",
             "geoObjects": [],
