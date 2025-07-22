@@ -1,5 +1,5 @@
 site_name: 4DGeo
-repo_url: https://github.com/3dgeo-heidelberg/4dgeo
+repo_url: https://github.com/3dgeo-heidelberg/4DGeo
 docs_dir: ../docs
 site_dir: ../build/docs
 site_url: https://3dgeo-heidelberg.github.io/4DGeo/docs/
@@ -56,7 +56,7 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Application: Application.md
-  - Github Pages: https://3dgeo-heidelberg.github.io/4dgeo
+  - Github Pages: https://3dgeo-heidelberg.github.io/4DGeo
   - Notebook examples:
     - Bee monitoring: beehive.ipynb
     - Rockfall monitoring: rockfall_monitoring.ipynb

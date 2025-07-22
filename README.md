@@ -47,12 +47,12 @@ To run 4DGeo locally, follow these steps:
     ```
 2. create the Conda environment with the provided .yml file
     ```
-    cd 4dgeo/docs
-    conda env create -n 4dgeo --file '4dgeo_doc.yml'
+    cd 4DGeo/docs
+    conda env create -n 4DGeo --file '4DGeo_doc.yml'
     ```
 3. Activate the environment
     ```
-    conda activate 4dgeo
+    conda activate 4DGeo
     ```
 
 

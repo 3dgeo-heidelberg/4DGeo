@@ -1,4 +1,4 @@
-name: 4dgeo_doc
+name: 4DGeo_doc
 channels:
 - conda-forge
 dependencies:

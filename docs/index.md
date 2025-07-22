@@ -27,8 +27,8 @@ To run 4DGeo locally, follow these steps:
 1. Clone the repository:
 
     ``` sh
-        git clone https://github.com/3dgeo-heidelberg/4dgeo.git
-        cd 4dgeo
+        git clone https://github.com/3dgeo-heidelberg/4DGeo.git
+        cd 4DGeo
     ```
 
 2. Install dependencies (Check if Node.js is installed on your computer. If not, download it from this [link](https://nodejs.org/en/download)):
@@ -51,7 +51,7 @@ To run 4DGeo locally, follow these steps:
 
 ## Hosting Options
 
-To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4dgeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
+To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
 
 ## Documentation
 
@@ -63,6 +63,6 @@ As a starting point, the **main features** of this software are described in the
 
 ## Contact / Bugs / Feature Requests
 
-Have you found a bug or have specific request for a new feature? Please open a [new issue in the online code repository on Github](https://github.com/3dgeo-heidelberg/4dgeo/issues). Also for general questions please use the issue system.
+Have you found a bug or have specific request for a new feature? Please open a [new issue in the online code repository on Github](https://github.com/3dgeo-heidelberg/4DGeo/issues). Also for general questions please use the issue system.
 
 Scientific requests can be directed to the [3DGeo Research Group Heidelberg](https://www.uni-heidelberg.de/3dgeo) and its respective members.
