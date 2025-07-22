@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import Box from '@mui/material/Box';
 import { fetchJsonData } from "../utils/http_fetcher";
 import { Button, Divider, styled } from "@mui/material";
