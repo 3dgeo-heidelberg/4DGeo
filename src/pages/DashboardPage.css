@@ -1,0 +1,5 @@
+@import url("../styles/main_theme.css");
+
+.custom-header {
+    color: var(--clr-primary-a30);
+}

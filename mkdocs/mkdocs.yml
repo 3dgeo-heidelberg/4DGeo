@@ -1,8 +1,8 @@
-site_name: 4dGeo
-repo_url: https://github.com/3dgeo-heidelberg/4dgeo
+site_name: 4DGeo
+repo_url: https://github.com/3dgeo-heidelberg/4DGeo
 docs_dir: ../docs
 site_dir: ../build/docs
-site_url: https://3dgeo-heidelberg.github.io/4dgeo/docs/
+site_url: https://3dgeo-heidelberg.github.io/4DGeo/docs/
 
 theme:
   logo: img/3DGeo_globe_white.svg     # light mode logo
@@ -45,13 +45,19 @@ plugins:
 markdown_extensions:
   - attr_list
   - abbr
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
 
 nav:
   - Home: index.md
+  - Application: Application.md
+  - Github Pages: https://3dgeo-heidelberg.github.io/4DGeo
   - Notebook examples:
-    - Main AImon5.0 monitoring pipeline: main.ipynb
-    - Adaptive monitoring: adaptive_monitoring.ipynb
-    - Rule-based classification of change events: classification_of_change_events_rule_based.ipynb
-    - Rule-based filtering of change events: filtering_of_change_events_rule_based.ipynb
-    - Random forest classification of change events: classification_of_change_events_using_random_forest_classifier.ipynb
-    - Configuration description: configuration_description.md
+    - Bee monitoring: beehive.ipynb
+    - Rockfall monitoring: rockfall_monitoring.ipynb
+    - Branch evolution: branch_evolution.ipynb

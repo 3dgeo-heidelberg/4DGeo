@@ -1,19 +1,22 @@
 import { useSearchParams } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Box from '@mui/material/Box';
 import { fetchJsonData } from "../utils/http_fetcher";
 import { Button, Divider, styled } from "@mui/material";
 import { addDays } from "date-fns";
 import ColorAssignment from "../components/dashboard-creation/ColorAssignment";
 import AddIcon from '@mui/icons-material/Add'
+import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import L from "leaflet";
+
+import './DashboardPage.css'
 
 function DashboardPage() {
     const urlParams = useSearchParams()[0]
     const [observations, setObservations] = useState([])
     const [wasFileUploaded, setWasFileUploaded] = useState(false);
-
-    const [htmlHeaderString, setHtmlHeaderString] = useState();
+    const [config, setConfig] = useState({})
 
     const [typeColors, setTypeColors] = useState(new Map());
 
@@ -21,9 +24,7 @@ function DashboardPage() {
     const [sliderRange, setSliderRange] = useState([0, 100]);
     const [dateTimeRange, setDateTimeRange] = useState({ startDate: 0, endDate: Date.now()})
 
-    async function fetchCustomHeader() {
-        setHtmlHeaderString(await (await fetch(`custom/custom_html/dashboard_page_header.html`)).text());
-    }
+    const [boundingBox, setBoundingBox] = useState(null);
 
     const getAllTypes = (observations) => {
         const allTypes = new Set();
@@ -71,10 +72,23 @@ function DashboardPage() {
         }
     }
 
+    async function fetchConfig() {
+        const json = await (await fetch(`config.json`, {
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+        })).json();
+        setConfig(json);
+    }
+
+    useEffect(() => {
+        fetchConfig();
+    }, []);
+
     useEffect(() => {
         if(!wasFileUploaded) {
             loadData(true);
-            fetchCustomHeader();
 
             const intervalResolution = urlParams.get('interval') == null ? 60 : urlParams.get('interval');
             const interval = setInterval(() => {
@@ -96,7 +110,9 @@ function DashboardPage() {
 
     const resetDashboardState = (observations) => {
         let tempStartEnd = {
-            startDate: Math.min(...observations.map(observation => Date.parse(observation.startDateTime))), 
+            startDate: Math.min(...observations.map(observation => {
+                return Date.parse(observation.startDateTime);
+            })), 
             endDate: Math.max(...observations.map(observation => Date.parse(observation.startDateTime)))
         }
         setDateRange({startDate: getDateFromDateTime(tempStartEnd.startDate), endDate: addDays(getDateFromDateTime(tempStartEnd.endDate), 1) - 1});
@@ -138,6 +154,50 @@ function DashboardPage() {
         reader.readAsText(file)
     }
 
+    const downloadFile = ({ data }) => {
+        const blob = new Blob([data], { type: 'application/json' })
+        const a = document.createElement('a')
+        a.download = 'exported_filtered_data.json'
+        a.href = window.URL.createObjectURL(blob)
+        const clickEvt = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+        })
+        a.dispatchEvent(clickEvt)
+        a.remove()
+    }
+
+    const exportVisibleGeoobjects = (e) => {
+        e.preventDefault();
+        var temporalFilteredObservations = Array.from(observations).filter((observation) => {
+            return Date.parse(observation.startDateTime) >= dateTimeRange.startDate && Date.parse(observation.startDateTime) <= dateTimeRange.endDate;
+        }).sort((a, b) => a.startDateTime > b.startDateTime ? 1 : -1);
+        
+        if(boundingBox) {
+            temporalFilteredObservations = temporalFilteredObservations.map((observation) => {
+                return {
+                    ...observation,
+                    geoObjects: observation.geoObjects.filter((geoObject) => {
+                        if(geoObject.geometry.type === 'Polygon' || geoObject.geometry.type === 'LineString') {
+                            for (let i = 0; i < geoObject.geometry.coordinates.length; i++) {
+                                if (boundingBox.contains(L.latLng(geoObject.geometry.coordinates[i][0], geoObject.geometry.coordinates[i][1]))) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        } else if(geoObject.geometry.type === 'Point') {
+                            return boundingBox.contains(L.latLng(geoObject.geometry.coordinates[0], geoObject.geometry.coordinates[1]));
+                        }
+                        return false;
+                    })
+                };
+            }).filter((observation) => observation.geoObjects.length > 0);
+        }
+
+        downloadFile({ data: JSON.stringify(temporalFilteredObservations) });
+    }
+
 
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
@@ -153,10 +213,17 @@ function DashboardPage() {
 
     return (
         <Box className="dashboard-container" sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', maxHeight: '5%', justifyContent: 'space-between', alignItems: 'center', padding: '2rem 4rem'}}>
-                <div className="custom-header" dangerouslySetInnerHTML={{__html: htmlHeaderString}} />
+            <Box sx={{ display: 'flex', maxHeight: '5rem', boxSizing: 'border-box', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 3rem'}}>
+                <h2>{config.APP_TITLE}</h2>
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", gap: "1.2rem"}}>
                     <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} />
+                    <Button 
+                        variant="contained"
+                        startIcon={<ArrowOutwardIcon />}
+                        onClick={exportVisibleGeoobjects}
+                    >
+                        Export by map extent
+                    </Button>
                     <Button
                         component="label"
                         variant="contained"
@@ -173,7 +240,7 @@ function DashboardPage() {
 
             <Divider />
 
-            <Box sx={{ flexGrow: 1, overflowY: 'auto', padding: '2rem' }}>
+            <Box sx={{ flexGrow: 1, overflowY: 'auto', padding: '1em' }}>
                 <Dashboard
                     layout={JSON.parse(urlParams.get('layout'))}
                     observations={observations}
@@ -184,6 +251,7 @@ function DashboardPage() {
                     setSliderRange={setSliderRange}
                     dateTimeRange={dateTimeRange}
                     setDateTimeRange={setDateTimeRange}
+                    setBoundingBox={setBoundingBox}
                 />
             </Box>
         </Box>

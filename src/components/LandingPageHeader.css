@@ -2,4 +2,5 @@
 
 .landing-page-header > h1 {
     color: var(--clr-primary-a30);
+    font-size: 1.4rem;
 }

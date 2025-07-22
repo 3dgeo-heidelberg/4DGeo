@@ -33,7 +33,7 @@ export default function ColorAssignment({typeColors, setTypeColors, preloadTypes
                         {Array.from(typeColors).map(((typeColor) => {
                             const [type, color] = typeColor;
                             return (
-                                <Box key={"" + type + color} sx={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: ""}}>
+                                <Box key={"" + type + color} sx={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between"}}>
                                     {type}:
                                     <input type="color" value={color} onChange={e => {
                                         setTypeColors(new Map([...typeColors, [type, e.target.value]]))

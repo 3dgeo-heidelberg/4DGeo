@@ -1,0 +1,24 @@
+.chart-module-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+
+    .selectors {
+        display: flex;
+        flex-direction: row;
+
+        position: relative;
+        padding-top: 0.4em;
+        padding-right: 0.4em;
+        width: min-content;
+        height: min-content;
+        z-index: 10;
+    }
+
+    .chart-container {
+        height: 90%;
+        width: 100%;
+    }
+}

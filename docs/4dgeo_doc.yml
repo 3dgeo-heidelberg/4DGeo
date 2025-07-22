@@ -1,0 +1,23 @@
+name: 4DGeo_doc
+channels:
+- conda-forge
+dependencies:
+- jupyterlab
+- laspy
+- matplotlib
+- numpy
+- opencv
+- pandas
+- pip
+- pyproj
+- pyside6
+- python=3.13
+- scikit-learn
+- scipy
+- shapely
+- tqdm
+- pip:
+  - fiona
+  - rasterio
+  - py4dgeo
+  - git+https://github.com/3dgeo-heidelberg/vapc.git@dev

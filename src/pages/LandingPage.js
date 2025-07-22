@@ -1,20 +1,27 @@
-import { Avatar, Box, Divider, Drawer, List, ListItem, ListItemButton, ListItemText, ListSubheader, Stack } from "@mui/material";
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, List, ListItem, ListItemButton, ListItemText, ListSubheader, Stack, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import './LandingPage.css';
 import DashboardCreation from "../components/dashboard-creation/DashboardCreation";
 import LandingPageHeader from "../components/LandingPageHeader";
+import LinkIcon from '@mui/icons-material/Link';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function LandingPage() {
-  const [exampleDashboards, setExampleDashboards] = useState([]);
-  const [selectedTemplate, setSelectedTemplate] = useState(1);
+  const [config, setConfig] = useState(null)
+  const [selectedTemplate, setSelectedTemplate] = useState(-1);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [drawerIsClosing, setDrawerIsClosing] = useState(false);
-  const drawerWidth = 250;
+
+  const [loadFromPermalinkOpen, setLoadFromPermalinkOpen] = useState(false);
+  const [temporaryPermalink, setTemporaryPermalink] = useState("");
+  const [permalinkError, setPermalinkError] = useState(false);
+  const drawerWidth = 230;
 
   const [layout, setLayout] = useState([]);
   const [url, setUrl] = useState("");
   const [interval, setInterval] = useState(0);
+  const [typeColors, setTypeColors] = useState(new Map());
 
 
   const handleDrawerClose = () => {
@@ -33,27 +40,19 @@ export default function LandingPage() {
   };
 
 
-  async function fetchExampleDashboards() {
-    console.log("Fetching example dashboards", window.location.href);
-    const json = await (await fetch(`custom/example_dashboards/example_dashboards.json`, {
+  async function fetchConfig() {
+    const json = await (await fetch(`config.json`, {
       headers : { 
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-       }
+      }
     })).json();
-    setExampleDashboards(json.example_dashboards);
+    setConfig(json);
   }
 
   useEffect(() => {
-    fetchExampleDashboards();
+    fetchConfig();
   }, []);
-
-
-  const handleTemplateSelection = (example) => {
-    setLayout(example.layout);
-    setUrl(example.url);
-    setInterval(example.interval);
-  };
 
   const handleDashboardCreationSelection = () => {
     setLayout([]);
@@ -61,27 +60,40 @@ export default function LandingPage() {
     setInterval(0);
   }
 
-  const sideBarContent = [
-    {
-      kind: 'header',
-      title: 'Example Dashboards'
-    }
-  ]
+  const handleLoadFromPermalinkSelection = () => {
+    setLoadFromPermalinkOpen(true);
+  };
 
-  exampleDashboards.forEach((example) => {
-    sideBarContent.push({
-      segment: example.title,
-      title: example.title,
-    });
-  });
+  const populateFromPermalink = (permalink) => {
+    const url = new URL(permalink);
+    setLayout(JSON.parse(url.searchParams.get('layout') || []));
+    setUrl(url.searchParams.get('url') || "");
+    setInterval(parseInt(url.searchParams.get('interval')) || 0);
+    setTypeColors(new Map(JSON.parse(url.searchParams.get('typeColors') || new Map())));
+  }
+
+  const handleLoadFromPermalinkClose = () => {
+    if (temporaryPermalink && temporaryPermalink.length > 0) {
+      try {
+        populateFromPermalink(temporaryPermalink)
+      }
+      catch (e) {
+        setPermalinkError(true);
+        return;
+      }
+    }
+    setLoadFromPermalinkOpen(false);
+    setPermalinkError(false);
+    setTemporaryPermalink("");
+    setSelectedTemplate(-1);
+  };
 
 
   const drawer = (
     <Stack className="example-dashboard-list">
       <List dense>
         <ListItem>
-          <Avatar className="avatar" src="/4dgeo/3dgeo.ico" alt="4DGeo Logo" />
-          <ListItemText primary="4DGeo Dashboard" />
+          <img src={config?.APP_ICON} alt="App-Logo" width={200} />
         </ListItem>
       </List>
       <Divider />
@@ -91,27 +103,72 @@ export default function LandingPage() {
           </ListSubheader>
         }
       >
-        {exampleDashboards.map((example, index) => (
-          <ListItemButton
-            key={index}
-            selected={selectedTemplate === index}
-            onClick={() => {
-              handleTemplateSelection(example);
-              setSelectedTemplate(index)
-            }}
-          >
-            <Avatar variant="square" className="avatar" src={example.image}/>
-            <ListItemText primary={example.title} />
-          </ListItemButton>
-        ))}
+        {
+          config?.TEMPLATES.map((template, index) => {
+            return (
+              <ListItemButton
+                key={index}
+                selected={selectedTemplate === index}
+                onClick={() => {
+                  populateFromPermalink(template.permalink);
+                  setSelectedTemplate(index)
+                }}
+              >
+                <Avatar variant="square" className="avatar" src={template.image}/>
+                <ListItemText primary={template.title} />
+              </ListItemButton>
+            )
+          })
+        }
+
+        <Divider sx={{ my: 1 }} />
+
         <ListItemButton
-          selected={selectedTemplate === exampleDashboards.length}
+          selected={selectedTemplate === config?.TEMPLATES.length}
           onClick={() => {
-            handleDashboardCreationSelection();
-            setSelectedTemplate(exampleDashboards.length);
+            handleLoadFromPermalinkSelection();
+            setSelectedTemplate(config?.TEMPLATES.length);
           }}
         >
-          <Avatar variant="square" className="avatar" src="https://cdn-icons-png.flaticon.com/512/1250/1250615.png"/>
+          <Avatar className="avatar">
+            <LinkIcon />
+          </Avatar>
+          <ListItemText primary="Load from permalink" />
+        </ListItemButton>
+        <Dialog
+          open={loadFromPermalinkOpen}
+          onClose={handleLoadFromPermalinkClose}
+        >
+            <DialogTitle>Load Dashboard from Permalink</DialogTitle>
+            <Divider />
+
+            <DialogContent>
+                <TextField
+                  fullWidth
+                  value={temporaryPermalink} 
+                  onChange={e => setTemporaryPermalink(e.target.value)} 
+                  id="permalink-input-popup" 
+                  label="Permalink"
+                  error={permalinkError}
+                  helperText={permalinkError ? "Invalid permalink format." : ""}
+                />
+            </DialogContent>
+
+            <DialogActions>
+                <Button onClick={handleLoadFromPermalinkClose}>Load</Button>
+            </DialogActions>
+        </Dialog>
+
+        <ListItemButton
+          selected={selectedTemplate === config?.TEMPLATES.length + 1}
+          onClick={() => {
+            handleDashboardCreationSelection();
+            setSelectedTemplate(config?.TEMPLATES.length + 1);
+          }}
+        >
+          <Avatar className="avatar">
+            <EditIcon />
+          </Avatar>
           <ListItemText primary="Start from scratch" />
         </ListItemButton>
       </List>
@@ -121,13 +178,6 @@ export default function LandingPage() {
 
   return (
     <Box className="landing-page-container">
-      {/* <Drawer
-        variant="permanent"
-        className="side-bar"
-        sx={{ width: '15%', minWidth: 250 }}
-      >
-        
-      </Drawer> */}
       <Box>
         <Drawer
           variant="temporary"
@@ -165,26 +215,26 @@ export default function LandingPage() {
       <Box
         component={'main'}
         className="main-content"
+        style={{ '--max-width': 'calc(100% - ' + drawerWidth + 'px)'}}
+        sx={{
+          width: 'var(--max-width)',
+          height: '100%'
+        }}
       >
-        <Stack
-          spacing={2}
-          className="content-stack"
-        >
-          <Box className="content-header">
-            <LandingPageHeader handleDrawerToggle={handleDrawerToggle} />
-          </Box>
-          
-          <Divider />
-          <DashboardCreation
-            className="dashboard-creation"
-            layout={layout}
-            setLayout={setLayout}
-            url={url}
-            setUrl={setUrl}
-            interval={interval}
-            setInterval={setInterval}
-          />
-        </Stack>
+        <Box className="content-header">
+          <LandingPageHeader handleDrawerToggle={handleDrawerToggle} config={config} />
+        </Box>
+        
+        <DashboardCreation
+          layout={layout}
+          setLayout={setLayout}
+          url={url}
+          setUrl={setUrl}
+          interval={interval}
+          setInterval={setInterval}
+          typeColors={typeColors}
+          setTypeColors={setTypeColors}
+        />
       </Box>
     </Box>
   )
