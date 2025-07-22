@@ -43,7 +43,22 @@ export default function View2D({
         },
 
         setLatLng: function () {}
-    })
+    });
+
+    L.polylineClusterable = L.Polyline.extend({
+        _originalInitialize: L.Polyline.prototype.initialize,
+
+        initialize: function (bounds, options) {
+            this._originalInitialize(bounds, options);
+            this._latlng = this.getBounds().getCenter();
+        },
+
+        getLatLng: function () {
+            return this._latlng;
+        },
+
+        setLatLng: function () {}
+    });
 
     const getGeoObjectGeometries = () => {
         if (clusteredLayer.current && normalLayer.current) {
@@ -111,7 +126,7 @@ export default function View2D({
                         leafletRectangle.addTo(clusteredLayer.current);
                         return;
                     case 'LineString':
-                        const leafletLine = L.polyline(
+                        const leafletLine = new L.polylineClusterable(
                             geoObject.geometry.coordinates, {
                                 color: typeColors.get(geoObject.type) || "black",
                                 weight: 1,
@@ -126,7 +141,7 @@ export default function View2D({
                                 return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
                             }) : "")
                         ).addTo(normalLayer.current)
-                        leafletLine.addTo(clusteredLayer.current);
+                        leafletLine.addTo(objectsToCluster);
                         return;
                     default:
                         return;
@@ -154,7 +169,7 @@ export default function View2D({
                 setBoundingBox={setBoundingBox}
             />
             <LayersControl position="topright" collapsed={false}>
-                <LayersControl.BaseLayer checked name="Clustered geoobjects">
+                <LayersControl.BaseLayer name="Clustered geoobjects">
                     <LayerGroup ref={clusteredLayer}
                         eventHandlers={{
                             add: () => {
@@ -163,7 +178,7 @@ export default function View2D({
                         }} 
                     />
                 </LayersControl.BaseLayer>
-                <LayersControl.BaseLayer name="Nonclustered geoobjects">
+                <LayersControl.BaseLayer checked name="Nonclustered geoobjects">
                     <LayerGroup ref={normalLayer}
                         eventHandlers={{
                             add: () => {
