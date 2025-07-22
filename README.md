@@ -5,6 +5,11 @@
 4DGeo is a modular web-based dashboard application for visualizing geospatial data over time. Built with React, it enables users to interact with and analyze 4D geodata (spatial and temporal) using various visualization modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations.
 
 
+##  Online documentation
+
+Thorough online documentation on the dashboard can be found [here](3dgeo-heidelberg.github.io/4DGeo). Feel free to use the notebook implementation examples as a starting point, and remember to cite this repository.
+
+
 ## Features
 
 - **Modular Design** - Easily add and customize visualization modules.
