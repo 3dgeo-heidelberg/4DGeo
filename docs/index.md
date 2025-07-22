@@ -2,7 +2,6 @@
 
 4DGeo is an open-source, modular web-based interactive dashboard application for visualizing geospatial, temporal data. 
 
-(XXX great video, but it needs either some text explaining OR a voice over that does something similar)
 <video width="100%" controls>
   <source src="img/index/4DGeo-Showcase.mp4" type="video/mp4">
 </video>
