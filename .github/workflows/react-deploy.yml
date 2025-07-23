@@ -1,7 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-  workflow-dispatch:
   push:
     branches:
       - main  # Deploy only when pushing to the main branch
