@@ -7,23 +7,9 @@ import { Bar, BarChart, Brush, CartesianGrid, Cell, Legend, ResponsiveContainer,
 
 import './Chart.css';
 
-export default function Chart({ observations, typeColors, onBarClick, selectedBarIndex }) {
+export default function Chart({ observations, typeColors, onBarClick, selectedBarIndex, customAttributeKeys }) {
     const [valueKey, setValueKey] = useState("");
     const [operatorKey, setOperatorKey] = useState("Sum");
-
-    const getCustomDataFields = () => {
-        const customDataFields = new Set();
-        observations.forEach((observation) => {
-            observation.geoObjects.forEach((geoObject) => {
-                if (geoObject.customAttributes) {
-                    Object.keys(geoObject.customAttributes).forEach((key) => {
-                        customDataFields.add(key);
-                    });
-                }
-            });
-        });
-        return Array.from(customDataFields);
-    }
 
     const renderColorfulLegendText = (value, entry) => {
         return <span style={{ color: 'black' }}>{value}</span>;
@@ -42,7 +28,7 @@ export default function Chart({ observations, typeColors, onBarClick, selectedBa
             return null;
         }
 
-        return observations.map((observation, index) => {
+        return observations.map((observation) => {
             const dateTime = new Date(Date.parse(observation.startDateTime));
             const collectorPerType = {
                 name: dateTime.toLocaleDateString() + "\n" + dateTime.toLocaleTimeString()
@@ -126,7 +112,7 @@ export default function Chart({ observations, typeColors, onBarClick, selectedBa
                         <MenuItem value="">
                         <em>None</em>
                         </MenuItem>
-                        {getCustomDataFields().map((field) => (
+                        {customAttributeKeys.map((field) => (
                             <MenuItem key={field} value={field}>{field}</MenuItem>
                         ))}
                     </Select>

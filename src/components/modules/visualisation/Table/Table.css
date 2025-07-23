@@ -1,0 +1,5 @@
+@import url("../../../styles/main_theme.css");
+
+.table-header {
+    background-color: var(--clr-primary-a10);
+}

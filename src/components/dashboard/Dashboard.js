@@ -5,10 +5,25 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import DateRangePicker from "../modules/user-input/DateRangePicker";
 import ObservationSlider from "../modules/user-input/ObservationSlider";
 import Chart from "../modules/visualisation/Chart/Chart";
+import Table from "../modules/visualisation/Table/Table";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange, chartSelectedIndex, setChartSelectedIndex, setBoundingBox }) {
+
+    const getCustomDataFields = (observations) => {
+        const customDataFields = new Set();
+        observations.forEach((observation) => {
+            observation.geoObjects.forEach((geoObject) => {
+                if (geoObject.customAttributes) {
+                    Object.keys(geoObject.customAttributes).forEach((key) => {
+                        customDataFields.add(key);
+                    });
+                }
+            });
+        });
+        return Array.from(customDataFields);
+    }
 
     const filterObservations = (startDate, endDate, chartSelectedIndex = -1) => {
         const filteredObservations = Array.from(observations).filter((observation) => {
@@ -71,6 +86,9 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
     }
 
     const getGridItemContent = (moduleName) => {
+        const observationsToVisualise = filterObservations(dateTimeRange.startDate, dateTimeRange.endDate, chartSelectedIndex);
+        const customAttributeKeys = getCustomDataFields(observationsToVisualise);
+
         switch(moduleName) {
             case 'Slider':
                 return(
@@ -94,21 +112,29 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
             case 'Chart':
                 return (
                     <Chart 
-                        observations={filterObservations(dateTimeRange.startDate, dateTimeRange.endDate)}
+                        observations={observationsToVisualise}
                         typeColors={typeColors}
                         onBarClick={handleBarSelected}
                         selectedBarIndex={chartSelectedIndex}
+                        customAttributeKeys={customAttributeKeys}
                     />
                 );
             case 'View2D':
                 return (
                     <MapView
                         className="mapview"
-                        observations={filterObservations(dateTimeRange.startDate, dateTimeRange.endDate, chartSelectedIndex)}
+                        observations={observationsToVisualise}
                         setBoundingBox={setBoundingBox}
                         typeColors={typeColors}
                     />
                 );
+            case 'Table':
+                return (
+                    <Table
+                        observations={observationsToVisualise}
+                        customAttributeKeys={customAttributeKeys}
+                    />
+                )
             default:
                 return (<div>Not a supported module name</div>);
         }
