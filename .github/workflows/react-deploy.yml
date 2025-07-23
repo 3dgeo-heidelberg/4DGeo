@@ -37,6 +37,9 @@ jobs:
       - name: Install mkdocs material
         run: pip install mkdocs-material
 
+      - name: Install mkdocs jupyter
+        run: pip install mkdocs-jupyter
+
       - name: Build MkDocs into React build folder
         run: mkdocs build -d build/docs -f ./mkdocs/mkdocs.yml
 
