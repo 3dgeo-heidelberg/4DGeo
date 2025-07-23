@@ -34,7 +34,7 @@ jobs:
         run: pip install mkdocs
 
       - name: Build MkDocs into React build folder
-        run: mkdocs build -d build/docs
+        run: mkdocs build -d build/docs -f ./mkdocs/mkdocs.yml
 
 
       - name: Deploy to GitHub Pages
