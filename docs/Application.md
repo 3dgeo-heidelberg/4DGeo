@@ -1,23 +1,23 @@
 # 4DGeo Application
 
-For better understanding and easier usage of the 4DGeo Dashboard, its functionalities, structure, and concepts will be explained here. The Application is split into **two parts**: firstly, the [dashboard creation page](#1-creation-page), where you can create and configure your own dashboard or load predefined examples and adjust their structure to your needs. And secondly, the [dashboard view page](#2-dashboard-view-page) which contains the actual dashboard with all the specified [modules](#3-modules) combined with your data.
+For better understanding and easier usage of the 4DGeo Dashboard, its functionalities, structure, and concepts will be explained here. The Application is split into **two parts**: firstly, the [dashboard creation page](#1-creation-page), where you can create and configure your own dashboard or load predefined examples and adjust their structure to your needs. And secondly, the [dashboard view page](#2-dashboard-view-page) which contains the actual dashboard with all the specified visualization [modules](#3-modules) combined with your data.
 
 
 ## 1 Creation Page
-On the dashboard creation page, you can design your own dashboard with a **custom layout** including all the modules you want to add, the data source, refresh interval, and color assignment.
+On the dashboard creation page, you can design your own dashboard with a **custom layout** including all the modules you want to add, the data source (URL), refresh interval, and color assignment.
 
 ![Creation Page](./img/application/CreationPage.png)
 
 ### 1.1 Data Source
-The data source is an integral part of the design of a dashboard. It defines the location of the data that should be read. This has to be a concrete link or URL to a specific file in the [correct format](#21-data-model).
+The data source is an integral part of the design of a dashboard. It defines the location of the structured input data that should be read. This has to be a concrete link or URL to a specific file in the [correct format](#21-data-model).
 
 ### 1.2 Refresh Interval
-You have the option to specify the frequency of refreshes for the dashboard. At every refresh, the data from your given data source is read and checked for updates. For example if you have a new analysed scan that you want to include into the dashboard, you just have to update the file in your data source and the dashboard will automatically show this new content on the next refresh.
+You have the option to specify the frequency of refreshes for the dashboard. At every refresh, the data from your given data source is read and checked for updates. For example, if you have a new analysed scan that you want to include into the dashboard, you just have to update the file in your data source and the dashboard will automatically show this new content on the next refresh. The refresh rate should be set according to the data update rate.
 
 ### 1.3 Color Assignment
 The Color Assignment feature helps create a more appealing and customized visualisation. It works as a map between all the possible types of geoobjects in your data and their respective assigned color, that you can freely choose once loaded. This feature only works when you already specified your data source link because it first reads a snapshot of the data and filters every present type to create the user input. 
 
-If you dont use this option when creating a dashboard, a random color assignment will be generated.
+If you dont use this option when creating a dashboard, a random color assignment will be used.
 
 ![Color Assignment](./img/application/ColorAssignment.png)
 
@@ -29,13 +29,13 @@ Once you have designed your dashboard and configured all the wanted options, you
 
 A permalink hashes all the values into a base64-String. This string is appended as a variable to the URL of the dashboard page. With this approach, each dashboard design can be stored in a simple link and shared and is easily reproducable this way.
 
-With the <b>Read from permalink</b> button, you can also read all the configurations of a design inside of the creation page and adjust it to your needs before going to the dashboard page.
+With the <b>Read from permalink</b> button, you can also read all the configurations of a design inside of the creation page and adjust it to your needs before going to the dashboard page. By this, you can share your perfect layout with others.
 
 ### 1.6 Templates
-The idea of populating the creation section with data from a permalink is expanded with a list of <b>templates</b>. A template is a predefined (example-)dashboard with sample data connected. Each template is defined in the `public/config.json` file as a permalink with every design option predefined.
+The idea of populating the creation section with data from a permalink is expanded with a list of <b>templates</b>. A template is a predefined and fully equipped (example-)dashboard that is connected with sample data from us. Each template is defined in the `public/config.json` file as a permalink with every design option predefined.
 
 ## 2 Dashboard View Page
-This page is the main visualisation page. A dashboard is generated via the stored information in the permalink with its layout, data source, refresh rate, and color assignment. It is then populated with data automatically read from the given data source. Each module of the dashboard has its own functionality and will be [further explained](#3-modules). Based on your specified refresh interval, the dashboard rereads the data from your data source and updates the content if anything changed.
+This page is the main visualisation page. A dashboard is generated via the stored information in the permalink with its layout, data source, refresh rate, and color assignment. It is then populated with data automatically read from the given data source. Each module of the dashboard has its own functionality and will be [further explained](#3-modules). Based on your specified refresh interval, the dashboard re-reads the data from your data source and updates the content if anything changed.
 
 ![Dashboard Page](./img/application/DashboardPageWorkflow.png)
 
@@ -44,7 +44,7 @@ The dashboard is built around our self-designed data model.
 <a name="datamodel"></a>
 
 ### 2.1 Data Model
-Our data model mainly serves the purpose to make the dashboard use-case independent. This way, the app can be used in a variety of scenarios that have their own data format but need to convert it into this data model.
+Our data model mainly serves the purpose to make the dashboard use-case independent. This way, the app can be used in a variety of 4D monitoring scenarios. You just need to convert your own data  into the 4DGeo data model. This can usually be done very easily by writing a script for automatic data conversion (from yours to 4DGeo) only once. 
 
 ![Data Model](./img/application/DataModel.png)
 
@@ -63,7 +63,7 @@ A geoobject includes the following attributes:
 - `datetime` (String ISO 8601 format): This specifies the specific point in time inside of the interval of its observation. It has to be a string in ISO 8601 format.
 - `geometry`: In order to visualise a geoobject, they need to specify their geometry. This is comparable to the geometry object in the [GeoJSON definition](https://datatracker.ietf.org/doc/html/rfc7946#page-7)
     - `type` (String): The type of geometry. Inspired by the GeoJSON [geometry type](https://datatracker.ietf.org/doc/html/rfc7946#section-1.4). As of now, Polygons, Points and LineStrings are supported.
-    - `coordinates` (Array): The exact coordinates of a geoobject. The structure of the values are based on the defined geometry type. These coordinates serve to correctly locate the position of the geoobjects in the 2D Viewer Module. The geoobjects will be visualised in front of the background image. The coordinates thus have to be in pixel values with [0, 0] being in the top-left hand corner and [-imageHeight, imageWidth] being in the bottom-right hand corner.
+    - `coordinates` (Array): The coordinates of a geoobject. The structure of the values are based on the defined geometry type. These coordinates serve to correctly locate the position of the geoobjects in the 2D Viewer Module. The geoobjects will be visualised in front of the background image. The coordinates thus have to be in pixel values with [0, 0] being in the top-left hand corner and [-imageHeight, imageWidth] being in the bottom-right hand corner.
 - `customAttributes` (Dictionary key-value): These custom attributes cover your use-case dependent information. They represent additional information bound to a specific geoobject. These attributes are the basis for the [Chart Module](#chart-visualisations). In our rockfall example, the custom attributes could include data like the rockfall magnitude or total volume.
 
 
@@ -110,10 +110,10 @@ This is a skeleton overview of how the finished data should look like:
 ## 3 Modules
 
 ### 3.1 Visualisation Modules
-With these modules, your data will be visualised in different ways so that you can analyse them to your liking.
+With these modules, your data will be visualised in different ways so that you can analyse your data designed for your needs.
 
 #### 2D View Map
-In the 2D View, all the geoobjects inside of your data will be rendered with a leaflet map infront of the specified background image. When multiple observations are selected, the background image is taken from the first. For now, only Polygons, Points, and LineStrings are supported. Each geoobject is [assigned a specific color](#41-color-assignment) based on their **type** which you can adjust easily <br>
+In the 2D View, all the geoobjects inside of your data will be rendered with a leaflet map in front of the specified background image. When multiple observations are selected, the background image is taken from the first timestamp. For now, only Polygons, Points, and LineStrings are supported. Each geoobject is [assigned a specific color](#41-color-assignment) based on their **type** which you can adjust easily <br>
 There are 2 layers you can choose from: 
 
 - Normal Layer: All the filtered geoobjects will be shown as their original geometry
@@ -128,7 +128,7 @@ There are 2 layers you can choose from:
 #### Chart Visualisations
 Additionally to the 2D View Module, this module can visualise the custom attributes of your objects.
 
-For now, only the bar chart is implemented.<br>
+For now, only the bar chart is implemented. Further chart types will follow in the next release.<br>
 Here, all your selected observations are shown as a bar. The value of this bar is calculated with the chosen operator and field. The field has to be a number value to be calculated correctly. Each bar is divided into all available geoobject types for a more detailed view. For operators, the following are included:
 
 - Sum: All values of the chosen attribute are summed up.
@@ -149,8 +149,8 @@ With this module, you can choose a date range so that only observations that fal
 #### Observation Slider
 Other than the date range module that takes care of a broad selection, the observation slider lets you define a more detailed selection. All the observations that fall into your chosen date range are shown on the slider. You have the option to then choose between the <i>Single</i> and <i>Range</i> mode:
 
-- Single: Only one observation is selected at a time. This can be usefull if you are interested in the number and attributes of objects at this specific point in time such as bees at a certain time for example.
-- Range: You can specify a start- and end-observation. For example if you are interested in visualising all objects detected within a time fram such as rockfalls within a given month, this can be used.
+- Single: Only one observation is selected at a time. This can be useful if you are interested in the number and attributes of objects at this specific point in time such as bees at a certain time for example.
+- Range: You can specify a start- and end-observation. For example, if you are interested in visualising all objects detected within a time fram such as rockfalls within a given month, this mode can be used.
 
 ![](./img/application/Slider.png)
 
@@ -160,9 +160,9 @@ Other than the date range module that takes care of a broad selection, the obser
 On the dashboard page, you can also freely adjust the colors of each type of geoobject with the "Assign Colors" button.
 
 ### 4.2 File Upload
-If you have a file that you quickly want to visualise with the dashboard, instead of setting up and uploading to a server, you can temporarily upload the file into the dashboard directly. This file is not saved and will be lost on refresh or if you share the permalink.
+If you want to visualise data on-the-fly with the dashboard, instead of setting up and uploading to a server, you can temporarily upload the input data into the dashboard directly. The selected input file is not saved and will be lost on refresh and also if you share the permalink it will not be included.
 
-### 4.3 Export by Map Extent
+### 4.3 Export/Download by Map Extent
 With this button, you can download a subset of you data. Only geoobjects that you selected and that are currently visible in the 2D View Map will be exported in the correct data format of the dashboard.
 
 ## 5 Project Structure
@@ -177,8 +177,8 @@ This project is organized into several main directories and files, each serving 
 - /public: Contains the `config.json` file for easy customization and some sample data.
 
 
-## 6 Example Dataflows
-You can look at a few tutorials and example dataflows in the Example Notebooks section of this documentation to make your own data compatible with the dashboard:
+## 6 Examples: Data Preparation Scripts 
+You can look at a few tutorials and example data preparation scripts in the Example Notebooks section of this documentation to make your own data compatible with the dashboard:
 
 - [Beehive monitoring](beehive.ipynb)
 - [Rockfall monitoring](rockfall_monitoring.ipynb)
