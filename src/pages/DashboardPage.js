@@ -22,7 +22,8 @@ function DashboardPage() {
 
     const [dateRange, setDateRange] = useState({ startDate: 0, endDate: Date.now()});
     const [sliderRange, setSliderRange] = useState([0, 100]);
-    const [dateTimeRange, setDateTimeRange] = useState({ startDate: 0, endDate: Date.now()})
+    const [dateTimeRange, setDateTimeRange] = useState({ startDate: 0, endDate: Date.now()});
+    const [chartSelectedIndex, setChartSelectedIndex] = useState(-1)
 
     const [boundingBox, setBoundingBox] = useState(null);
 
@@ -109,6 +110,7 @@ function DashboardPage() {
     }
 
     const resetDashboardState = (observations) => {
+        setChartSelectedIndex(-1);
         let tempStartEnd = {
             startDate: Math.min(...observations.map(observation => {
                 return Date.parse(observation.startDateTime);
@@ -251,6 +253,8 @@ function DashboardPage() {
                     setSliderRange={setSliderRange}
                     dateTimeRange={dateTimeRange}
                     setDateTimeRange={setDateTimeRange}
+                    chartSelectedIndex={chartSelectedIndex}
+                    setChartSelectedIndex={setChartSelectedIndex}
                     setBoundingBox={setBoundingBox}
                 />
             </Box>

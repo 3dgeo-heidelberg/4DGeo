@@ -8,12 +8,18 @@ import Chart from "../modules/visualisation/Chart/Chart";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange, setBoundingBox }) {
+function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange, chartSelectedIndex, setChartSelectedIndex, setBoundingBox }) {
 
-    const filterObservations = (startDate, endDate) => {
-        return Array.from(observations).filter((observation) => {
+    const filterObservations = (startDate, endDate, chartSelectedIndex = -1) => {
+        const filteredObservations = Array.from(observations).filter((observation) => {
             return Date.parse(observation.startDateTime) >= startDate && Date.parse(observation.startDateTime) <= endDate;
         }).sort((a, b) => a.startDateTime > b.startDateTime ? 1 : -1);
+
+        if(typeof filteredObservations[chartSelectedIndex] === 'undefined') {
+            return filteredObservations;
+        } else {
+            return [filteredObservations[chartSelectedIndex]];
+        }
     }
 
     const resetSliderRange = (includedDateTimes) => {
@@ -23,7 +29,7 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
     }
 
     const handleDateRangeSelected = (newDateRange) => {  
-        
+        setChartSelectedIndex(-1);
         setDateRange(newDateRange);    
         let newFilteredObservations = filterObservations(newDateRange.startDate, newDateRange.endDate);
 
@@ -40,6 +46,7 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
 
 
     const handleSliderRangeSelected = (newSliderRange) => {
+        setChartSelectedIndex(-1);
         setSliderRange(newSliderRange);
 
         if(newSliderRange.length === 1) {
@@ -52,6 +59,14 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
                 startDate: newSliderRange[0],
                 endDate: newSliderRange[1]
             });
+        }
+    }
+
+    const handleBarSelected = (data, index) => {
+        if(index === chartSelectedIndex) {
+            setChartSelectedIndex(-1);
+        } else {
+            setChartSelectedIndex(index);
         }
     }
 
@@ -81,13 +96,15 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
                     <Chart 
                         observations={filterObservations(dateTimeRange.startDate, dateTimeRange.endDate)}
                         typeColors={typeColors}
+                        onBarClick={handleBarSelected}
+                        selectedBarIndex={chartSelectedIndex}
                     />
                 );
             case 'View2D':
                 return (
                     <MapView
                         className="mapview"
-                        observations={filterObservations(dateTimeRange.startDate, dateTimeRange.endDate)}
+                        observations={filterObservations(dateTimeRange.startDate, dateTimeRange.endDate, chartSelectedIndex)}
                         setBoundingBox={setBoundingBox}
                         typeColors={typeColors}
                     />
