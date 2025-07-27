@@ -216,7 +216,7 @@ function DashboardPage() {
     return (
         <Box className="dashboard-container" sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', maxHeight: '7rem', boxSizing: 'border-box', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 3rem'}}>
-               <div> <img src={config?.APP_ICON} alt="App-Logo" width={200} /></div>
+               <img src={config?.APP_ICON} alt="App-Logo" width={200} />
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", gap: "1.2rem"}}>
                     <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} />
                     <Button 
