@@ -7,10 +7,11 @@
 You can access a hosted version of the dashboard [here](https://3dgeo-heidelberg.github.io/4DGeo/).
 
 <video width="100%" controls>
-  <source src="img/4DGeo Trailer.mp4" type="video/mp4">
+  <source src="docs/img/4DGeoTrailer.mp4" type="video/mp4">
 </video>
 
-**Get started in 2 minutes: Visualize your point clouds**
+## Get started in 2 minutes: Visualize your point clouds
+
 To show how easy it is to visualize your data with a 4DGeo dashboard, we've prepared a short [Python Notebook](getting_started.ipynb) tutorial. It demonstrates how a series of point clouds can be prjected into images and displayed within the dashboard.
 
 The process involves just two simple steps:

@@ -3,14 +3,15 @@
 4DGeo is an open-source, modular, super lightweight, web-based interactive dashboard application for visualizing your point cloud timeseries captured with a continuous and even ongoing 3D environmental monitoring station (e.g. LiDAR, 3D photogrammetry, smartphone). 
 
 <video width="100%" controls>
-  <source src="img/index/4DGeo-Showcase.mp4" type="video/mp4">
+  <source src="img/index/4DGeoTrailer.mp4" type="video/mp4">
 </video>
 
 ## About
 
 4DGeo enables users to create and share their own dashboard layout to visualize their custom 4D geodata using various available visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be [hosted on a simple server or with Github Pages](#hosting-options). The structured input [data](Application.md#21-data-model) is read from a user-defined web  source and is updated automatically at regular intervals, as specified in the refresh timer. This enables the 4DGeo dashboard to work particularly well with continuously updated data, such as that from monitoring systems that repeatedly scan an area of interest in addition to static or archive data that does not need constant refreshing.
 
-**Get started in 2 minutes: Visualize your point clouds**
+## Get started in 2 minutes: Visualize your point clouds
+
 To show how easy it is to visualize your data with a 4DGeo dashboard, we've prepared a short [Python Notebook](getting_started.ipynb) tutorial. It demonstrates how a series of point clouds can be prjected into images and displayed within the dashboard.
 
 The process involves just two simple steps:
