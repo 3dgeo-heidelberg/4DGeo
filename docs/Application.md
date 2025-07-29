@@ -2,6 +2,12 @@
 
 For better understanding and easier usage of the 4DGeo Dashboard, its functionalities, structure, and concepts will be explained here. The Application is split into **two parts**: firstly, the [dashboard creation page](#1-creation-page), where you can create and configure your own dashboard or load predefined examples and adjust their structure to your needs. And secondly, the [dashboard view page](#2-dashboard-view-page) which contains the actual dashboard with all the specified visualization [modules](#3-modules) combined with your data.
 
+The following video demonstrates the basic functionality of the app.
+
+<video width="100%" controls>
+  <source src="img/index/4DGeo-Showcase.mp4" type="video/mp4">
+</video>
+
 
 ## 1 Creation Page
 On the dashboard creation page, you can design your own dashboard with a **custom layout** including all the modules you want to add, the data source (URL), refresh interval, and color assignment.
