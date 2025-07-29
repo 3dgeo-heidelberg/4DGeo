@@ -1,12 +1,14 @@
 # 4DGeo
 
-![<h2 align="center"><img src="public/4DGeo_Logo_300dpi.png" width="200" /></h2>](public/4DGeo_Logo_300dpi.png)
+<p align="center">
+  <img src="public/4DGeo_Logo_300dpi.png" />
+</p>
 
-4DGeo is a modular web-based dashboard application for visualizing geospatial data over time. Built with React, it enables users to interact with and analyze 4D geodata (spatial and temporal) using various visualization modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations.
-
-You can access a hosted version of the dashboard [here](https://3dgeo-heidelberg.github.io/4DGeo/).
+4DGeo is an open-source, modular, super lightweight, web-based interactive dashboard application for visualizing your point cloud timeseries captured with a continuous and even ongoing 3D environmental monitoring station (e.g. LiDAR, 3D photogrammetry, smartphone). 
 
 ![Trailer](/docs/img/4DGeoTrailer.gif)
+
+You can access a hosted version of the dashboard [here](https://3dgeo-heidelberg.github.io/4DGeo/).
 
 ## Get started in 2 minutes: Visualize your point clouds
 

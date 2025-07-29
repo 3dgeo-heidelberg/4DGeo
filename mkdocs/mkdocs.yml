@@ -58,6 +58,7 @@ nav:
   - Application: Application.md
   - Github Pages: https://3dgeo-heidelberg.github.io/4DGeo
   - Notebook examples:
+    - Getting started: getting_started.ipynb
     - Bee monitoring: beehive.ipynb
     - Rockfall monitoring: rockfall_monitoring.ipynb
     - Branch evolution: branch_evolution.ipynb

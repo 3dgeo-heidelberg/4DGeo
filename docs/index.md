@@ -3,7 +3,7 @@
 4DGeo is an open-source, modular, super lightweight, web-based interactive dashboard application for visualizing your point cloud timeseries captured with a continuous and even ongoing 3D environmental monitoring station (e.g. LiDAR, 3D photogrammetry, smartphone). 
 
 <video width="100%" controls>
-  <source src="img/index/4DGeoTrailer.mp4" type="video/mp4">
+  <source src="img/4DGeoTrailer.mp4" type="video/mp4">
 </video>
 
 ## About
@@ -20,7 +20,7 @@ The process involves just two simple steps:
 - **Configure your dashboard:** Either load a predefined layout or create your own with our [dashboard creation page](Application.md#1-creation-page)
 
 
-**Key Features:**
+## Key Features
 
 - Controlled visualization of your results, for example from various 3D and 4D change analysis methods
 - **Time-series** support

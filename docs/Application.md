@@ -52,7 +52,7 @@ The dashboard is built around our self-designed data model.
 ### 2.1 Data Model
 Our data model mainly serves the purpose to make the dashboard use-case independent. This way, the app can be used in a variety of 4D monitoring scenarios. You just need to convert your own data  into the 4DGeo data model. This can usually be done very easily by writing a script for automatic data conversion (from yours to 4DGeo) only once. 
 
-![Data Model](./img/application/DataModel.png)
+![Data Model](./img/application/DataModel.jpg)
 
 It is designed around <b>observations</b>. An observation can be described as a snapshot of the real world over a specified area at a specific short interval in time.
 <br>
