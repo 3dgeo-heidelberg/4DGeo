@@ -3,11 +3,11 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { PureComponent, useState } from "react";
-import { Bar, BarChart, Brush, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, Brush, CartesianGrid, Cell, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 import './Chart.css';
 
-export default function Chart({ observations, typeColors }) {
+export default function Chart({ observations, typeColors, onBarClick, selectedBarIndex }) {
     const [valueKey, setValueKey] = useState("");
     const [operatorKey, setOperatorKey] = useState("Sum");
 
@@ -24,6 +24,12 @@ export default function Chart({ observations, typeColors }) {
         });
         return Array.from(customDataFields);
     }
+
+    const renderColorfulLegendText = (value, entry) => {
+        const { color } = entry;
+
+        return <span style={{ color: 'black' }}>{value}</span>;
+    };
 
     const handleFieldSelected = (event) => { 
         setValueKey(event.target.value);
@@ -136,10 +142,16 @@ export default function Chart({ observations, typeColors }) {
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" height={70} tick={<CustomizedAxisTick /> } />
                             <YAxis />
-                            <Tooltip />
-                            <Legend />
+                            <Tooltip itemStyle={{color: "black"}} />
+                            <Legend formatter={renderColorfulLegendText} />
                             {Array.from(typeColors).map(([type, color]) => {
-                                return <Bar key={type.toString()} dataKey={type.toString()} stackId={"a"} fill={color} />
+                                return (
+                                    <Bar key={type.toString()} dataKey={type.toString()} stackId={"a"} fill={color} onClick={onBarClick}>
+                                        {data.map((entry, index) => (
+                                            <Cell cursor="pointer" stroke={index === selectedBarIndex ? 'red' : ''} key={`cell-${index}`} />
+                                        ))}
+                                    </Bar>
+                                )
                             })}
                             <Brush dataKey="name" height={20} stroke="#8884d8" />
                         </BarChart>

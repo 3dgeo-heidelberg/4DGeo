@@ -83,9 +83,9 @@ export default function View2D({
                             }
                         ).bindTooltip(
                             `<b>Type:</b> ${geoObject.type}<br>` +
-                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).map((item, i) => {
-                                return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
-                            }) : ""));
+                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).reduce((accumulator, item, i) => {
+                                return accumulator + "\n<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
+                            }, "") : ""));
                         leafletPolygon.addTo(normalLayer.current);
                         leafletPolygon.addTo(deflateFeatures);
                         return;
@@ -101,9 +101,9 @@ export default function View2D({
                             }
                         ).bindTooltip(
                             `<b>Type:</b> ${geoObject.type}<br>` +
-                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).map((item, i) => {
-                                return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
-                            }) : "")
+                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).reduce((accumulator, item, i) => {
+                                return accumulator + "\n<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
+                            }, "") : "")
                         ).addTo(normalLayer.current);
                         leafletCircle.addTo(objectsToCluster);
                         return;
@@ -119,9 +119,9 @@ export default function View2D({
                             }
                         ).bindTooltip(
                             `<b>Type:</b> ${geoObject.type}<br>` +
-                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).map((item, i) => {
-                                return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
-                            }) : "")
+                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).reduce((accumulator, item, i) => {
+                                return accumulator + "\n<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
+                            }, "") : "")
                         ).addTo(normalLayer.current)
                         leafletRectangle.addTo(clusteredLayer.current);
                         return;
@@ -137,9 +137,9 @@ export default function View2D({
                             }
                         ).bindTooltip(
                             `<b>Type:</b> ${geoObject.type}<br>` +
-                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).map((item, i) => {
-                                return "<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
-                            }) : "")
+                            (geoObject.customAttributes ? Object.entries(geoObject.customAttributes).reduce((accumulator, item, i) => {
+                                return accumulator + "\n<div key={" + i + "}><b>" + item[0] + ":</b> " + item[1] + "</div>";
+                            }, "") : "")
                         ).addTo(normalLayer.current)
                         leafletLine.addTo(objectsToCluster);
                         return;

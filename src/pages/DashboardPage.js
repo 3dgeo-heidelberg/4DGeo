@@ -22,7 +22,8 @@ function DashboardPage() {
 
     const [dateRange, setDateRange] = useState({ startDate: 0, endDate: Date.now()});
     const [sliderRange, setSliderRange] = useState([0, 100]);
-    const [dateTimeRange, setDateTimeRange] = useState({ startDate: 0, endDate: Date.now()})
+    const [dateTimeRange, setDateTimeRange] = useState({ startDate: 0, endDate: Date.now()});
+    const [chartSelectedIndex, setChartSelectedIndex] = useState(-1)
 
     const [boundingBox, setBoundingBox] = useState(null);
 
@@ -113,6 +114,7 @@ function DashboardPage() {
     }
 
     const resetDashboardState = (observations) => {
+        setChartSelectedIndex(-1);
         let tempStartEnd = {
             startDate: Math.min(...observations.map(observation => {
                 return Date.parse(observation.startDateTime);
@@ -217,8 +219,8 @@ function DashboardPage() {
 
     return (
         <Box className="dashboard-container" sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-            <Box sx={{ display: 'flex', maxHeight: '5rem', boxSizing: 'border-box', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 3rem'}}>
-                <h2>{config.APP_TITLE}</h2>
+            <Box sx={{ display: 'flex', maxHeight: '7rem', boxSizing: 'border-box', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 3rem'}}>
+               <img src={config?.APP_ICON} alt="App-Logo" width={200} />
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", gap: "1.2rem"}}>
                     <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} />
                     <Button 
@@ -255,6 +257,8 @@ function DashboardPage() {
                     setSliderRange={setSliderRange}
                     dateTimeRange={dateTimeRange}
                     setDateTimeRange={setDateTimeRange}
+                    chartSelectedIndex={chartSelectedIndex}
+                    setChartSelectedIndex={setChartSelectedIndex}
                     setBoundingBox={setBoundingBox}
                 />
             </Box>
