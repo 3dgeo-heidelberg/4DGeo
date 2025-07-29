@@ -6,9 +6,7 @@
 
 You can access a hosted version of the dashboard [here](https://3dgeo-heidelberg.github.io/4DGeo/).
 
-<video width="100%" controls>
-  <source src="docs/img/4DGeoTrailer.mp4" type="video/mp4">
-</video>
+![Trailer](/docs/img/4DGeoTrailer.gif)
 
 ## Get started in 2 minutes: Visualize your point clouds
 
