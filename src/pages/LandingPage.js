@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, List, ListItem, ListItemButton, ListItemText, ListSubheader, Stack, TextField } from "@mui/material";
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Drawer, List, ListItem, ListItemButton, ListItemText, ListSubheader, Stack, TextField, useMediaQuery, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 
 import './LandingPage.css';
@@ -6,6 +6,8 @@ import DashboardCreation from "../components/dashboard-creation/DashboardCreatio
 import LandingPageHeader from "../components/LandingPageHeader";
 import LinkIcon from '@mui/icons-material/Link';
 import EditIcon from '@mui/icons-material/Edit';
+import DescriptionIcon from '@mui/icons-material/Description';
+import { Link, useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
   const [config, setConfig] = useState(null)
@@ -22,6 +24,10 @@ export default function LandingPage() {
   const [url, setUrl] = useState("");
   const [interval, setInterval] = useState(0);
   const [typeColors, setTypeColors] = useState(new Map());
+
+  const theme = useTheme();
+  const navigate = useNavigate();
+  const isMobilePhoneScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
 
   const handleDrawerClose = () => {
@@ -171,6 +177,22 @@ export default function LandingPage() {
           </Avatar>
           <ListItemText primary="Start from scratch" />
         </ListItemButton>
+
+        <Divider sx={{ my: 1 }} />
+
+        <Button 
+          id="moduleSelectButton"
+          color="primary"
+          aria-label="add" 
+          variant="contained" 
+          onClick={() => {
+            navigate("/docs")
+          }}
+          sx={{ margin: '0px 24px' }}
+          startIcon={<DescriptionIcon />}
+        >                        
+          Documentation
+        </Button>
       </List>
     </Stack>
   )
@@ -215,7 +237,7 @@ export default function LandingPage() {
       <Box
         component={'main'}
         className="main-content"
-        style={{ '--max-width': 'calc(100% - ' + drawerWidth + 'px)'}}
+        style={isMobilePhoneScreen ? { 'width': '100%' } : { '--max-width': 'calc(100% - ' + drawerWidth + 'px)' }}
         sx={{
           width: 'var(--max-width)',
           height: '100%'

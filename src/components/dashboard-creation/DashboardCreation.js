@@ -104,10 +104,10 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
     return (
         <div className="container">
             <div className="header">
-                <div className="headline-buttons">
+                <div className="headline-buttons" style={{display: "flex"}}>
                     <h2 className="headline">Customize your Dashboard</h2>
 
-                    <div className="buttons">
+                    <div className="buttons" style={{display: "flex"}}>
                         <Button 
                             id="moduleSelectButton"
                             color="primary"
