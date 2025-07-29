@@ -16,6 +16,10 @@ import pooch
 # Image handling
 from PIL import Image, ImageSequence
 
+# Hosting
+import http.server
+import socketserver
+
 
 
 def download_example_data():
@@ -43,7 +47,8 @@ def get_example_configuration():
             "output_folder": "./out/getting_started",
             "temporal_format": "%y%m%d_%H%M%S",
             "silent_mode": True,
-            "include_timestamp": False
+            "include_timestamp": False,
+            "hosting_port": 8003
         },
         "pc_projection": {
             "pc_path": "",
@@ -66,6 +71,7 @@ def get_example_configuration():
 
 
 def convert_point_cloud_time_series_to_datamodel(data_folder, configuration):
+
     laz_paths = list(Path(data_folder).glob("*.laz"))
     laz_paths = sorted(laz_paths)
 
@@ -73,11 +79,12 @@ def convert_point_cloud_time_series_to_datamodel(data_folder, configuration):
     list_background_projections = []
     pcs = sorted(laz_paths)
 
+    project_name = configuration['project_setting']['project_name']
+    output_folder = configuration['project_setting']['output_folder']
+
     for enum, pc in enumerate(pcs):
         lf = laspy.read(pc)
         configuration['pc_projection']['pc_path'] = pc
-        project_name = configuration['project_setting']['project_name']
-        output_folder = configuration['project_setting']['output_folder']
 
         background_projection = projection.PCloudProjection(
             configuration = configuration,
@@ -107,7 +114,8 @@ def convert_point_cloud_time_series_to_datamodel(data_folder, configuration):
             bg_img = bg_img[2:]
 
         curr_fname = os.path.basename(pc)
-        start_scan = utilities.iso_timestamp(curr_fname) + "Z"
+        start_scan = (utilities.iso_timestamp(curr_fname) + "Z").replace(":", " ")
+
         
         outfile = bg_img.split('.')[0] + f"_{start_scan}." + bg_img.split('.')[1]
 
@@ -146,11 +154,11 @@ def convert_point_cloud_time_series_to_datamodel(data_folder, configuration):
     aggregated_data = utilities.DataModel([])
 
     for (i, background_projection) in enumerate(list_background_projections):
-        full_path = os.path.abspath( png_images[i])
+        full_path = f"http://localhost:{configuration['project_setting']['hosting_port']}/" + png_images[i]
         img_size = Image.open(png_images[i]).convert("RGB").size
         aggregated_data.observations.append(utilities.Observation(
-            startDateTime = os.path.basename(background_projection.bg_image_filename[0]).split('_')[-1][:-5],
-            endDateTime = os.path.basename(background_projection.bg_image_filename[0]).split('_')[-1][:-5],
+            startDateTime = os.path.basename(background_projection.bg_image_filename[0]).split('_')[-1][:-5].replace(" ", ":"),
+            endDateTime = os.path.basename(background_projection.bg_image_filename[0]).split('_')[-1][:-5].replace(" ", ":"),
             geoObjects=[],
             backgroundImageData=utilities.ImageData(
                 url=str(full_path).replace("\\", "/"),
@@ -161,3 +169,22 @@ def convert_point_cloud_time_series_to_datamodel(data_folder, configuration):
 
     with open(f"{output_folder}/data_model.json", "w") as f:
         f.write(aggregated_data.toJSON())
+
+
+class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
+    def end_headers(self):
+        # Add CORS headers
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', '*')
+        http.server.SimpleHTTPRequestHandler.end_headers(self)
+
+    def do_OPTIONS(self):
+      self.send_response(200)
+      self.end_headers()
+
+    
+def host_images(configuration):
+    with socketserver.TCPServer(("", configuration['project_setting']['hosting_port']), CORSRequestHandler) as httpd:
+        print(f"Serving at http://localhost:{configuration['project_setting']['hosting_port']}")
+        httpd.serve_forever()
