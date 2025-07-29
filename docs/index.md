@@ -10,8 +10,13 @@
 
 4DGeo enables users to create and share their own dashboard layout to visualize their custom 4D geodata using various available visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be [hosted on a simple server or with Github Pages](#hosting-options). The structured input [data](Application.md#21-data-model) is read from a user-defined web  source and is updated automatically at regular intervals, as specified in the refresh timer. This enables the 4DGeo dashboard to work particularly well with continuously updated data, such as that from monitoring systems that repeatedly scan an area of interest in addition to static or archive data that does not need constant refreshing.
 
-**How to set it up and share it in 2 min:**
-- ADD
+**Get started in 2 minutes: Visualize your point clouds**
+To show how easy it is to visualize your data with a 4DGeo dashboard, we've prepared a short [Python Notebook](getting_started.ipynb) tutorial. It demonstrates how a series of point clouds can be prjected into images and displayed within the dashboard.
+
+The process involves just two simple steps:
+
+- **Prepare your data:** Convert your list of images into the 4DGeo [data model](Application.md#21-data-model)
+- **Configure your dashboard:** Either load a predefined layout or create your own with our [dashboard creation page](Application.md#1-creation-page)
 
 
 **Key Features:**
@@ -61,6 +66,7 @@ To **host** this application **on your own**, you can either copy our [Github Ac
 
 As a starting point, the **main features** of this software are described in the [Application Page](Application.md). To understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there:
 
+- [Getting started](getting_started.ipynb)
 - [Beehive monitoring](beehive.ipynb)
 - [Rockfall monitoring](rockfall_monitoring.ipynb)
 - [Branch evolution](branch_evolution.ipynb)
