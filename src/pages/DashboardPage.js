@@ -90,15 +90,19 @@ function DashboardPage() {
         if(!wasFileUploaded) {
             loadData(true);
 
-            const intervalResolution = urlParams.get('interval') == null ? 60 : urlParams.get('interval');
-            const interval = setInterval(() => {
-                if(!wasFileUploaded) {
-                    loadData(false);
-                    console.log("Reloading data!");
-                }
-            }, Number.parseInt(intervalResolution)*1000);
+            const intervalResolution = urlParams.get('interval') == null ? 0 : urlParams.get('interval');
+            if (intervalResolution > 0) {
+                const interval = setInterval(() => {
+                    if(!wasFileUploaded) {
+                        loadData(false);
+                        console.log("Reloading data!");
+                    }
+                }, Number.parseInt(intervalResolution)*1000);
 
-            return () => clearInterval(interval);
+                return () => clearInterval(interval);
+            } else {
+                return;
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [wasFileUploaded]);
