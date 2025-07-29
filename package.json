@@ -51,7 +51,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "react-scripts build && mkdocs build -d build/docs -f ./mkdocs/mkdocs.yml",
+    "predeploy": "react-scripts build && mkdocs build -d ../build/docs -f ./mkdocs/mkdocs.yml",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
