@@ -7,7 +7,7 @@ import LandingPageHeader from "../components/LandingPageHeader";
 import LinkIcon from '@mui/icons-material/Link';
 import EditIcon from '@mui/icons-material/Edit';
 import DescriptionIcon from '@mui/icons-material/Description';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
   const [config, setConfig] = useState(null)
