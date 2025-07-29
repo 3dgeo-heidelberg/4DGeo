@@ -69,27 +69,41 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
         setLayout(newLayout);
     }
 
-    const handlePermalink = () => {
-        const permaLink = new URL(window.location.origin + '/dashboard', window.location.origin);
-        permaLink.searchParams.append("layout", JSON.stringify(layout));
-        permaLink.searchParams.append("url", url);
-        permaLink.searchParams.append("interval", interval);
-        permaLink.searchParams.append("typeColors", JSON.stringify([...typeColors]))
+    const getPermalink = () => {
+        const baseLink = window.location.origin + '/dashboard'
+        // const permaLink = new URL(window.location.origin + '/dashboard', window.location.origin);
 
-        navigator.clipboard.writeText(permaLink);
+        const searchParams = new URLSearchParams({
+            "layout": JSON.stringify(layout),
+            "url": url,
+            "interval": interval,
+            "typeColors": JSON.stringify([...typeColors])
+        }).toString();
+        console.log(btoa(searchParams), searchParams)
+        // permaLink.searchParams.append("layout", JSON.stringify(layout));
+        // permaLink.searchParams.append("url", url);
+        // permaLink.searchParams.append("interval", interval);
+        // permaLink.searchParams.append("typeColors", JSON.stringify([...typeColors]))
+
+        return baseLink + "?state=" + btoa(searchParams);
+    }
+
+    const handlePermalink = () => {
+        navigator.clipboard.writeText(getPermalink());
         setSnackbarOpen(true);
     }
 
     const handleGo = () => {
-        navigate({
-            pathname: "/dashboard",
-            search: createSearchParams({
-                layout: JSON.stringify(layout),
-                url: url,
-                interval: interval,
-                typeColors: JSON.stringify([...typeColors])
-            }).toString()
-        })
+        navigate(getPermalink())
+        // navigate({
+        //     pathname: "/dashboard",
+        //     search: createSearchParams({
+        //         layout: JSON.stringify(layout),
+        //         url: url,
+        //         interval: interval,
+        //         typeColors: JSON.stringify([...typeColors])
+        //     }).toString()
+        // })
     }
 
     const getAspectRatioOfScreen = () => {
