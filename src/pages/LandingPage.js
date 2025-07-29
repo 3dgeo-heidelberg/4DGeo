@@ -72,10 +72,11 @@ export default function LandingPage() {
 
   const populateFromPermalink = (permalink) => {
     const url = new URL(permalink);
-    setLayout(JSON.parse(url.searchParams.get('layout') || []));
-    setUrl(url.searchParams.get('url') || "");
-    setInterval(parseInt(url.searchParams.get('interval')) || 0);
-    setTypeColors(new Map(JSON.parse(url.searchParams.get('typeColors') || new Map())));
+    const params = new URLSearchParams(atob(url.searchParams.get('state')))
+    setLayout(JSON.parse(params.get('layout') || []));
+    setUrl(params.get('url') || "");
+    setInterval(parseInt(params.get('interval')) || 0);
+    setTypeColors(new Map(JSON.parse(params.get('typeColors') || new Map())));
   }
 
   const handleLoadFromPermalinkClose = () => {

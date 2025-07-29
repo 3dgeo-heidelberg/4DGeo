@@ -5,7 +5,7 @@ import DashboardPreview from "./DashboardPreview";
 import { useState } from "react";
 
 import './DashboardCreation.css';
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate, createSearchParams, useHref } from "react-router-dom";
 import { fetchJsonData } from "../../utils/http_fetcher";
 import ColorAssignment from "./ColorAssignment";
 
@@ -18,6 +18,7 @@ const minimumModuleSizes = new Map([
 
 function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterval, typeColors, setTypeColors }) {
     const navigate = useNavigate();
+    const baseurl = useHref("/");
     const [counterForKey, setCounterForKey] = useState(0)
     const [snackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -70,8 +71,7 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
     }
 
     const getPermalink = () => {
-        const baseLink = window.location.origin + '/dashboard'
-        // const permaLink = new URL(window.location.origin + '/dashboard', window.location.origin);
+        const baseLink = window.location.origin + baseurl + '/dashboard'
 
         const searchParams = new URLSearchParams({
             "layout": JSON.stringify(layout),
@@ -80,10 +80,6 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
             "typeColors": JSON.stringify([...typeColors])
         }).toString();
         console.log(btoa(searchParams), searchParams)
-        // permaLink.searchParams.append("layout", JSON.stringify(layout));
-        // permaLink.searchParams.append("url", url);
-        // permaLink.searchParams.append("interval", interval);
-        // permaLink.searchParams.append("typeColors", JSON.stringify([...typeColors]))
 
         return baseLink + "?state=" + btoa(searchParams);
     }
@@ -94,16 +90,12 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
     }
 
     const handleGo = () => {
-        navigate(getPermalink())
-        // navigate({
-        //     pathname: "/dashboard",
-        //     search: createSearchParams({
-        //         layout: JSON.stringify(layout),
-        //         url: url,
-        //         interval: interval,
-        //         typeColors: JSON.stringify([...typeColors])
-        //     }).toString()
-        // })
+        navigate({
+            pathname: "/dashboard",
+            search: createSearchParams({
+                state: getPermalink().split("?state=")[1]
+            }).toString()
+        })
     }
 
     const getAspectRatioOfScreen = () => {

@@ -13,7 +13,7 @@ import L from "leaflet";
 import './DashboardPage.css'
 
 function DashboardPage() {
-    const urlParams = Object.fromEntries(new URLSearchParams(atob(useSearchParams()[0].get("state"))))
+    const urlParams = new URLSearchParams(atob(useSearchParams()[0].get("state")))
     const [observations, setObservations] = useState([])
     const [wasFileUploaded, setWasFileUploaded] = useState(false);
     const [config, setConfig] = useState({})
