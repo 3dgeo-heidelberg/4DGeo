@@ -26,8 +26,6 @@ export default function Chart({ observations, typeColors, onBarClick, selectedBa
     }
 
     const renderColorfulLegendText = (value, entry) => {
-        const { color } = entry;
-
         return <span style={{ color: 'black' }}>{value}</span>;
     };
 
