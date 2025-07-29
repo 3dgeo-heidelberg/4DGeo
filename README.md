@@ -43,12 +43,12 @@ To run 4DGeo locally, follow these steps:
 
 1. Clone the GitHub repository in a local folder
     ```
-    git clone -b development  https://github.com/3dgeo-heidelberg/4DGeo.git
+    git clone https://github.com/3dgeo-heidelberg/4DGeo.git
     ```
 2. create the Conda environment with the provided .yml file
     ```
     cd 4DGeo/docs
-    conda env create -n 4DGeo --file '4DGeo_doc.yml'
+    conda env create -n 4DGeo --file 4DGeo_doc.yml
     ```
 3. Activate the environment
     ```
