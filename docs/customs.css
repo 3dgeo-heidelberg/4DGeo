@@ -1,0 +1,27 @@
+/* Full path selector */
+html.js-focus-visible.js body div.md-container main.md-main div.md-main__inner.md-grid div.md-content article.md-content__inner.md-typeset div.jupyter-wrapper div.jp-Notebook div.jp-Cell.jp-CodeCell.jp-Notebook-cell div.jp-Cell-outputWrapper div.jp-OutputArea.jp-Cell-outputArea div.jp-OutputArea-child.jp-OutputArea-executeResult div.jp-RenderedHTMLCommon.jp-RenderedHTML.jp-OutputArea-output.jp-OutputArea-executeResult div.highlight pre {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    overflow-x: auto !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    background-color: #f5f5f5 !important;
+    padding: 10px !important;
+    border-radius: 4px !important;
+}
+
+/* Simplified selector */
+div.jp-OutputArea-executeResult div.highlight pre {
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    overflow-x: auto !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    background-color: #f5f5f5 !important;
+    padding: 10px !important;
+    border-radius: 4px !important;
+}
+
+.invisible {
+    display: none;
+}
