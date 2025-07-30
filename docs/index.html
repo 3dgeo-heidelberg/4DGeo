@@ -342,18 +342,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#forking" class="md-nav__link">
+  <a href="#hosting-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Forking
+      Hosting Options
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#hosting-options" class="md-nav__link">
+  <a href="#forking" class="md-nav__link">
     <span class="md-ellipsis">
-      Hosting Options
+      Forking
     </span>
   </a>
   
@@ -644,18 +644,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#forking" class="md-nav__link">
+  <a href="#hosting-options" class="md-nav__link">
     <span class="md-ellipsis">
-      Forking
+      Hosting Options
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#hosting-options" class="md-nav__link">
+  <a href="#forking" class="md-nav__link">
     <span class="md-ellipsis">
-      Hosting Options
+      Forking
     </span>
   </a>
   
@@ -728,7 +728,7 @@
 <p>To show how easy it is to visualize your data with a 4DGeo dashboard, we've prepared a short <a href="getting_started.html">Python Notebook</a> tutorial. It demonstrates how a series of point clouds can be projected into images and displayed within the dashboard.</p>
 <p>The process involves just two simple steps:</p>
 <ul>
-<li><strong>Prepare your data:</strong> Convert your list of images into the 4DGeo <a href="Application.html#21-data-model">data model</a></li>
+<li><strong>Prepare your data:</strong> Convert your list of images into the 4DGeo <a href="Application.html#21-data-model">data model</a> and host this data! This is what's done in the above mentioned <a href="getting_started.html">Python Notebook</a>.</li>
 <li><strong>Configure your dashboard:</strong> Either load a predefined layout or create your own with our <a href="Application.html#1-creation-page">dashboard creation page</a></li>
 </ul>
 <h2 id="key-features">Key Features</h2>
@@ -765,20 +765,21 @@
 </span></code></pre></div>
 </li>
 </ol>
+<h2 id="hosting-options">Hosting Options</h2>
+<p>To <strong>host</strong> this application <strong>on your own</strong>, you can either copy our <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml">Github Action workflow</a> for deploying it to Github Pages which is favorable in a production or testing environment. For that you need to consider the points raised in the <a href="#forking">fork section</a> below. </p>
+<p>Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library <a href="https://docs.python.org/3/library/http.server.html"><code>http.server</code></a> and used in our examples notebooks like <a href="rockfall_monitoring.html#visualise-the-data-in-the-dashboard">here</a>.</p>
 <h2 id="forking">Forking</h2>
-<p>If you want to fork this repo to work on it on your own, you can do so freely but you need to change and adjust some settings and content. To help you through this process, heres a list of changes you need to consider.</p>
+<p>It is recommended to fork this repository in order to work on it independently, especially using our Github Pages setup for an easy hosting option. However, it is necessary to make some adjustments to the settings and content. To assist you in navigating this process, please find below a list of key changes to consider.   </p>
 <ul>
-<li>The <a href="/public/config.json">config.json</a> file contains various options containing the repository name (here 4DGeo), which you need to adjust to your liking. This also includes paths to the app icon.</li>
-<li>Change the <code>basename</code> of the <a href="/src/index.js">React Browserrouter</a> so that routing still works as intended.</li>
-<li>Adjust the "name" and "homepage" values in the <a href="/package.json">package.json</a> file.</li>
+<li>Update the <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/public/config.json">config.json</a> file to reflect your repository's name (e.g., replacing "4DGeo" with your preferred name). This file also includes paths to the app icon, which should be modified accordingly.</li>
+<li>Modify the <code>basename</code> of the <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/src/index.js">React Browserrouter</a> so that routing still works as intended.</li>
+<li>Adjust the "name" and "homepage" fields in the <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/package.json">package.json</a> file.</li>
 <li>The Github Action for deploying the Github Pages doesn't need any further adaptations.</li>
 <li>The testing data is based on the "4DGeo" name. You need to change the image paths containing the "4DGeo" name to your new name.</li>
 <li>If you also want the documentation to run on your fork, adjust <code>site_name</code>, <code>repo_url</code>, <code>site_url</code> and the <code>Github Pages</code> navigation link.</li>
 </ul>
-<h2 id="hosting-options">Hosting Options</h2>
-<p>To <strong>host</strong> this application <strong>on your own</strong>, you can either copy our <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml">Github Action workflow</a> for deploying it to Github Pages which is favorable in a production or testing environment. Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library <a href="https://docs.python.org/3/library/http.server.html"><code>http.server</code></a> and used in our examples notebooks like <a href="rockfall_monitoring.html#visualise-the-data-in-the-dashboard">here</a>.</p>
 <h2 id="documentation">Documentation</h2>
-<p>As a starting point, the <strong>main features</strong> of this software are described in the <a href="Application.html">Application Page</a>. To understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there:</p>
+<p>As a starting point, the <strong>main features</strong> of this software are described in the <a href="Application.html">4DGeo manual</a>. Additionally, to understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there:</p>
 <ul>
 <li><a href="getting_started.html">Getting started</a></li>
 <li><a href="beehive.html">Beehive monitoring</a></li>
@@ -801,7 +802,7 @@
 </ol>
 <h2 id="contact-bugs-feature-requests">Contact / Bugs / Feature Requests</h2>
 <p>Have you found a bug or have specific request for a new feature? Please open a <a href="https://github.com/3dgeo-heidelberg/4DGeo/issues">new issue in the online code repository on Github</a>. Also for general questions please use the issue system.</p>
-<p>Scientific requests can be directed to the <a href="https://www.uni-heidelberg.de/3dgeo">3DGeo Research Group Heidelberg</a> and its respective members.</p>
+<p>Scientific requests can be directed to the <a href="https://www.geog.uni-heidelberg.de/en/3dgeo">3DGeo Research Group Heidelberg</a> and its respective members.</p>
 
 
 
