@@ -16,7 +16,7 @@ To show how easy it is to visualize your data with a 4DGeo dashboard, we've prep
 
 The process involves just two simple steps:
 
-- **Prepare your data:** Convert your list of images into the 4DGeo [data model](Application.md#21-data-model)
+- **Prepare your data:** Convert your list of images into the 4DGeo [data model](Application.md#21-data-model) and host this data! This is what's done in the above mentioned [Python Notebook](getting_started.ipynb).
 - **Configure your dashboard:** Either load a predefined layout or create your own with our [dashboard creation page](Application.md#1-creation-page)
 
 
@@ -59,24 +59,26 @@ To run 4DGeo locally, follow these steps:
         http://localhost:3000
     ```
 
+## Hosting Options
+
+To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. For that you need to consider the points raised in the [fork section](#forking) below. 
+
+Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
+
 ## Forking
 
-If you want to fork this repo to work on it on your own, you can do so freely but you need to change and adjust some settings and content. To help you through this process, heres a list of changes you need to consider.
+It is recommended to fork this repository in order to work on it independently, especially using our Github Pages setup for an easy hosting option. However, it is necessary to make some adjustments to the settings and content. To assist you in navigating this process, please find below a list of key changes to consider.   
 
-- The [config.json](/public/config.json) file contains various options containing the repository name (here 4DGeo), which you need to adjust to your liking. This also includes paths to the app icon.
-- Change the ``basename`` of the [React Browserrouter](/src/index.js) so that routing still works as intended.
-- Adjust the "name" and "homepage" values in the [package.json](/package.json) file.
+- Update the [config.json](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/public/config.json) file to reflect your repository's name (e.g., replacing "4DGeo" with your preferred name). This file also includes paths to the app icon, which should be modified accordingly.
+- Modify the ``basename`` of the [React Browserrouter](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/src/index.js) so that routing still works as intended.
+- Adjust the "name" and "homepage" fields in the [package.json](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/package.json) file.
 - The Github Action for deploying the Github Pages doesn't need any further adaptations.
 - The testing data is based on the "4DGeo" name. You need to change the image paths containing the "4DGeo" name to your new name.
 - If you also want the documentation to run on your fork, adjust ``site_name``, ``repo_url``, ``site_url`` and the ``Github Pages`` navigation link.
 
-## Hosting Options
-
-To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
-
 ## Documentation
 
-As a starting point, the **main features** of this software are described in the [Application Page](Application.md). To understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there:
+As a starting point, the **main features** of this software are described in the [4DGeo manual](Application.md). Additionally, to understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there:
 
 - [Getting started](getting_started.ipynb)
 - [Beehive monitoring](beehive.ipynb)
@@ -104,4 +106,4 @@ For these notebooks to fully work, you need to create a conda environment with t
 
 Have you found a bug or have specific request for a new feature? Please open a [new issue in the online code repository on Github](https://github.com/3dgeo-heidelberg/4DGeo/issues). Also for general questions please use the issue system.
 
-Scientific requests can be directed to the [3DGeo Research Group Heidelberg](https://www.uni-heidelberg.de/3dgeo) and its respective members.
+Scientific requests can be directed to the [3DGeo Research Group Heidelberg](https://www.geog.uni-heidelberg.de/en/3dgeo) and its respective members.
