@@ -178,7 +178,7 @@ class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
       self.end_headers()
 
     
-def host_images(configuration):
+def host_data(configuration):
     with socketserver.TCPServer(("", configuration['project_setting']['hosting_port']), CORSRequestHandler) as httpd:
         print(f"Serving at http://localhost:{configuration['project_setting']['hosting_port']}")
         httpd.serve_forever()
