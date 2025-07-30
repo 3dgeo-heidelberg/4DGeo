@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Getting started
             
           </span>
         </div>
@@ -270,7 +270,7 @@
   
   
   <span class="md-ellipsis">
-    Home
+    Getting started
     
   </span>
   
@@ -283,7 +283,7 @@
   
   
   <span class="md-ellipsis">
-    Home
+    Getting started
     
   </span>
   
@@ -315,9 +315,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#get-started-in-2-minutes-visualize-your-point-clouds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get started in 2 minutes: Visualize your point clouds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#development-installation" class="md-nav__link">
     <span class="md-ellipsis">
       Development &amp; Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forking
     </span>
   </a>
   
@@ -338,6 +365,21 @@
       Documentation
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conda-environment-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conda environment installation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -370,7 +412,7 @@
   
   
   <span class="md-ellipsis">
-    Application
+    4DGeo manual
     
   </span>
   
@@ -392,7 +434,7 @@
   
   
   <span class="md-ellipsis">
-    Github Pages
+    4DGeo (Web)
     
   </span>
   
@@ -439,6 +481,29 @@
             Notebook examples
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="getting_started.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -552,9 +617,36 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#get-started-in-2-minutes-visualize-your-point-clouds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Get started in 2 minutes: Visualize your point clouds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#development-installation" class="md-nav__link">
     <span class="md-ellipsis">
       Development &amp; Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forking" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forking
     </span>
   </a>
   
@@ -575,6 +667,21 @@
       Documentation
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#conda-environment-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conda environment installation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -612,14 +719,19 @@
 <h1 id="4dgeo">4DGeo</h1>
 <p>4DGeo is an open-source, modular, super lightweight, web-based interactive dashboard application for visualizing your point cloud timeseries captured with a continuous and even ongoing 3D environmental monitoring station (e.g. LiDAR, 3D photogrammetry, smartphone). </p>
 <video width="100%" controls>
-  <source src="img/index/4DGeo-Showcase.mp4" type="video/mp4">
+  <source src="img/4DGeoTrailer.mp4" type="video/mp4">
 </video>
 
 <h2 id="about">About</h2>
 <p>4DGeo enables users to create and share their own dashboard layout to visualize their custom 4D geodata using various available visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be <a href="#hosting-options">hosted on a simple server or with Github Pages</a>. The structured input <a href="Application.html#21-data-model">data</a> is read from a user-defined web  source and is updated automatically at regular intervals, as specified in the refresh timer. This enables the 4DGeo dashboard to work particularly well with continuously updated data, such as that from monitoring systems that repeatedly scan an area of interest in addition to static or archive data that does not need constant refreshing.</p>
-<p><strong>How to set it up and share it in 2 min:</strong>
-- ADD</p>
-<p><strong>Key Features:</strong></p>
+<h2 id="get-started-in-2-minutes-visualize-your-point-clouds">Get started in 2 minutes: Visualize your point clouds</h2>
+<p>To show how easy it is to visualize your data with a 4DGeo dashboard, we've prepared a short <a href="getting_started.html">Python Notebook</a> tutorial. It demonstrates how a series of point clouds can be prjected into images and displayed within the dashboard.</p>
+<p>The process involves just two simple steps:</p>
+<ul>
+<li><strong>Prepare your data:</strong> Convert your list of images into the 4DGeo <a href="Application.html#21-data-model">data model</a></li>
+<li><strong>Configure your dashboard:</strong> Either load a predefined layout or create your own with our <a href="Application.html#1-creation-page">dashboard creation page</a></li>
+</ul>
+<h2 id="key-features">Key Features</h2>
 <ul>
 <li>Controlled visualization of your results, for example from various 3D and 4D change analysis methods</li>
 <li><strong>Time-series</strong> support</li>
@@ -653,15 +765,40 @@
 </span></code></pre></div>
 </li>
 </ol>
+<h2 id="forking">Forking</h2>
+<p>If you want to fork this repo to work on it on your own, you can do so freely but you need to change and adjust some settings and content. To help you through this process, heres a list of changes you need to consider.</p>
+<ul>
+<li>The <a href="/public/config.json">config.json</a> file contains various options containing the repository name (here 4DGeo), which you need to adjust to your liking. This also includes paths to the app icon.</li>
+<li>Change the <code>basename</code> of the <a href="/src/index.js">React Browserrouter</a> so that routing still works as intended.</li>
+<li>Adjust the "name" and "homepage" values in the <a href="/package.json">package.json</a> file.</li>
+<li>The Github Action for deploying the Github Pages doesn't need any further adaptations.</li>
+<li>The testing data is based on the "4DGeo" name. You need to change the image paths containing the "4DGeo" name to your new name.</li>
+<li>If you also want the documentation to run on your fork, adjust <code>site_name</code>, <code>repo_url</code>, <code>site_url</code> and the <code>Github Pages</code> navigation link.</li>
+</ul>
 <h2 id="hosting-options">Hosting Options</h2>
 <p>To <strong>host</strong> this application <strong>on your own</strong>, you can either copy our <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml">Github Action workflow</a> for deploying it to Github Pages which is favorable in a production or testing environment. Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library <a href="https://docs.python.org/3/library/http.server.html"><code>http.server</code></a> and used in our examples notebooks like <a href="rockfall_monitoring.html#visualise-the-data-in-the-dashboard">here</a>.</p>
 <h2 id="documentation">Documentation</h2>
 <p>As a starting point, the <strong>main features</strong> of this software are described in the <a href="Application.html">Application Page</a>. To understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there:</p>
 <ul>
+<li><a href="getting_started.html">Getting started</a></li>
 <li><a href="beehive.html">Beehive monitoring</a></li>
 <li><a href="rockfall_monitoring.html">Rockfall monitoring</a></li>
 <li><a href="branch_evolution.html">Branch evolution</a></li>
 </ul>
+<h3 id="conda-environment-installation">Conda environment installation</h3>
+<p>For these notebooks to fully work, you need to create a conda environment with the correct dependencies installed.</p>
+<ol>
+<li>Clone the GitHub repository in a local folder
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git clone https://github.com/3dgeo-heidelberg/4DGeo.git
+</span></code></pre></div></li>
+<li>create the Conda environment with the provided .yml file
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>cd 4DGeo/docs
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>conda env create -n 4DGeo --file 4DGeo_doc.yml
+</span></code></pre></div></li>
+<li>Activate the environment
+    <div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>conda activate 4DGeo
+</span></code></pre></div></li>
+</ol>
 <h2 id="contact-bugs-feature-requests">Contact / Bugs / Feature Requests</h2>
 <p>Have you found a bug or have specific request for a new feature? Please open a <a href="https://github.com/3dgeo-heidelberg/4DGeo/issues">new issue in the online code repository on Github</a>. Also for general questions please use the issue system.</p>
 <p>Scientific requests can be directed to the <a href="https://www.uni-heidelberg.de/3dgeo">3DGeo Research Group Heidelberg</a> and its respective members.</p>
@@ -702,13 +839,13 @@
         
         
           
-          <a href="Application.html" class="md-footer__link md-footer__link--next" aria-label="Next: Application">
+          <a href="Application.html" class="md-footer__link md-footer__link--next" aria-label="Next: 4DGeo manual">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Application
+                4DGeo manual
               </div>
             </div>
             <div class="md-footer__button md-icon">
