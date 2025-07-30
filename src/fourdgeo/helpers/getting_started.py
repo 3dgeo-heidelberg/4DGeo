@@ -22,23 +22,17 @@ import socketserver
 
 
 
-def download_example_data():
-    # Handle file download/reading here
-    data_url = "https://heibox.uni-heidelberg.de/f/6c2a4e6755b74d1abad0/?dl=1"
-    data_hash = "77b343183c86cbc3f72e0edbe362cc3219d41e00fcf4389ab650a09a13b1b1ec"
-    file_name = "rockfall_trier.zip"
-    data_folder = "data/rockfall_trier"
-
-    if not Path(data_folder).exists():
-        fnames = pooch.retrieve(url=data_url,
-                                known_hash=data_hash,
+def download_example_data(config):    
+    if not Path(config["data_folder"]).exists():
+        fnames = pooch.retrieve(url=config["data_url"],
+                                known_hash=config["data_hash"],
                                 path="./",
-                                fname=file_name,
-                                processor=pooch.Unzip(extract_dir=data_folder),
+                                fname=config["file_name"],
+                                processor=pooch.Unzip(extract_dir=config["data_folder"]),
                                 progressbar=True)
-        os.remove(file_name)
+        os.remove(config["file_name"])
     
-    return data_folder
+    return config["data_folder"]
 
 def get_example_configuration():
     configuration = {
@@ -184,7 +178,8 @@ class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
       self.end_headers()
 
     
-def host_images(configuration):
+def host_data(configuration):
     with socketserver.TCPServer(("", configuration['project_setting']['hosting_port']), CORSRequestHandler) as httpd:
-        print(f"Serving at http://localhost:{configuration['project_setting']['hosting_port']}")
+        print(f"Serving json at http://localhost:{configuration['project_setting']['hosting_port']}/out/getting_started/data_model.json")
+        print(f"Open the following link to see your dashboard: \nhttps://3dgeo-heidelberg.github.io/4DGeo/dashboard?state=bGF5b3V0PSU1QiU3QiUyMnclMjIlM0EzJTJDJTIyaCUyMiUzQTElMkMlMjJ4JTIyJTNBMCUyQyUyMnklMjIlM0EwJTJDJTIyaSUyMiUzQSUyMkRhdGVSYW5nZVBpY2tlciUyMiUyQyUyMm1pblclMjIlM0EyJTJDJTIybWluSCUyMiUzQTElMkMlMjJtb3ZlZCUyMiUzQWZhbHNlJTJDJTIyc3RhdGljJTIyJTNBZmFsc2UlN0QlMkMlN0IlMjJ3JTIyJTNBOSUyQyUyMmglMjIlM0ExJTJDJTIyeCUyMiUzQTMlMkMlMjJ5JTIyJTNBMCUyQyUyMmklMjIlM0ElMjJTbGlkZXIlMjIlMkMlMjJtaW5XJTIyJTNBMiUyQyUyMm1pbkglMjIlM0ExJTJDJTIybW92ZWQlMjIlM0FmYWxzZSUyQyUyMnN0YXRpYyUyMiUzQWZhbHNlJTdEJTJDJTdCJTIydyUyMiUzQTglMkMlMjJoJTIyJTNBNCUyQyUyMnglMjIlM0E0JTJDJTIyeSUyMiUzQTElMkMlMjJpJTIyJTNBJTIyVmlldzJEJTIyJTJDJTIybWluVyUyMiUzQTQlMkMlMjJtaW5IJTIyJTNBMiUyQyUyMm1vdmVkJTIyJTNBZmFsc2UlMkMlMjJzdGF0aWMlMjIlM0FmYWxzZSU3RCUyQyU3QiUyMnclMjIlM0E0JTJDJTIyaCUyMiUzQTQlMkMlMjJ4JTIyJTNBMCUyQyUyMnklMjIlM0ExJTJDJTIyaSUyMiUzQSUyMkNoYXJ0JTIyJTJDJTIybWluVyUyMiUzQTIlMkMlMjJtaW5IJTIyJTNBMiUyQyUyMm1vdmVkJTIyJTNBZmFsc2UlMkMlMjJzdGF0aWMlMjIlM0FmYWxzZSU3RCU1RCZ1cmw9aHR0cCUzQSUyRiUyRmxvY2FsaG9zdCUzQTgwMDMlMkZvdXQlMkZnZXR0aW5nX3N0YXJ0ZWQlMkZkYXRhX21vZGVsLmpzb24maW50ZXJ2YWw9NjAmdHlwZUNvbG9ycz0lNUIlNUIlMjJ1bmtub3duJTIyJTJDJTIyJTIzZmYwMDAwJTIyJTVEJTVE")
         httpd.serve_forever()
