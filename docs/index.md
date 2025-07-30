@@ -59,6 +59,12 @@ To run 4DGeo locally, follow these steps:
         http://localhost:3000
     ```
 
+## Hosting Options
+
+To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. For that you need to consider the points raised in the [fork section](#forking) below. 
+
+Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
+
 ## Forking
 
 If you want to fork this repo to work on it on your own, you can do so freely but you need to change and adjust some settings and content. To help you through this process, heres a list of changes you need to consider.
@@ -69,10 +75,6 @@ If you want to fork this repo to work on it on your own, you can do so freely bu
 - The Github Action for deploying the Github Pages doesn't need any further adaptations.
 - The testing data is based on the "4DGeo" name. You need to change the image paths containing the "4DGeo" name to your new name.
 - If you also want the documentation to run on your fork, adjust ``site_name``, ``repo_url``, ``site_url`` and the ``Github Pages`` navigation link.
-
-## Hosting Options
-
-To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
 
 ## Documentation
 
