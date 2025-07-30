@@ -468,6 +468,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#putting-it-all-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting it all together
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -634,6 +643,15 @@
   <a href="#visualise-the-data-in-the-dashboard" class="md-nav__link">
     <span class="md-ellipsis">
       Visualise the data in the dashboard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#putting-it-all-together" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting it all together
     </span>
   </a>
   
@@ -1141,7 +1159,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="easy-monitoring-example">Easy monitoring example<a class="anchor-link" href="#easy-monitoring-example">¶</a></h1><p>Ronald Tabernig, William Albert, Hannah Weiser, July 2025</p>
-<p>This notebook demonstrates the data preparation. The dataset contains <strong>6 scans</strong> of a <a href="https://www.youtube.com/watch?v=bOp4XN9FM48">rockfall area in Trier, Germany</a> captured hourly in the night from 25 August 2024 to 26 August 2024.</p>
+<p>This notebook demonstrates the data preparation. The dataset contains <strong>6 scans</strong> of a <a href="https://www.youtube.com/watch?v=bOp4XN9FM48">rockfall area in Trier, Germany</a> captured hourly in the night from 25 August 2024 to 26 August 2024. We've prepared the needed functionality in the <a href="../src/fourdgeo/helpers/getting_started.py">helper functions</a>.</p>
 </div>
 </div>
 </div>
@@ -1338,6 +1356,64 @@ data_folder = download_example_data()</div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">host_images</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-5">host_images(configuration)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ae86b8d9">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="putting-it-all-together">Putting it all together<a class="anchor-link" href="#putting-it-all-together">¶</a></h3><p>Heres every step in one so you can copy and paste it into your own environment! Remember to also copy the <a href="../src/fourdgeo/helpers/getting_started.py">helper functions</a>.</p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=29f7e5ef">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="CodeMirror cm-s-jupyter">
+<div class="zeroclipboard-container">
+<clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-6">
+<div>
+<span class="notice" hidden="">Copied!</span>
+<svg aria-hidden="true" class="clipboard-copy-icon" data-view-component="true" height="20" version="1.1" viewbox="0 0 16 16" width="20">
+<path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+<path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+</clipboard-copy>
+</div>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"../src"</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fourdgeo.helpers.getting_started</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">data_folder</span> <span class="o">=</span> <span class="n">download_example_data</span><span class="p">()</span>
+
+<span class="n">configuration</span> <span class="o">=</span> <span class="n">get_example_configuration</span><span class="p">()</span>
+
+<span class="n">list_background_projections</span> <span class="o">=</span> <span class="n">convert_point_cloud_time_series_to_datamodel</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">configuration</span><span class="p">)</span>
+
+<span class="n">host_images</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
+</pre></div>
+<div class="clipboard-copy-txt" id="cell-6">import sys
+sys.path.insert(0, "../src")
+from fourdgeo.helpers.getting_started import *
+
+data_folder = download_example_data()
+
+configuration = get_example_configuration()
+
+list_background_projections = convert_point_cloud_time_series_to_datamodel(data_folder, configuration)
+
+host_images(configuration)</div>
 </div>
 </div>
 </div>
