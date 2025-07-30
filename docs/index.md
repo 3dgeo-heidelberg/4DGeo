@@ -16,9 +16,11 @@ To show how easy it is to visualize your data with a 4DGeo dashboard, we've prep
 
 The process involves just two simple steps:
 
-- **Prepare your data:** Convert your list of images into the 4DGeo [data model](Application.md#21-data-model) and host this data! This is what's done in the above mentioned [Python Notebook](getting_started.ipynb).
+- **Prepare your data:** Convert your list of images into the 4DGeo [data model](Application.md#21-data-model) and make it public! This is what's done in the above mentioned [Python Notebook](getting_started.ipynb).
 - **Configure your dashboard:** Either load a predefined layout or create your own with our [dashboard creation page](Application.md#1-creation-page)
 
+
+To run this [Python Notebook](getting_started.ipynb) locally, 
 
 ## Key Features
 

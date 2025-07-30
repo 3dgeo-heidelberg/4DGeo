@@ -22,23 +22,17 @@ import socketserver
 
 
 
-def download_example_data():
-    # Handle file download/reading here
-    data_url = "https://heibox.uni-heidelberg.de/f/6c2a4e6755b74d1abad0/?dl=1"
-    data_hash = "77b343183c86cbc3f72e0edbe362cc3219d41e00fcf4389ab650a09a13b1b1ec"
-    file_name = "rockfall_trier.zip"
-    data_folder = "data/rockfall_trier"
-
-    if not Path(data_folder).exists():
-        fnames = pooch.retrieve(url=data_url,
-                                known_hash=data_hash,
+def download_example_data(config):    
+    if not Path(config["data_folder"]).exists():
+        fnames = pooch.retrieve(url=config["data_url"],
+                                known_hash=config["data_hash"],
                                 path="./",
-                                fname=file_name,
-                                processor=pooch.Unzip(extract_dir=data_folder),
+                                fname=config["file_name"],
+                                processor=pooch.Unzip(extract_dir=config["data_folder"]),
                                 progressbar=True)
-        os.remove(file_name)
+        os.remove(config["file_name"])
     
-    return data_folder
+    return config["data_folder"]
 
 def get_example_configuration():
     configuration = {
