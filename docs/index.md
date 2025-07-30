@@ -12,7 +12,7 @@
 
 ## Get started in 2 minutes: Visualize your point clouds
 
-To show how easy it is to visualize your data with a 4DGeo dashboard, we've prepared a short [Python Notebook](getting_started.ipynb) tutorial. It demonstrates how a series of point clouds can be prjected into images and displayed within the dashboard.
+To show how easy it is to visualize your data with a 4DGeo dashboard, we've prepared a short [Python Notebook](getting_started.ipynb) tutorial. It demonstrates how a series of point clouds can be projected into images and displayed within the dashboard.
 
 The process involves just two simple steps:
 
