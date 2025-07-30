@@ -8,11 +8,11 @@
 
 ## About
 
-4DGeo enables users to create and share their own dashboard layout to visualize their custom 4D geodata using various available visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be [hosted on a simple server or with Github Pages](#hosting-options). The structured input [data](Application.md#21-data-model) is read from a user-defined web  source and is updated automatically at regular intervals, as specified in the refresh timer. This enables the 4DGeo dashboard to work particularly well with continuously updated data, such as that from monitoring systems that repeatedly scan an area of interest in addition to static or archive data that does not need constant refreshing.
+4DGeo enables users to create and share their own dashboard layout to visualise their custom 4D geodata using various available visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be [hosted on a simple server or with Github Pages](#hosting-options). The structured input [data](Application.md#21-data-model) is read from a user-defined web  source and is updated automatically at regular intervals, as specified in the refresh timer. This enables the 4DGeo dashboard to work particularly well with continuously updated data, such as that from monitoring systems that repeatedly scan an area of interest in addition to static or archive data that does not need constant refreshing.
 
-## Get started in 2 minutes: Visualize your point clouds
+## Get started in 2 minutes: Visualise your point clouds
 
-To show how easy it is to visualize your data with a 4DGeo dashboard, we've prepared a short [Python Notebook](getting_started.ipynb) tutorial. It demonstrates how a series of point clouds can be projected into images and displayed within the dashboard.
+To show how easy it is to visualise your data with a 4DGeo dashboard, we've prepared a short [Python Notebook](getting_started.ipynb) tutorial. It demonstrates how a series of point clouds can be projected into images and displayed within the dashboard.
 
 The process involves just two simple steps:
 
@@ -20,7 +20,7 @@ The process involves just two simple steps:
 - **Configure your dashboard:** Either load a predefined layout or create your own with our [dashboard creation page](Application.md#1-creation-page)
 
 
-To run this [Python Notebook](getting_started.ipynb) locally, 
+To run this [Python Notebook](getting_started.ipynb) yourself, just open a command line in your target directory and follow the [conda environment installation steps](#conda-environment-installation)
 
 ## Key Features
 
