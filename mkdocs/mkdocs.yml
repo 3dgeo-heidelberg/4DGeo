@@ -54,9 +54,9 @@ markdown_extensions:
   - pymdownx.superfences
 
 nav:
-  - Home: index.md
-  - Application: Application.md
-  - Github Pages: https://3dgeo-heidelberg.github.io/4DGeo
+  - Getting started: index.md
+  - 4DGeo manual: Application.md
+  - 4DGeo (Web): https://3dgeo-heidelberg.github.io/4DGeo
   - Notebook examples:
     - Getting started: getting_started.ipynb
     - Bee monitoring: beehive.ipynb
