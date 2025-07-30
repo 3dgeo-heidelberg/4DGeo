@@ -3,18 +3,24 @@
 4DGeo is an open-source, modular, super lightweight, web-based interactive dashboard application for visualizing your point cloud timeseries captured with a continuous and even ongoing 3D environmental monitoring station (e.g. LiDAR, 3D photogrammetry, smartphone). 
 
 <video width="100%" controls>
-  <source src="img/index/4DGeo-Showcase.mp4" type="video/mp4">
+  <source src="img/4DGeoTrailer.mp4" type="video/mp4">
 </video>
 
 ## About
 
 4DGeo enables users to create and share their own dashboard layout to visualize their custom 4D geodata using various available visualization and user-input modules. The project is designed to be flexible and extendable, making it easy to adapt for different use cases such as landslide detection, insect monitoring, and other environmental observations. It can be [hosted on a simple server or with Github Pages](#hosting-options). The structured input [data](Application.md#21-data-model) is read from a user-defined web  source and is updated automatically at regular intervals, as specified in the refresh timer. This enables the 4DGeo dashboard to work particularly well with continuously updated data, such as that from monitoring systems that repeatedly scan an area of interest in addition to static or archive data that does not need constant refreshing.
 
-**How to set it up and share it in 2 min:**
-- ADD
+## Get started in 2 minutes: Visualize your point clouds
+
+To show how easy it is to visualize your data with a 4DGeo dashboard, we've prepared a short [Python Notebook](getting_started.ipynb) tutorial. It demonstrates how a series of point clouds can be prjected into images and displayed within the dashboard.
+
+The process involves just two simple steps:
+
+- **Prepare your data:** Convert your list of images into the 4DGeo [data model](Application.md#21-data-model)
+- **Configure your dashboard:** Either load a predefined layout or create your own with our [dashboard creation page](Application.md#1-creation-page)
 
 
-**Key Features:**
+## Key Features
 
 - Controlled visualization of your results, for example from various 3D and 4D change analysis methods
 - **Time-series** support
@@ -53,6 +59,17 @@ To run 4DGeo locally, follow these steps:
         http://localhost:3000
     ```
 
+## Forking
+
+If you want to fork this repo to work on it on your own, you can do so freely but you need to change and adjust some settings and content. To help you through this process, heres a list of changes you need to consider.
+
+- The [config.json](/public/config.json) file contains various options containing the repository name (here 4DGeo), which you need to adjust to your liking. This also includes paths to the app icon.
+- Change the ``basename`` of the [React Browserrouter](/src/index.js) so that routing still works as intended.
+- Adjust the "name" and "homepage" values in the [package.json](/package.json) file.
+- The Github Action for deploying the Github Pages doesn't need any further adaptations.
+- The testing data is based on the "4DGeo" name. You need to change the image paths containing the "4DGeo" name to your new name.
+- If you also want the documentation to run on your fork, adjust ``site_name``, ``repo_url``, ``site_url`` and the ``Github Pages`` navigation link.
+
 ## Hosting Options
 
 To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
@@ -61,9 +78,27 @@ To **host** this application **on your own**, you can either copy our [Github Ac
 
 As a starting point, the **main features** of this software are described in the [Application Page](Application.md). To understand how you can use this app and incorporate it into your own Project, you can have a look at the Example Notebooks. The current usages and implementations are described in detail there:
 
+- [Getting started](getting_started.ipynb)
 - [Beehive monitoring](beehive.ipynb)
 - [Rockfall monitoring](rockfall_monitoring.ipynb)
 - [Branch evolution](branch_evolution.ipynb)
+
+### Conda environment installation
+For these notebooks to fully work, you need to create a conda environment with the correct dependencies installed.
+
+1. Clone the GitHub repository in a local folder
+    ```
+    git clone https://github.com/3dgeo-heidelberg/4DGeo.git
+    ```
+2. create the Conda environment with the provided .yml file
+    ```
+    cd 4DGeo/docs
+    conda env create -n 4DGeo --file 4DGeo_doc.yml
+    ```
+3. Activate the environment
+    ```
+    conda activate 4DGeo
+    ```
 
 ## Contact / Bugs / Feature Requests
 

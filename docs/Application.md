@@ -2,6 +2,12 @@
 
 For better understanding and easier usage of the 4DGeo Dashboard, its functionalities, structure, and concepts will be explained here. The Application is split into **two parts**: firstly, the [dashboard creation page](#1-creation-page), where you can create and configure your own dashboard or load predefined examples and adjust their structure to your needs. And secondly, the [dashboard view page](#2-dashboard-view-page) which contains the actual dashboard with all the specified visualization [modules](#3-modules) combined with your data.
 
+The following video demonstrates the basic functionality of the app.
+
+<video width="100%" controls>
+  <source src="img/index/4DGeo-Showcase.mp4" type="video/mp4">
+</video>
+
 
 ## 1 Creation Page
 On the dashboard creation page, you can design your own dashboard with a **custom layout** including all the modules you want to add, the data source (URL), refresh interval, and color assignment.
@@ -46,7 +52,7 @@ The dashboard is built around our self-designed data model.
 ### 2.1 Data Model
 Our data model mainly serves the purpose to make the dashboard use-case independent. This way, the app can be used in a variety of 4D monitoring scenarios. You just need to convert your own data  into the 4DGeo data model. This can usually be done very easily by writing a script for automatic data conversion (from yours to 4DGeo) only once. 
 
-![Data Model](./img/application/DataModel.png)
+![Data Model](./img/application/DataModel.jpg)
 
 It is designed around <b>observations</b>. An observation can be described as a snapshot of the real world over a specified area at a specific short interval in time.
 <br>
