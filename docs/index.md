@@ -58,7 +58,7 @@ To run 4DGeo locally, follow these steps:
 4. Open your browser and navigate to:
 
     ```
-        http://localhost:3000
+        http://localhost:3000/4DGeo
     ```
 
 ## Hosting Options
