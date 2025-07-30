@@ -1160,6 +1160,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="easy-monitoring-example">Easy monitoring example<a class="anchor-link" href="#easy-monitoring-example">¶</a></h1><p>Ronald Tabernig, William Albert, Hannah Weiser, July 2025</p>
 <p>This notebook demonstrates the data preparation. The dataset contains <strong>6 scans</strong> of a <a href="https://www.youtube.com/watch?v=bOp4XN9FM48">rockfall area in Trier, Germany</a> captured hourly in the night from 25 August 2024 to 26 August 2024. We've prepared the needed functionality in the <a href="../src/fourdgeo/helpers/getting_started.py">helper functions</a>.</p>
+<p>To make this work with your own list of point clouds, you simply need to adjust the url and paths when downloading. And make sure the name and timestamp of each file is matching the format defined in the configuration.</p>
 </div>
 </div>
 </div>
@@ -1180,7 +1181,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-1">
@@ -1222,7 +1223,7 @@ from fourdgeo.helpers.getting_started import *</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-2">
@@ -1236,10 +1237,20 @@ from fourdgeo.helpers.getting_started import *</div>
 </clipboard-copy>
 </div>
 <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Load the rockfall data or use your own data by giving the path to the data folder variable</span>
-<span class="n">data_folder</span> <span class="o">=</span> <span class="n">download_example_data</span><span class="p">()</span>
+<span class="n">data_folder</span> <span class="o">=</span> <span class="n">download_example_data</span><span class="p">({</span>
+    <span class="s2">"data_url"</span><span class="p">:</span> <span class="s2">"https://heibox.uni-heidelberg.de/f/6c2a4e6755b74d1abad0/?dl=1"</span><span class="p">,</span>
+    <span class="s2">"data_hash"</span><span class="p">:</span> <span class="s2">"77b343183c86cbc3f72e0edbe362cc3219d41e00fcf4389ab650a09a13b1b1ec"</span><span class="p">,</span>
+    <span class="s2">"file_name"</span><span class="p">:</span> <span class="s2">"rockfall_trier.zip"</span><span class="p">,</span>
+    <span class="s2">"data_folder"</span><span class="p">:</span> <span class="s2">"data/rockfall_trier"</span><span class="p">,</span>
+<span class="p">})</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-2"># Load the rockfall data or use your own data by giving the path to the data folder variable
-data_folder = download_example_data()</div>
+data_folder = download_example_data({
+    "data_url": "https://heibox.uni-heidelberg.de/f/6c2a4e6755b74d1abad0/?dl=1",
+    "data_hash": "77b343183c86cbc3f72e0edbe362cc3219d41e00fcf4389ab650a09a13b1b1ec",
+    "file_name": "rockfall_trier.zip",
+    "data_folder": "data/rockfall_trier",
+})</div>
 </div>
 </div>
 </div>
@@ -1262,7 +1273,7 @@ data_folder = download_example_data()</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="CodeMirror cm-s-jupyter">
 <div class="zeroclipboard-container">
 <clipboard-copy ,="" aria-label="Copy to Clipboard" for="cell-3">
@@ -1290,7 +1301,7 @@ data_folder = download_example_data()</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="generate-and-populate-the-datamodel-with-the-input-point-clouds">Generate and populate the datamodel with the input point clouds<a class="anchor-link" href="#generate-and-populate-the-datamodel-with-the-input-point-clouds">¶</a></h3>
+<h3 id="generate-and-populate-the-datamodel-with-the-input-point-clouds">Generate and populate the datamodel with the input point clouds<a class="anchor-link" href="#generate-and-populate-the-datamodel-with-the-input-point-clouds">¶</a></h3><p>The final json file is now finished and stored.</p>
 </div>
 </div>
 </div>
@@ -1328,9 +1339,9 @@ data_folder = download_example_data()</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="visualise-the-data-in-the-dashboard">Visualise the data in the dashboard<a class="anchor-link" href="#visualise-the-data-in-the-dashboard">¶</a></h3><p>To see our results in the actual dashboard, we need to host the created json file to make it accessbile. As a quick and easy solution, we can use the <strong>http.server</strong> python library.</p>
-<p>Then, inside of the dashboard, set the data source to <code>http://localhost:PORT_NUMBER/out/getting_started/data_model.json</code>.</p>
-<p>If you quickly want to open a predesigned dashboard, you can open this <a href="https://3dgeo-heidelberg.github.io/4DGeo/dashboard?layout=%5B%7B%22w%22%3A3%2C%22h%22%3A1%2C%22x%22%3A0%2C%22y%22%3A0%2C%22i%22%3A%22DateRangePicker%22%2C%22minW%22%3A2%2C%22minH%22%3A1%2C%22moved%22%3Afalse%2C%22static%22%3Afalse%7D%2C%7B%22w%22%3A9%2C%22h%22%3A1%2C%22x%22%3A3%2C%22y%22%3A0%2C%22i%22%3A%22Slider%22%2C%22minW%22%3A2%2C%22minH%22%3A1%2C%22moved%22%3Afalse%2C%22static%22%3Afalse%7D%2C%7B%22w%22%3A8%2C%22h%22%3A4%2C%22x%22%3A4%2C%22y%22%3A1%2C%22i%22%3A%22View2D%22%2C%22minW%22%3A4%2C%22minH%22%3A2%2C%22moved%22%3Afalse%2C%22static%22%3Afalse%7D%2C%7B%22w%22%3A4%2C%22h%22%3A4%2C%22x%22%3A0%2C%22y%22%3A1%2C%22i%22%3A%22Chart%22%2C%22minW%22%3A2%2C%22minH%22%3A2%2C%22moved%22%3Afalse%2C%22static%22%3Afalse%7D%5D&amp;url=http%3A%2F%2Flocalhost%3A8003%2Fout%2Fgetting_started%2Fdata_model.json&amp;interval=60&amp;typeColors=%5B%5B%22unknown%22%2C%22%23ff0000%22%5D%5D">link</a></p>
+<h3 id="visualise-the-data-in-the-dashboard">Visualise the data in the dashboard<a class="anchor-link" href="#visualise-the-data-in-the-dashboard">¶</a></h3><p>To see your results in the actual dashboard, we need to host the created json file and images to make them accessbile. As a quick and easy solution, we can use the <strong>http.server</strong> python library. Running the following cell will host your newly converted data and make it available for a dashboard to read it.</p>
+<p>For example, this <a href="https://3dgeo-heidelberg.github.io/4DGeo/dashboard?state=bGF5b3V0PSU1QiU3QiUyMnclMjIlM0EzJTJDJTIyaCUyMiUzQTElMkMlMjJ4JTIyJTNBMCUyQyUyMnklMjIlM0EwJTJDJTIyaSUyMiUzQSUyMkRhdGVSYW5nZVBpY2tlciUyMiUyQyUyMm1pblclMjIlM0EyJTJDJTIybWluSCUyMiUzQTElMkMlMjJtb3ZlZCUyMiUzQWZhbHNlJTJDJTIyc3RhdGljJTIyJTNBZmFsc2UlN0QlMkMlN0IlMjJ3JTIyJTNBOSUyQyUyMmglMjIlM0ExJTJDJTIyeCUyMiUzQTMlMkMlMjJ5JTIyJTNBMCUyQyUyMmklMjIlM0ElMjJTbGlkZXIlMjIlMkMlMjJtaW5XJTIyJTNBMiUyQyUyMm1pbkglMjIlM0ExJTJDJTIybW92ZWQlMjIlM0FmYWxzZSUyQyUyMnN0YXRpYyUyMiUzQWZhbHNlJTdEJTJDJTdCJTIydyUyMiUzQTglMkMlMjJoJTIyJTNBNCUyQyUyMnglMjIlM0E0JTJDJTIyeSUyMiUzQTElMkMlMjJpJTIyJTNBJTIyVmlldzJEJTIyJTJDJTIybWluVyUyMiUzQTQlMkMlMjJtaW5IJTIyJTNBMiUyQyUyMm1vdmVkJTIyJTNBZmFsc2UlMkMlMjJzdGF0aWMlMjIlM0FmYWxzZSU3RCUyQyU3QiUyMnclMjIlM0E0JTJDJTIyaCUyMiUzQTQlMkMlMjJ4JTIyJTNBMCUyQyUyMnklMjIlM0ExJTJDJTIyaSUyMiUzQSUyMkNoYXJ0JTIyJTJDJTIybWluVyUyMiUzQTIlMkMlMjJtaW5IJTIyJTNBMiUyQyUyMm1vdmVkJTIyJTNBZmFsc2UlMkMlMjJzdGF0aWMlMjIlM0FmYWxzZSU3RCU1RCZ1cmw9aHR0cCUzQSUyRiUyRmxvY2FsaG9zdCUzQTgwMDMlMkZvdXQlMkZnZXR0aW5nX3N0YXJ0ZWQlMkZkYXRhX21vZGVsLmpzb24maW50ZXJ2YWw9NjAmdHlwZUNvbG9ycz0lNUIlNUIlMjJ1bmtub3duJTIyJTJDJTIyJTIzZmYwMDAwJTIyJTVEJTVE">dashboard</a> reads that data and visualises your images! (This link only works if you didn't change the port number in the configuration)</p>
+<p>If you want to create your own dashboard, simply set the <a href="https://3dgeo-heidelberg.github.io/4DGeo/docs/Application.html#11-data-source">data source</a> to <code>http://localhost:PORT_NUMBER/out/getting_started/data_model.json</code>.</p>
 </div>
 </div>
 </div>
@@ -1353,9 +1364,9 @@ data_folder = download_example_data()</div>
 </div>
 </clipboard-copy>
 </div>
-<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">host_images</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
+<div class="highlight-ipynb hl-python"><pre><span></span><span class="n">host_data</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
 </pre></div>
-<div class="clipboard-copy-txt" id="cell-5">host_images(configuration)</div>
+<div class="clipboard-copy-txt" id="cell-5">host_data(configuration)</div>
 </div>
 </div>
 </div>
@@ -1401,7 +1412,7 @@ data_folder = download_example_data()</div>
 
 <span class="n">list_background_projections</span> <span class="o">=</span> <span class="n">convert_point_cloud_time_series_to_datamodel</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">configuration</span><span class="p">)</span>
 
-<span class="n">host_images</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
+<span class="n">host_data</span><span class="p">(</span><span class="n">configuration</span><span class="p">)</span>
 </pre></div>
 <div class="clipboard-copy-txt" id="cell-6">import sys
 sys.path.insert(0, "../src")
@@ -1413,7 +1424,7 @@ configuration = get_example_configuration()
 
 list_background_projections = convert_point_cloud_time_series_to_datamodel(data_folder, configuration)
 
-host_images(configuration)</div>
+host_data(configuration)</div>
 </div>
 </div>
 </div>
