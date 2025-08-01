@@ -186,9 +186,7 @@ export default function LandingPage() {
           color="primary"
           aria-label="add" 
           variant="contained" 
-          onClick={() => {
-            navigate("/docs")
-          }}
+          href={window.location.href + "/docs"}
           sx={{ margin: '0px 24px' }}
           startIcon={<DescriptionIcon />}
         >                        
