@@ -7,7 +7,6 @@ import LandingPageHeader from "../components/LandingPageHeader";
 import LinkIcon from '@mui/icons-material/Link';
 import EditIcon from '@mui/icons-material/Edit';
 import DescriptionIcon from '@mui/icons-material/Description';
-import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
   const [config, setConfig] = useState(null)
@@ -26,7 +25,6 @@ export default function LandingPage() {
   const [typeColors, setTypeColors] = useState(new Map());
 
   const theme = useTheme();
-  const navigate = useNavigate();
   const isMobilePhoneScreen = useMediaQuery(theme.breakpoints.only('xs'))
 
 
