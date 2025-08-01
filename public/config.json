@@ -1,5 +1,6 @@
 {
     "APP_TITLE": "4DGeo Dashboard",
+    "APP_NAME": "4DGeo",
     "APP_ICON": "/4DGeo/4DGeo_Logo_300dpi.png",
     "ICON_3DGEO": "/4DGeo/3dgeo.ico",
     "APP_HEADER": "Welcome to the 4DGeo Dashboard!",

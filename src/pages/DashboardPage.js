@@ -181,24 +181,26 @@ function DashboardPage() {
         }).sort((a, b) => a.startDateTime > b.startDateTime ? 1 : -1);
         
         if(boundingBox) {
-            temporalFilteredObservations = temporalFilteredObservations.map((observation) => {
-                return {
-                    ...observation,
-                    geoObjects: observation.geoObjects.filter((geoObject) => {
-                        if(geoObject.geometry.type === 'Polygon' || geoObject.geometry.type === 'LineString') {
-                            for (let i = 0; i < geoObject.geometry.coordinates.length; i++) {
-                                if (boundingBox.contains(L.latLng(geoObject.geometry.coordinates[i][0], geoObject.geometry.coordinates[i][1]))) {
-                                    return true;
-                                }
-                            }
-                            return false;
-                        } else if(geoObject.geometry.type === 'Point') {
-                            return boundingBox.contains(L.latLng(geoObject.geometry.coordinates[0], geoObject.geometry.coordinates[1]));
-                        }
-                        return false;
-                    })
-                };
-            }).filter((observation) => observation.geoObjects.length > 0);
+            temporalFilteredObservations = {
+                observations: temporalFilteredObservations.map((observation) => {
+                                    return {
+                                        ...observation,
+                                        geoObjects: observation.geoObjects.filter((geoObject) => {
+                                            if(geoObject.geometry.type === 'Polygon' || geoObject.geometry.type === 'LineString') {
+                                                for (let i = 0; i < geoObject.geometry.coordinates.length; i++) {
+                                                    if (boundingBox.contains(L.latLng(geoObject.geometry.coordinates[i][0], geoObject.geometry.coordinates[i][1]))) {
+                                                        return true;
+                                                    }
+                                                }
+                                                return false;
+                                            } else if(geoObject.geometry.type === 'Point') {
+                                                return boundingBox.contains(L.latLng(geoObject.geometry.coordinates[0], geoObject.geometry.coordinates[1]));
+                                            }
+                                            return false;
+                                        })
+                                    };
+                               }).filter((observation) => observation.geoObjects.length > 0)
+            }
         }
 
         downloadFile({ data: JSON.stringify(temporalFilteredObservations) });
@@ -220,7 +222,7 @@ function DashboardPage() {
     return (
         <Box className="dashboard-container" sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', maxHeight: '7rem', boxSizing: 'border-box', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 3rem'}}>
-               <img src={config?.APP_ICON} alt="App-Logo" width={200} />
+               <a href={window.location.origin + "/" + config.APP_NAME}><img src={config?.APP_ICON} alt="App-Logo" width={200} /></a>
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", gap: "1.2rem"}}>
                     <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} />
                     <Button 

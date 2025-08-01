@@ -7,10 +7,18 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const config = await (await fetch(`./config.json`, {
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+        })).json();
+
 root.render(
   <React.StrictMode>
-    <link rel="icon" href="./4DGeo/3dgeo.ico" />
-    <BrowserRouter basename='/4DGeo'>
+    <link rel="icon" href={config.ICON_3DGEO} />
+    <BrowserRouter basename={'/' + config.APP_NAME}>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />

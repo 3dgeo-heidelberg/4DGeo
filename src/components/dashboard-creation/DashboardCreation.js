@@ -79,7 +79,6 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
             "interval": interval,
             "typeColors": JSON.stringify([...typeColors])
         }).toString();
-        console.log(btoa(searchParams), searchParams)
 
         return baseLink + "?state=" + btoa(searchParams);
     }
