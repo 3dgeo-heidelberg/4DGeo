@@ -1,6 +1,6 @@
 # 4DGeo
 
-4DGeo is an open-source, modular, super lightweight, web-based interactive dashboard application for visualizing your point cloud timeseries captured with a continuous and even ongoing 3D environmental monitoring station (e.g. LiDAR, 3D photogrammetry, smartphone). 
+4DGeo is an open-source, modular, super lightweight, web-based interactive dashboard application for visualizing your geodata timeseries captured with a continuous and even ongoing 3D environmental monitoring station (e.g. LiDAR, 3D photogrammetry, smartphone). 
 
 <video width="100%" controls>
   <source src="img/4DGeoTrailer.mp4" type="video/mp4">
@@ -71,12 +71,16 @@ Or for a quick and simple locally hosted server, you can also use a static web s
 
 It is recommended to fork this repository in order to work on it independently, especially using our Github Pages setup for an easy hosting option. However, it is necessary to make some adjustments to the settings and content. To assist you in navigating this process, please find below a list of key changes to consider.   
 
+For the Application to run:
+
 - Update the [config.json](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/public/config.json) file to reflect your repository's name (e.g., replacing "4DGeo" with your preferred name). This file includes information like the path to the app icon, the app name and also the list of template, which should all be modified accordingly.
-- Modify the ``basename`` of the [React Browserrouter](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/src/index.js) so that routing still works as intended.
-- Adjust the "name" and "homepage" fields in the [package.json](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/package.json) file.
-- The Github Action for deploying the Github Pages doesn't need any further adaptations.
-- The testing data is based on the "4DGeo" name. You need to change the image paths containing the "4DGeo" name to your new name.
-- If you also want the documentation to run on your fork, adjust ``site_name``, ``repo_url``, ``site_url`` and the ``Github Pages`` navigation link.
+- Adjust the "name" field in the [package.json](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/package.json) file.
+- If you also want the documentation to run on your fork, adjust ``site_name``, ``repo_url``, ``site_url`` and the ``4DGeo (Web)`` navigation link in the [mkdocs.yml](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/mkdocs/mkdocs.yml) file.
+
+If you want to also deploy the Application to your Github Pages:
+
+- Adjust the "homepage" field in the [package.json](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/package.json) file. The "homepage" is needed for the Github Pages deployment to work properly. For a better understanding of this workflow, we recommend [this article](https://blog.logrocket.com/gh-pages-react-apps/).
+- The Github Action for deploying the Github Pages doesn't need any further adaptations. But if you have trouble starting the workflow or its not showing up in the "Actions" tab, create a new workflow in your repository and copy the content. This way the workflow will be Github will definetly recognize it as a new working workflow.
 
 ## Documentation
 
