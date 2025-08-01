@@ -135,7 +135,7 @@ There are 2 layers you can choose from:
 Additionally to the 2D View Module, this module can visualise the custom attributes of your objects.
 
 For now, only the bar chart is implemented. Further chart types will follow in the next release.<br>
-Here, all your selected observations are shown as a bar. The value of this bar is calculated with the chosen operator and field. The field has to be a number value to be calculated correctly. Each bar is divided into all available geoobject types for a more detailed view. For operators, the following are included:
+Here, all your selected observations are shown as a bar. The value of this bar is calculated with the chosen operator and field. The field has to be a number value to be calculated successfully. Each bar is divided into all available geoobject types for a more detailed view. For operators, the following are included:
 
 - Sum: All values of the chosen attribute are summed up.
 - Average: The average value of the chosen attribute.
@@ -143,6 +143,7 @@ Here, all your selected observations are shown as a bar. The value of this bar i
 - Max: Only the biggest value of the attribute will be shown.
 - Count: The total count of objects. If a field is selected, only objects that have the chosen field are counted.
 
+As an additional control option, you can click on a bar to select this corresponding observation and only show its content in the 2D View module.
 
 ### 3.2 User Input
 Next to the visualisation modules, user input modules are important to guarantee a responsive dashboard. They support functionality to filter your observations with time-based selection options.

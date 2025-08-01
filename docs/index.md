@@ -16,11 +16,10 @@ To show how easy it is to visualise your data with a 4DGeo dashboard, we've prep
 
 The process involves just two simple steps:
 
-- **Prepare your data:** Convert your list of images into the 4DGeo [data model](Application.md#21-data-model) and make it public! This is what's done in the above mentioned [Python Notebook](getting_started.ipynb).
+- **Prepare your data:** Convert your list of images into the 4DGeo [data model](Application.md#21-data-model). This is what's done in the above mentioned [Python Notebook](getting_started.ipynb).
 - **Configure your dashboard:** Either load a predefined layout or create your own with our [dashboard creation page](Application.md#1-creation-page)
 
-
-To run this [Python Notebook](getting_started.ipynb) yourself, just open a command line in your target directory and follow the [conda environment installation steps](#conda-environment-installation)
+To run this Notebook yourself, just open a command line in your target directory and follow the [conda environment installation steps](#conda-environment-installation)
 
 ## Key Features
 
@@ -63,7 +62,7 @@ To run 4DGeo locally, follow these steps:
 
 ## Hosting Options
 
-To **host** this application **on your own**, you can either copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment. For that you need to consider the points raised in the [fork section](#forking) below. 
+To **host** this application **on your own**, we recommend to fork this repository and copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment and very easy to set up. For that you need to consider the points raised in the [fork section](#forking) below. 
 
 Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
 
