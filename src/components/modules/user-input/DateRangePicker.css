@@ -2,12 +2,13 @@
 
 .react-aria-DateRangePicker {
   color: var(--clr-dark-a0);
+  width: 100%;
+  overflow:visible;
 
   .react-aria-Group {
     display: flex;
     align-items: center;
     width: fit-content;
-    min-width: 220px;
     max-width: 100%;
     box-sizing: border-box;
     overflow: auto;
