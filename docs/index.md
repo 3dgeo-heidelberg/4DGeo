@@ -71,7 +71,7 @@ Or for a quick and simple locally hosted server, you can also use a static web s
 
 It is recommended to fork this repository in order to work on it independently, especially using our Github Pages setup for an easy hosting option. However, it is necessary to make some adjustments to the settings and content. To assist you in navigating this process, please find below a list of key changes to consider.   
 
-- Update the [config.json](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/public/config.json) file to reflect your repository's name (e.g., replacing "4DGeo" with your preferred name). This file also includes paths to the app icon, which should be modified accordingly.
+- Update the [config.json](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/public/config.json) file to reflect your repository's name (e.g., replacing "4DGeo" with your preferred name). This file includes information like the path to the app icon, the app name and also the list of template, which should all be modified accordingly.
 - Modify the ``basename`` of the [React Browserrouter](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/src/index.js) so that routing still works as intended.
 - Adjust the "name" and "homepage" fields in the [package.json](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/package.json) file.
 - The Github Action for deploying the Github Pages doesn't need any further adaptations.
