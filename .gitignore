@@ -28,6 +28,7 @@ package-lock.json
 **/.ipynb_checkpoints
 
 # data
-/docs/data*
+/docs/data
+data/
 /docs/out*
 **/*.zip

@@ -1,4 +1,4 @@
-# 4DGeo Application
+# 4DGeo Manual
 
 For better understanding and easier usage of the 4DGeo Dashboard, its functionalities, structure, and concepts will be explained here. The Application is split into **two parts**: firstly, the [dashboard creation page](#1-creation-page), where you can create and configure your own dashboard or load predefined examples and adjust their structure to your needs. And secondly, the [dashboard view page](#2-dashboard-view-page) which contains the actual dashboard with all the specified visualization [modules](#3-modules) combined with your data.
 
