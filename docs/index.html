@@ -434,7 +434,7 @@
   
   
   <span class="md-ellipsis">
-    4DGeo (Web)
+    4DGeo dashboard (Web)
     
   </span>
   
@@ -512,6 +512,29 @@
   
   
     <li class="md-nav__item">
+      <a href="branch_evolution.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Branch evolution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="beehive.html" class="md-nav__link">
         
   
@@ -541,29 +564,6 @@
   
   <span class="md-ellipsis">
     Rockfall monitoring
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="branch_evolution.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Branch evolution
     
   </span>
   
@@ -771,13 +771,13 @@
 <p>Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library <a href="https://docs.python.org/3/library/http.server.html"><code>http.server</code></a> and used in our examples notebooks like <a href="rockfall_monitoring.html#visualise-the-data-in-the-dashboard">here</a>.</p>
 <h2 id="forking">Forking</h2>
 <p>It is recommended to fork this repository in order to work on it independently, especially using our Github Pages setup for an easy hosting option. However, it is necessary to make some adjustments to the settings and content. To assist you in navigating this process, please find below a list of key changes to consider.   </p>
-<p>For the Application to run:</p>
+<p>For the application to run:</p>
 <ul>
 <li>Update the <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/public/config.json">config.json</a> file to reflect your repository's name (e.g., replacing "4DGeo" with your preferred name). This file includes information like the path to the app icon, the app name and also the list of template, which should all be modified accordingly.</li>
 <li>Adjust the "name" field in the <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/package.json">package.json</a> file.</li>
 <li>If you also want the documentation to run on your fork, adjust <code>site_name</code>, <code>repo_url</code>, <code>site_url</code> and the <code>4DGeo (Web)</code> navigation link in the <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/mkdocs/mkdocs.yml">mkdocs.yml</a> file.</li>
 </ul>
-<p>If you want to also deploy the Application to your Github Pages:</p>
+<p>If you want to also deploy the application to your Github Pages:</p>
 <ul>
 <li>Adjust the "homepage" field in the <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/package.json">package.json</a> file. The "homepage" is needed for the Github Pages deployment to work properly. For a better understanding of this workflow, we recommend <a href="https://blog.logrocket.com/gh-pages-react-apps/">this article</a>.</li>
 <li>The Github Action for deploying the Github Pages doesn't need any further adaptations. But if you have trouble starting the workflow or its not showing up in the "Actions" tab, create a new workflow in your repository and copy the content. This way the workflow will be Github will definetly recognize it as a new working workflow.</li>
