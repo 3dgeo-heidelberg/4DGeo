@@ -767,10 +767,17 @@
 </li>
 </ol>
 <h2 id="hosting-options">Hosting Options</h2>
-<p>To <strong>host</strong> this application <strong>on your own</strong>, we recommend to fork this repository and copy our <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml">Github Action workflow</a> for deploying it to Github Pages which is favorable in a production or testing environment and very easy to set up. For that you need to consider the points raised in the <a href="#forking">fork section</a> below. </p>
-<p>Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library <a href="https://docs.python.org/3/library/http.server.html"><code>http.server</code></a> and used in our examples notebooks like <a href="rockfall_monitoring.html#visualise-the-data-in-the-dashboard">here</a>.</p>
+<p>To <strong>host</strong> this application <strong>on your own</strong>, there are 2 main options:</p>
+<ol>
+<li>
+<p>We recommend to fork this repository and copy our <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml">Github Action workflow</a> for deploying it to Github Pages which is favorable in a production or testing environment and very easy to set up. For that you need to consider the points raised in the <a href="#forking">fork section</a> below. </p>
+</li>
+<li>
+<p>For a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library <a href="https://docs.python.org/3/library/http.server.html"><code>http.server</code></a> and used in our examples notebooks like <a href="rockfall_monitoring.html#visualise-the-data-in-the-dashboard">here</a>.</p>
+</li>
+</ol>
 <h2 id="forking">Forking</h2>
-<p>It is recommended to fork this repository in order to work on it independently, especially using our Github Pages setup for an easy hosting option. However, it is necessary to make some adjustments to the settings and content. To assist you in navigating this process, please find below a list of key changes to consider.   </p>
+<p>If you want to fork this repository in order to work on it independently, it is necessary to make some adjustments to the settings and content. To assist you in navigating this process, please find below a list of key changes to consider.   </p>
 <p>For the application to run:</p>
 <ul>
 <li>Update the <a href="https://github.com/3dgeo-heidelberg/4DGeo/blob/main/public/config.json">config.json</a> file to reflect your repository's name (e.g., replacing "4DGeo" with your preferred name). This file includes information like the path to the app icon, the app name and also the list of template, which should all be modified accordingly.</li>
