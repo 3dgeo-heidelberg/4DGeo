@@ -62,13 +62,15 @@ To run 4DGeo locally, follow these steps:
 
 ## Hosting Options
 
-To **host** this application **on your own**, we recommend to fork this repository and copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment and very easy to set up. For that you need to consider the points raised in the [fork section](#forking) below. 
+To **host** this application **on your own**, there are 2 main options:
 
-Or for a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
+1. We recommend to fork this repository and copy our [Github Action workflow](https://github.com/3dgeo-heidelberg/4DGeo/blob/main/.github/workflows/react-deploy.yml) for deploying it to Github Pages which is favorable in a production or testing environment and very easy to set up. For that you need to consider the points raised in the [fork section](#forking) below. 
+
+2. For a quick and simple locally hosted server, you can also use a static web server setup with, for example, the built-in Python library [`http.server`](https://docs.python.org/3/library/http.server.html) and used in our examples notebooks like [here](rockfall_monitoring.ipynb#visualise-the-data-in-the-dashboard).
 
 ## Forking
 
-It is recommended to fork this repository in order to work on it independently, especially using our Github Pages setup for an easy hosting option. However, it is necessary to make some adjustments to the settings and content. To assist you in navigating this process, please find below a list of key changes to consider.   
+If you want to fork this repository in order to work on it independently, it is necessary to make some adjustments to the settings and content. To assist you in navigating this process, please find below a list of key changes to consider.   
 
 For the application to run:
 
