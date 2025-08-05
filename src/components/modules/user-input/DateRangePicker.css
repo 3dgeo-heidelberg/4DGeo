@@ -4,6 +4,8 @@
   color: var(--clr-dark-a0);
   width: 100%;
   overflow:visible;
+  display: flex;
+  justify-content: center;
 
   .react-aria-Group {
     display: flex;
