@@ -181,7 +181,7 @@ This project is organized into several main directories and files, each serving 
     - /pages: The 2 pages of the application.
     - /styles: Includes the main theme of the dashboard.
     - /utils: Utility functions for the dashboard like the http fetcher.
-- /public: Contains the `config.json` file for easy customization and some sample data.
+- /public: Contains the `config.json` file for easy customization.
 
 
 ## 6 Examples: Data Preparation Scripts 
