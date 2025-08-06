@@ -1,6 +1,6 @@
 # 4DGeo
 
-4DGeo is an open-source, modular, super lightweight, web-based interactive dashboard application for visualizing your geodata timeseries captured with a continuous and even ongoing 3D environmental monitoring station (e.g. LiDAR, 3D photogrammetry, smartphone). 
+4DGeo is an open-source, modular, super lightweight, web-based interactive dashboard application for visualizing your geodata time series captured with a continuous and even ongoing 3D environmental monitoring station (e.g. LiDAR, 3D photogrammetry, smartphone). 
 
 <video width="100%" controls>
   <source src="img/4DGeoTrailer.mp4" type="video/mp4">
