@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Please cite the 4DGeo repository when using our software & tools in your research."
+authors:
+    - family-names: Müller, Moritz and Albert, William and Tabernig, Ronald and Weiser, Hannah and Höfle, Bernhard
+title: "4DGeo"
+version: 1.0.0
+date-released: 2025-08-06
+license: "MIT"
+repository-code: "https://github.com/3dgeo-heidelberg/4DGeo"
