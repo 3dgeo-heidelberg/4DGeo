@@ -26,7 +26,7 @@ export default function Chart({ observations, typeColors, onBarClick, selectedBa
     }
 
     const renderColorfulLegendText = (value, entry) => {
-        return <span style={{ color: 'black' }}>{value}</span>;
+        return <span className='legend-entry' style={{ color: 'black' }}>{value}</span>;
     };
 
     const handleFieldSelected = (event) => { 
@@ -92,12 +92,12 @@ export default function Chart({ observations, typeColors, onBarClick, selectedBa
             return collectorPerType;
         })
     }
-
+    
     const data = observationsToBarData(observations);
 
     return (
         <div className='chart-module-container'>
-            <div className="selectors">
+            <div className="selectors" data-testid="selectors">
                 <FormControl sx={{ m: 1, minWidth: 120 }} size='small'>
                     <InputLabel id="operator-select-label">Operator</InputLabel>
                     <Select
@@ -132,11 +132,12 @@ export default function Chart({ observations, typeColors, onBarClick, selectedBa
                     </Select>
                 </FormControl>
             </div>
-
+            
             <div className='chart-container'>
                 <ResponsiveContainer width="95%" height="95%" className={"chart-responsive-container"}>
-                    { data === null || observations.length === 0 ? ("") : (
-                        <BarChart width="85%" height="70%" data={data} className='chart'>
+                    { !(data === null || observations.length === 0) && (
+                        <BarChart width="85%" height="70%" data={data} className='bar-chart' data-testid="bar-chart">
+                            { console.log("rendering bars", data, observations)}
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" height={70} tick={<CustomizedAxisTick /> } />
                             <YAxis />

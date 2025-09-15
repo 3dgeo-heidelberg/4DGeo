@@ -3,14 +3,13 @@ import Dashboard from "../components/dashboard/Dashboard";
 import { useState, useEffect } from "react";
 import Box from '@mui/material/Box';
 import { fetchJsonData } from "../utils/http_fetcher";
-import { Button, Divider, styled } from "@mui/material";
+import { Divider } from "@mui/material";
 import { addDays } from "date-fns";
 import ColorAssignment from "../components/dashboard-creation/ColorAssignment";
-import AddIcon from '@mui/icons-material/Add'
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
-import L from "leaflet";
 
 import './DashboardPage.css'
+import ExportButton from "../components/dashboard/ExportButton";
+import UploadButton from "../components/dashboard/UploadButton";
 
 function DashboardPage() {
     const urlParams = new URLSearchParams(atob(useSearchParams()[0].get("state")))
@@ -75,10 +74,10 @@ function DashboardPage() {
 
     async function fetchConfig() {
         const json = await (await fetch(`config.json`, {
-        headers : { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
+            headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
         })).json();
         setConfig(json);
     }
@@ -136,113 +135,24 @@ function DashboardPage() {
         }
     }
 
-    const onFileUpload = async (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = async (e) => {
-            const content = e.target.result;
-            try {
-                const jsonData = JSON.parse(content);
-                if (jsonData.observations) {
-                    setObservations(jsonData.observations);
-                    setWasFileUploaded(true);
-
-                    resetDashboardState(jsonData.observations);
-                    setTypeColors(completeTypeColors(new Map(), jsonData.observations));
-                } else {
-                    console.error("Invalid data format");
-                }
-            } catch (error) {
-                console.error("Error parsing JSON file:", error);
-            }
-        }
-        reader.readAsText(file)
-    }
-
-    const downloadFile = ({ data }) => {
-        const blob = new Blob([data], { type: 'application/json' })
-        const a = document.createElement('a')
-        a.download = 'exported_filtered_data.json'
-        a.href = window.URL.createObjectURL(blob)
-        const clickEvt = new MouseEvent('click', {
-            view: window,
-            bubbles: true,
-            cancelable: true,
-        })
-        a.dispatchEvent(clickEvt)
-        a.remove()
-    }
-
-    const exportVisibleGeoobjects = (e) => {
-        e.preventDefault();
-        var temporalFilteredObservations = Array.from(observations).filter((observation) => {
-            return Date.parse(observation.startDateTime) >= dateTimeRange.startDate && Date.parse(observation.startDateTime) <= dateTimeRange.endDate;
-        }).sort((a, b) => a.startDateTime > b.startDateTime ? 1 : -1);
-        
-        if(boundingBox) {
-            temporalFilteredObservations = {
-                observations: temporalFilteredObservations.map((observation) => {
-                                    return {
-                                        ...observation,
-                                        geoObjects: observation.geoObjects.filter((geoObject) => {
-                                            if(geoObject.geometry.type === 'Polygon' || geoObject.geometry.type === 'LineString') {
-                                                for (let i = 0; i < geoObject.geometry.coordinates.length; i++) {
-                                                    if (boundingBox.contains(L.latLng(geoObject.geometry.coordinates[i][0], geoObject.geometry.coordinates[i][1]))) {
-                                                        return true;
-                                                    }
-                                                }
-                                                return false;
-                                            } else if(geoObject.geometry.type === 'Point') {
-                                                return boundingBox.contains(L.latLng(geoObject.geometry.coordinates[0], geoObject.geometry.coordinates[1]));
-                                            }
-                                            return false;
-                                        })
-                                    };
-                               }).filter((observation) => observation.geoObjects.length > 0)
-            }
-        }
-
-        downloadFile({ data: JSON.stringify(temporalFilteredObservations) });
-    }
-
-
-    const VisuallyHiddenInput = styled('input')({
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'inset(50%)',
-        height: 1,
-        overflow: 'hidden',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        whiteSpace: 'nowrap',
-        width: 1,
-    });
-
     return (
         <Box className="dashboard-container" sx={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', maxHeight: '7rem', boxSizing: 'border-box', justifyContent: 'space-between', alignItems: 'center', padding: '1.5rem 3rem'}}>
                <a href={window.location.origin + "/" + config.APP_NAME}><img src={config?.APP_ICON} alt="App-Logo" width={200} /></a>
                 <Box sx={{display: "flex", flexDirection: "row", alignItems: "center", gap: "1.2rem"}}>
-                    <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} />
-                    <Button 
-                        variant="contained"
-                        startIcon={<ArrowOutwardIcon />}
-                        onClick={exportVisibleGeoobjects}
-                    >
-                        Export by map extent
-                    </Button>
-                    <Button
-                        component="label"
-                        variant="contained"
-                        startIcon={<AddIcon />}
-                        >
-                        Upload data
-                        <VisuallyHiddenInput
-                            type="file"
-                            onChange={(e) => onFileUpload(e)}
-                        />
-                    </Button>
+                    <ColorAssignment id="" typeColors={typeColors} setTypeColors={setTypeColors} />
+                    <ExportButton
+                        observations={observations}
+                        boundingBox={boundingBox}
+                        dateTimeRange={dateTimeRange}
+                    />
+                    <UploadButton
+                        setObservations={setObservations}
+                        setWasFileUploaded={setWasFileUploaded}
+                        resetDashboardState={resetDashboardState}
+                        setTypeColors={setTypeColors}
+                        completeTypeColors={(inputTypeColors) => completeTypeColors(inputTypeColors, observations)}
+                    />
                 </Box>
             </Box>
 
@@ -250,6 +160,7 @@ function DashboardPage() {
 
             <Box sx={{ flexGrow: 1, overflowY: 'auto', padding: '1em' }}>
                 <Dashboard
+                    className="dashboard"
                     layout={JSON.parse(urlParams.get('layout'))}
                     observations={observations}
                     typeColors={typeColors}

@@ -230,7 +230,7 @@ export default function LandingPage() {
           {drawer}
         </Drawer>
       </Box>
-      
+
       <Box
         component={'main'}
         className="main-content"
