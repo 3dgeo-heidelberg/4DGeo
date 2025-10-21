@@ -9,7 +9,7 @@ import Table from "../modules/visualisation/Table/Table";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange, chartSelectedIndex, setChartSelectedIndex, setBoundingBox, selectedObjectId, setSelectedObjectId }) {
+function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange, chartSelectedIndex, setChartSelectedIndex, setBoundingBox, selectedObjectId, setSelectedObjectId, pointRadius }) {
 
     const getCustomDataFields = (observations) => {
         const customDataFields = new Set();
@@ -132,6 +132,7 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
                         setBoundingBox={setBoundingBox}
                         typeColors={typeColors}
                         selectedObjectId={selectedObjectId}
+                        pointRadius={pointRadius}
                     />
                 );
             case 'Table':

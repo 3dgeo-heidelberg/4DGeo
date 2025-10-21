@@ -21,7 +21,8 @@ export default function View2D({
     observations,
     typeColors,
     setBoundingBox,
-    selectedObjectId
+    selectedObjectId,
+    pointRadius
  }) {
     const clusteredLayer = useRef(null);
     const normalLayer = useRef(null);
@@ -110,7 +111,7 @@ export default function View2D({
                                 weight: 1,
                                 opacity: 1,
                                 fillOpacity: 0.65,
-                                radius: 4,
+                                radius: pointRadius,
                                 crs: L.CRS.Simple
                             }
                         ).bindTooltip(

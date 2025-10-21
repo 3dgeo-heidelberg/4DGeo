@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { createSearchParams, useNavigate, useSearchParams } from "react-router-dom";
 import Dashboard from "../components/dashboard/Dashboard";
 import { useState, useEffect } from "react";
 import Box from '@mui/material/Box';
@@ -11,13 +11,18 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import L from "leaflet";
 
 import './DashboardPage.css'
+import Settings from "../components/Settings";
 
 function DashboardPage() {
-    const urlParams = new URLSearchParams(atob(useSearchParams()[0].get("state")))
+    const urlParams = new URLSearchParams(atob(useSearchParams()[0].get("state")));
+    const navigate = useNavigate();
     const [observations, setObservations] = useState([])
     const [wasFileUploaded, setWasFileUploaded] = useState(false);
     const [config, setConfig] = useState({})
-
+    
+    // Settings
+    const [pointRadius, setPointRadius] = useState(4);
+ 
     const [typeColors, setTypeColors] = useState(new Map());
 
     const [dateRange, setDateRange] = useState({ startDate: 0, endDate: Date.now()});
@@ -207,6 +212,17 @@ function DashboardPage() {
         downloadFile({ data: JSON.stringify(temporalFilteredObservations) });
     }
 
+    const updateDataSource = (newDataSource) => {
+        urlParams.set("url", newDataSource);
+        navigate({
+            pathname: "/dashboard",
+            search: createSearchParams({
+                state: btoa(urlParams)
+            }).toString()
+        });
+
+        window.location.reload();
+    }
 
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
@@ -244,6 +260,7 @@ function DashboardPage() {
                             onChange={(e) => onFileUpload(e)}
                         />
                     </Button>
+                    <Settings pointRadius={pointRadius} setPointRadius={setPointRadius} dataSource={urlParams.get('url')} setDataSource={updateDataSource} />
                 </Box>
             </Box>
 
@@ -265,6 +282,7 @@ function DashboardPage() {
                     setBoundingBox={setBoundingBox}
                     selectedObjectId={selectedObjectId}
                     setSelectedObjectId={setSelectedObjectId}
+                    pointRadius={pointRadius}
                 />
             </Box>
         </Box>

@@ -1,0 +1,9 @@
+@import url("../styles/main_theme.css");
+
+.MuiSlider-root {
+    color: var(--clr-primary-a30);
+}
+
+.MuiButton-root {
+    color: var(--clr-primary-a30);
+}
