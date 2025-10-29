@@ -7,7 +7,7 @@ import { Bar, BarChart, Brush, CartesianGrid, Cell, Legend, ResponsiveContainer,
 
 import './Chart.css';
 
-export default function Chart({ observations, typeColors, onBarClick, selectedBarIndex, customAttributeKeys }) {
+export default function Chart({ observations, typeColors, onBarClick, selectedBarIndex, customAttributeKeys, selectedObjectId }) {
     const [valueKey, setValueKey] = useState("");
     const [operatorKey, setOperatorKey] = useState("Sum");
 
@@ -28,7 +28,20 @@ export default function Chart({ observations, typeColors, onBarClick, selectedBa
             return null;
         }
 
-        return observations.map((observation) => {
+        const filteredObservations = [];
+
+        if(selectedObjectId !== null) {
+            observations.forEach(observation => {
+                filteredObservations.push({
+                    ...observation,
+                    geoObjects: observation.geoObjects.filter(geoObject => geoObject.id === selectedObjectId)
+                });
+            })
+        } else {
+            filteredObservations.push(...Array.from(observations));
+        }
+
+        return filteredObservations.map((observation) => {
             const dateTime = new Date(Date.parse(observation.startDateTime));
             const collectorPerType = {
                 name: dateTime.toLocaleDateString() + "\n" + dateTime.toLocaleTimeString()

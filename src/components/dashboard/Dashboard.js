@@ -9,7 +9,7 @@ import Table from "../modules/visualisation/Table/Table";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange, chartSelectedIndex, setChartSelectedIndex, setBoundingBox }) {
+function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange, chartSelectedIndex, setChartSelectedIndex, setBoundingBox, selectedObjectId, setSelectedObjectId }) {
 
     const getCustomDataFields = (observations) => {
         const customDataFields = new Set();
@@ -25,15 +25,18 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
         return Array.from(customDataFields);
     }
 
-    const filterObservations = (startDate, endDate, chartSelectedIndex = -1) => {
-        const filteredObservations = Array.from(observations).filter((observation) => {
+    const filterObservationsByDateRange = (startDate, endDate) => {
+        return Array.from(observations).filter((observation) => {
             return Date.parse(observation.startDateTime) >= startDate && Date.parse(observation.startDateTime) <= endDate;
         }).sort((a, b) => a.startDateTime > b.startDateTime ? 1 : -1);
 
-        if(typeof filteredObservations[chartSelectedIndex] === 'undefined') {
-            return filteredObservations;
+    }
+
+    const filterObservationsByChartSelected = (observations, chartSelectedIndex) => {
+        if(typeof observations[chartSelectedIndex] === 'undefined') {
+            return observations;
         } else {
-            return [filteredObservations[chartSelectedIndex]];
+            return [observations[chartSelectedIndex]];
         }
     }
 
@@ -46,7 +49,7 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
     const handleDateRangeSelected = (newDateRange) => {  
         setChartSelectedIndex(-1);
         setDateRange(newDateRange);    
-        let newFilteredObservations = filterObservations(newDateRange.startDate, newDateRange.endDate);
+        let newFilteredObservations = filterObservationsByDateRange(newDateRange.startDate, newDateRange.endDate);
 
         const newSliderRange = resetSliderRange(Array.from(new Set(newFilteredObservations.map(observation => Date.parse(observation.startDateTime)))));
 
@@ -86,14 +89,15 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
     }
 
     const getGridItemContent = (moduleName) => {
-        const observationsToVisualise = filterObservations(dateTimeRange.startDate, dateTimeRange.endDate, chartSelectedIndex);
-        const customAttributeKeys = getCustomDataFields(observationsToVisualise);
+        const observationsFilteredByDateRange = filterObservationsByDateRange(dateTimeRange.startDate, dateTimeRange.endDate);
+        const observationsFilteredByChartSelected = filterObservationsByChartSelected(observationsFilteredByDateRange, chartSelectedIndex);
+        const customAttributeKeys = getCustomDataFields(observationsFilteredByDateRange);
 
         switch(moduleName) {
             case 'Slider':
                 return(
                     <ObservationSlider
-                        includedDateTimes={Array.from(new Set(Array.from(filterObservations(dateRange.startDate, dateRange.endDate)).map(observation => new Date(Date.parse(observation.startDateTime)))))}
+                        includedDateTimes={Array.from(new Set(Array.from(filterObservationsByDateRange(dateRange.startDate, dateRange.endDate)).map(observation => new Date(Date.parse(observation.startDateTime)))))}
                         sliderRange={sliderRange}
                         handleSliderRangeChange={handleSliderRangeSelected}
                     />
@@ -112,27 +116,31 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
             case 'Chart':
                 return (
                     <Chart 
-                        observations={observationsToVisualise}
+                        observations={observationsFilteredByDateRange}
                         typeColors={typeColors}
                         onBarClick={handleBarSelected}
                         selectedBarIndex={chartSelectedIndex}
                         customAttributeKeys={customAttributeKeys}
+                        selectedObjectId={selectedObjectId}
                     />
                 );
             case 'View2D':
                 return (
                     <MapView
                         className="mapview"
-                        observations={observationsToVisualise}
+                        observations={observationsFilteredByChartSelected}
                         setBoundingBox={setBoundingBox}
                         typeColors={typeColors}
+                        selectedObjectId={selectedObjectId}
                     />
                 );
             case 'Table':
                 return (
                     <Table
-                        observations={observationsToVisualise}
+                        observations={observationsFilteredByChartSelected}
                         customAttributeKeys={customAttributeKeys}
+                        selectedObjectId={selectedObjectId}
+                        setSelectedObjectId={setSelectedObjectId}
                     />
                 )
             default:
