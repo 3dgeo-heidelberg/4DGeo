@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Table as MuiTable, Radio } from '@mui/material';
+import { Table as MuiTable, Radio, TextField } from '@mui/material';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -9,8 +8,12 @@ import Paper from '@mui/material/Paper';
 import { TableVirtuoso } from 'react-virtuoso';
 
 import './Table.css'
+import { useState } from 'react';
+import React from 'react';
 
 export default function Table({ observations, customAttributeKeys, selectedObjectId, setSelectedObjectId }) {
+    const [search, setSearch] = useState("");
+
     const columns = [
         {
             width: "2rem",
@@ -53,12 +56,17 @@ export default function Table({ observations, customAttributeKeys, selectedObjec
         return data;
     })).flat();
 
+    console.log("rows", rows)
+    const filteredRows = rows.filter(row => {
+
+    })
+
     const VirtuosoTableComponents = {
         Scroller: React.forwardRef((props, ref) => (
             <TableContainer component={Paper} {...props} ref={ref} />
         )),
         Table: (props) => (
-            <MuiTable {...props} size='small' sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />
+            <MuiTable {...props} stickyHeader size='small' sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />
         ),
         TableHead: React.forwardRef((props, ref) => <TableHead {...props} ref={ref} />),
         TableRow: React.forwardRef((props, ref) => <TableRow {...props} ref={ref} />),
@@ -67,18 +75,40 @@ export default function Table({ observations, customAttributeKeys, selectedObjec
 
     const fixedHeaderContent = () => {
         return (
-            <TableRow className='table-header'>
-                {columns.map((column) => (
-                    <TableCell
-                        key={column.dataKey}
-                        variant="head"
-                        align={column.numeric || false ? 'right' : 'left'}
-                        style={{ width: column.width }}
-                    >
-                        <b>{column.label}</b>
-                    </TableCell>
-                ))}
-            </TableRow>
+            <>
+                <TableRow
+                    sx={{
+                        textAlign: "right",
+                        backgroundColor: "white",
+                        position: "sticky",
+                        right: 0,
+                        zIndex: 5,
+                    }}
+                    key="search_input"
+                >
+                    <TextField
+                        key="search_input_field"
+                        size="small"
+                        placeholder="Search…"
+                        // type='search'
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        sx={{ width: 200 }}
+                    />
+                </TableRow>
+                <TableRow className='table-header'>
+                    {columns.map((column) => (
+                        <TableCell
+                            key={column.dataKey}
+                            variant="head"
+                            align={column.numeric || false ? 'right' : 'left'}
+                            style={{ width: column.width }}
+                        >
+                            <b>{column.label}</b>
+                        </TableCell>
+                    ))}
+                </TableRow>
+            </>
         );
     }
 
