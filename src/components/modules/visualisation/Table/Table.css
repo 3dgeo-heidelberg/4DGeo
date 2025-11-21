@@ -1,0 +1,29 @@
+@import url("../../../../styles/main_theme.css");
+
+/* .table-header {
+    background-color: var(--clr-primary-a10);
+} */
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.selected {
+    background-color: var(--clr-primary-a50) !important;
+    opacity: 80%;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    height: 3rem;
+
+}
+
+.search_bar {
+    flex-grow: 0;
+    width: 25rem;
+}

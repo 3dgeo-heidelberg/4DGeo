@@ -23,7 +23,8 @@ function DashboardPage() {
     const [dateRange, setDateRange] = useState({ startDate: 0, endDate: Date.now()});
     const [sliderRange, setSliderRange] = useState([0, 100]);
     const [dateTimeRange, setDateTimeRange] = useState({ startDate: 0, endDate: Date.now()});
-    const [chartSelectedIndex, setChartSelectedIndex] = useState(-1)
+    const [chartSelectedIndex, setChartSelectedIndex] = useState(-1);
+    const [selectedObjectId, setSelectedObjectId] = useState(null);
 
     const [boundingBox, setBoundingBox] = useState(null);
 
@@ -262,6 +263,8 @@ function DashboardPage() {
                     chartSelectedIndex={chartSelectedIndex}
                     setChartSelectedIndex={setChartSelectedIndex}
                     setBoundingBox={setBoundingBox}
+                    selectedObjectId={selectedObjectId}
+                    setSelectedObjectId={setSelectedObjectId}
                 />
             </Box>
         </Box>

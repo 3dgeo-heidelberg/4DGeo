@@ -112,6 +112,7 @@ export default function LandingPage() {
           config?.TEMPLATES.map((template, index) => {
             return (
               <ListItemButton
+                sx={{borderRadius: '1rem'}}
                 key={index}
                 selected={selectedTemplate === index}
                 onClick={() => {
@@ -129,6 +130,7 @@ export default function LandingPage() {
         <Divider sx={{ my: 1 }} />
 
         <ListItemButton
+          sx={{borderRadius: '1rem'}}
           selected={selectedTemplate === config?.TEMPLATES.length}
           onClick={() => {
             handleLoadFromPermalinkSelection();
@@ -165,6 +167,7 @@ export default function LandingPage() {
         </Dialog>
 
         <ListItemButton
+          sx={{borderRadius: '1rem'}}
           selected={selectedTemplate === config?.TEMPLATES.length + 1}
           onClick={() => {
             handleDashboardCreationSelection();

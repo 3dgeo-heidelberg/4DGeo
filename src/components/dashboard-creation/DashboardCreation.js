@@ -13,7 +13,8 @@ const minimumModuleSizes = new Map([
     ["Chart", {w: 2, h: 2}],
     ["View2D", {w: 4, h: 2}],
     ["DateRangePicker", {w: 2, h: 1}],
-    ["Slider", {w: 2, h: 1}]
+    ["Slider", {w: 2, h: 1}],
+    ["Table", {w: 3, h: 3}]
   ])
 
 function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterval, typeColors, setTypeColors }) {
@@ -146,6 +147,7 @@ function DashboardCreation({ layout, setLayout, url, setUrl, interval, setInterv
                             <MenuItem onClick={handleClose}>Chart</MenuItem>
                             <MenuItem onClick={handleClose}>DateRangePicker</MenuItem>
                             <MenuItem onClick={handleClose}>Slider</MenuItem>
+                            <MenuItem onClick={handleClose}>Table</MenuItem>
                         </Menu>
 
                         <ColorAssignment typeColors={typeColors} setTypeColors={setTypeColors} preloadTypes={preloadTypes} />
