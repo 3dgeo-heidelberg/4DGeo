@@ -23,8 +23,17 @@ function DashboardPage() {
     const [dateRange, setDateRange] = useState({ startDate: 0, endDate: Date.now()});
     const [sliderRange, setSliderRange] = useState([0, 100]);
     const [dateTimeRange, setDateTimeRange] = useState({ startDate: 0, endDate: Date.now()});
-    const [chartSelectedIndex, setChartSelectedIndex] = useState(-1);
+    const [barChartSelectedIndex, setBarChartSelectedIndex] = useState(-1);
     const [selectedObjectId, setSelectedObjectId] = useState(null);
+
+    const [animationSliderRange, setAnimationSliderRange] = useState(null);
+    const [animationdateTimeRange, setAnimationDateTimeRange] = useState(null);
+    const [animationChartSelectedIndex, setAnimationChartSelectedIndex] = useState(null);
+    const [isInAnimation, setIsInAnimation] = useState(false);
+    const [isAnimationPaused, setIsAnimationPaused] = useState(false);
+    const [animationIntervalId, setAnimationIntervalId] = useState(null);
+    const [secondsPerFrame, setSecondsPerFrame] = useState(1);
+    const [isPreloadingImages, setIsPreloadingImages] = useState(false);
 
     const [boundingBox, setBoundingBox] = useState(null);
 
@@ -115,7 +124,7 @@ function DashboardPage() {
     }
 
     const resetDashboardState = (observations) => {
-        setChartSelectedIndex(-1);
+        setBarChartSelectedIndex(-1);
         let tempStartEnd = {
             startDate: Math.min(...observations.map(observation => {
                 return Date.parse(observation.startDateTime);
@@ -135,6 +144,13 @@ function DashboardPage() {
         } else {
             setSliderRange([0, 100])
         }
+
+        setAnimationChartSelectedIndex(null);
+        setAnimationDateTimeRange(null);
+        setAnimationIntervalId(null);
+        setAnimationSliderRange(null);
+        setSecondsPerFrame(1);
+        setIsInAnimation(false);
     }
 
     const onFileUpload = async (event) => {
@@ -260,11 +276,24 @@ function DashboardPage() {
                     setSliderRange={setSliderRange}
                     dateTimeRange={dateTimeRange}
                     setDateTimeRange={setDateTimeRange}
-                    chartSelectedIndex={chartSelectedIndex}
-                    setChartSelectedIndex={setChartSelectedIndex}
+                    barChartSelectedIndex={barChartSelectedIndex}
+                    setBarChartSelectedIndex={setBarChartSelectedIndex}
                     setBoundingBox={setBoundingBox}
                     selectedObjectId={selectedObjectId}
                     setSelectedObjectId={setSelectedObjectId}
+                    setAnimationChartSelectedIndex={setAnimationChartSelectedIndex}
+                    setAnimationDateTimeRange={setAnimationDateTimeRange}
+                    animationIntervalId={animationIntervalId}
+                    setAnimationIntervalId={setAnimationIntervalId}
+                    setAnimationSliderRange={setAnimationSliderRange}
+                    secondsPerFrame={secondsPerFrame}
+                    setSecondsPerFrame={setSecondsPerFrame}
+                    isAnimationPaused={isAnimationPaused}
+                    setIsAnimationPaused={setIsAnimationPaused}
+                    isInAnimation={isInAnimation}
+                    setIsInAnimation={setIsInAnimation}
+                    isPreloadingImages={isPreloadingImages}
+                    setIsPreloadingImages={setIsPreloadingImages}
                 />
             </Box>
         </Box>
