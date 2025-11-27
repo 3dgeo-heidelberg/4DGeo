@@ -6,7 +6,7 @@ import DateRangePicker from "../modules/user-input/DateRangePicker";
 import ObservationSlider from "../modules/user-input/ObservationSlider";
 import Chart from "../modules/visualisation/Chart/Chart";
 import Table from "../modules/visualisation/Table/Table";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
