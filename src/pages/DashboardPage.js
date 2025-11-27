@@ -26,9 +26,6 @@ function DashboardPage() {
     const [barChartSelectedIndex, setBarChartSelectedIndex] = useState(-1);
     const [selectedObjectId, setSelectedObjectId] = useState(null);
 
-    const [animationSliderRange, setAnimationSliderRange] = useState(null);
-    const [animationdateTimeRange, setAnimationDateTimeRange] = useState(null);
-    const [animationChartSelectedIndex, setAnimationChartSelectedIndex] = useState(null);
     const [isInAnimation, setIsInAnimation] = useState(false);
     const [isAnimationPaused, setIsAnimationPaused] = useState(false);
     const [animationIntervalId, setAnimationIntervalId] = useState(null);
@@ -145,10 +142,7 @@ function DashboardPage() {
             setSliderRange([0, 100])
         }
 
-        setAnimationChartSelectedIndex(null);
-        setAnimationDateTimeRange(null);
         setAnimationIntervalId(null);
-        setAnimationSliderRange(null);
         setSecondsPerFrame(1);
         setIsInAnimation(false);
     }
@@ -281,11 +275,8 @@ function DashboardPage() {
                     setBoundingBox={setBoundingBox}
                     selectedObjectId={selectedObjectId}
                     setSelectedObjectId={setSelectedObjectId}
-                    setAnimationChartSelectedIndex={setAnimationChartSelectedIndex}
-                    setAnimationDateTimeRange={setAnimationDateTimeRange}
                     animationIntervalId={animationIntervalId}
                     setAnimationIntervalId={setAnimationIntervalId}
-                    setAnimationSliderRange={setAnimationSliderRange}
                     secondsPerFrame={secondsPerFrame}
                     setSecondsPerFrame={setSecondsPerFrame}
                     isAnimationPaused={isAnimationPaused}

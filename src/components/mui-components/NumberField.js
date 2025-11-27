@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { NumberField as BaseNumberField } from '@base-ui-components/react/number-field';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
