@@ -2,7 +2,31 @@
 
 .slider-container {
   width:100%;
-  margin: 1rem 3rem ;
+  margin: 1rem 3rem;
+
+  .slider-options {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+
+    .play-button-container {
+      margin: 1;
+      position: relative;
+
+      .play-button {
+        /* size: 3rem; */
+        color: var(--clr-primary-a40);
+      }
+
+      .preloading-animation {
+        color: var(--clr-surface-a50);
+        position: absolute;
+        z-index: 1;
+        left: 0rem;
+      }
+    }
+  }
 
   .observation-slider {
     color: var(--clr-primary-a30);

@@ -6,12 +6,37 @@ import DateRangePicker from "../modules/user-input/DateRangePicker";
 import ObservationSlider from "../modules/user-input/ObservationSlider";
 import Chart from "../modules/visualisation/Chart/Chart";
 import Table from "../modules/visualisation/Table/Table";
+import { useEffect, useRef } from "react";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, sliderRange, setSliderRange, dateTimeRange, setDateTimeRange, chartSelectedIndex, setChartSelectedIndex, setBoundingBox, selectedObjectId, setSelectedObjectId }) {
+function Dashboard({ 
+    layout,
+    observations,
+    typeColors,
+    dateRange,
+    setDateRange,
+    sliderRange,
+    setSliderRange,
+    dateTimeRange,
+    setDateTimeRange,
+    barChartSelectedIndex,
+    setBarChartSelectedIndex,
+    setBoundingBox,
+    selectedObjectId,
+    setSelectedObjectId,
+    animationIntervalId,
+    setAnimationIntervalId,
+    secondsPerFrame,
+    setSecondsPerFrame,
+    isInAnimation,
+    setIsInAnimation,
+    isPreloadingImages,
+    setIsPreloadingImages
+}) {
+    const animationSliderRange = useRef();
 
-    const getCustomDataFields = (observations) => {
+    const getCustomDataAttributes = (observations) => {
         const customDataFields = new Set();
         observations.forEach((observation) => {
             observation.geoObjects.forEach((geoObject) => {
@@ -25,7 +50,7 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
         return Array.from(customDataFields);
     }
 
-    const filterObservationsByDateRange = (startDate, endDate) => {
+    const filterObservationsByDateTimeRange = (observations, startDate, endDate) => {
         return Array.from(observations).filter((observation) => {
             return Date.parse(observation.startDateTime) >= startDate && Date.parse(observation.startDateTime) <= endDate;
         }).sort((a, b) => a.startDateTime > b.startDateTime ? 1 : -1);
@@ -40,6 +65,23 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
         }
     }
 
+    const filterObservationsBySelectedObject = (observations, selectedObjectId) => {
+        const filteredObservations = [];
+
+        if(selectedObjectId !== null) {
+            observations.forEach(observation => {
+                filteredObservations.push({
+                    ...observation,
+                    geoObjects: observation.geoObjects.filter(geoObject => geoObject.id === selectedObjectId)
+                });
+            })
+        } else {
+            filteredObservations.push(...Array.from(observations));
+        }
+
+        return filteredObservations;
+    }
+
     const resetSliderRange = (includedDateTimes) => {
         const newSliderRange = [includedDateTimes[includedDateTimes.length - 1]];
         setSliderRange(newSliderRange);
@@ -47,9 +89,9 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
     }
 
     const handleDateRangeSelected = (newDateRange) => {  
-        setChartSelectedIndex(-1);
+        setBarChartSelectedIndex(-1);
         setDateRange(newDateRange);    
-        let newFilteredObservations = filterObservationsByDateRange(newDateRange.startDate, newDateRange.endDate);
+        let newFilteredObservations = filterObservationsByDateTimeRange(newDateRange.startDate, newDateRange.endDate);
 
         const newSliderRange = resetSliderRange(Array.from(new Set(newFilteredObservations.map(observation => Date.parse(observation.startDateTime)))));
 
@@ -64,7 +106,7 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
 
 
     const handleSliderRangeSelected = (newSliderRange) => {
-        setChartSelectedIndex(-1);
+        setBarChartSelectedIndex(-1);
         setSliderRange(newSliderRange);
 
         if(newSliderRange.length === 1) {
@@ -80,26 +122,109 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
         }
     }
 
-    const handleBarSelected = (data, index) => {
-        if(index === chartSelectedIndex) {
-            setChartSelectedIndex(-1);
+    const handleChartBarSelected = (data, index) => {
+        if(index === barChartSelectedIndex) {
+            setBarChartSelectedIndex(-1);
         } else {
-            setChartSelectedIndex(index);
+            setBarChartSelectedIndex(index);
         }
     }
 
+
+    // Animation handling
+    const handlePlayButton = (includedDateTimes) => {
+        if(!isInAnimation) {
+            if(sliderRange.length === 1) {
+                startAnimation(includedDateTimes, includedDateTimes[0].getTime(), includedDateTimes[includedDateTimes.length - 1].getTime())
+            } else {
+                startAnimation(includedDateTimes, sliderRange[0], sliderRange[1]);
+            }
+            
+            setIsInAnimation(true);
+        } else {
+            stopAnimation(animationIntervalId);
+        }
+    }
+
+    const preloadImagesForAnimation = async (images) => {
+        return Promise.all(images.map(async (imgSrc) => {
+            const img = new Image();
+            img.src = imgSrc;
+            await img.decode();
+            return img;
+        }));
+    }
+
+    const startAnimation = (includedDateTimes, startDateTime, endDateTime) => {
+        setIsPreloadingImages(true);
+        let currentIndex = Array.from(includedDateTimes).map(dateTime => dateTime.getTime()).indexOf(startDateTime);
+        console.log("curr index", currentIndex, "\nincludedDateTimes", includedDateTimes, startDateTime)
+        const endIndex = Array.from(includedDateTimes).map(dateTime => dateTime.getTime()).indexOf(endDateTime);
+
+        animationSliderRange.current = [startDateTime, endDateTime];
+
+        preloadImagesForAnimation(
+            filterObservationsByDateTimeRange(observations, startDateTime, endDateTime).map((observation) => observation.backgroundImageData.url)
+        ).then(() => {
+            setIsPreloadingImages(false);
+            stepAnimation(includedDateTimes, currentIndex);
+
+            const interval = setInterval(() => {
+                currentIndex++;
+                if(currentIndex > endIndex) {
+                    stopAnimation(interval);
+                } else {
+                    stepAnimation(includedDateTimes, currentIndex);
+                }
+            }, secondsPerFrame * 1000);
+            
+            setAnimationIntervalId(interval);  
+        });
+    }
+
+    const stepAnimation = (includedDateTimes, currentIndex) => {
+        handleSliderRangeSelected([Array.from(includedDateTimes)[currentIndex].getTime()]);
+        setBarChartSelectedIndex(currentIndex);
+    }
+
+    const stopAnimation = (intervalId) => {
+        clearInterval(intervalId);
+        setIsPreloadingImages(false);
+        setIsInAnimation(false);
+        animationSliderRange.current = null;
+    }
+
+    const getObservations = (filterByDateTimeRange, filterBySelectedObject, filterBySelectedBarChart, dateTimeRange = null) => {
+        let filteredObservations = observations;
+
+        if(filterByDateTimeRange) { filteredObservations = filterObservationsByDateTimeRange(filteredObservations, dateTimeRange.startDate, dateTimeRange.endDate) }
+
+        if(filterBySelectedObject) { filteredObservations = filterObservationsBySelectedObject(filteredObservations, selectedObjectId) }
+
+        if(filterBySelectedBarChart) { filteredObservations = filterObservationsByChartSelected(filteredObservations, barChartSelectedIndex) }
+
+        return filteredObservations;
+    }
+
     const getGridItemContent = (moduleName) => {
-        const observationsFilteredByDateRange = filterObservationsByDateRange(dateTimeRange.startDate, dateTimeRange.endDate);
-        const observationsFilteredByChartSelected = filterObservationsByChartSelected(observationsFilteredByDateRange, chartSelectedIndex);
-        const customAttributeKeys = getCustomDataFields(observationsFilteredByDateRange);
+        const customAttributeKeys = getCustomDataAttributes(observations);
+
+        const dateTimesOnSlider = Array.from(new Set(Array.from(filterObservationsByDateTimeRange(observations, dateRange.startDate, dateRange.endDate)).map(observation => new Date(Date.parse(observation.startDateTime)))));
 
         switch(moduleName) {
             case 'Slider':
                 return(
                     <ObservationSlider
-                        includedDateTimes={Array.from(new Set(Array.from(filterObservationsByDateRange(dateRange.startDate, dateRange.endDate)).map(observation => new Date(Date.parse(observation.startDateTime)))))}
+                        includedDateTimes={dateTimesOnSlider}
                         sliderRange={sliderRange}
+                        animationSliderRange={animationSliderRange.current}
                         handleSliderRangeChange={handleSliderRangeSelected}
+                        handlePlayButton={handlePlayButton}
+                        stopAnimation={stopAnimation}
+                        isInAnimation={isInAnimation}
+                        secondsPerFrame={secondsPerFrame}
+                        setSecondsPerFrame={setSecondsPerFrame}
+                        isPreloadingImages={isPreloadingImages}
                     />
                 )
             case 'DateRangePicker':
@@ -109,26 +234,40 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
                         handleDateRangeChange={handleDateRangeSelected}
                         includedDates={Array.from(new Set(Array.from(observations).map(observation => {
                             const date = new Date(Date.parse(observation.startDateTime));
-                            return date.setHours(0, 0, 0, 0)
+                            return date.setHours(0, 0, 0, 0);
                         })))}
                     />
                 )
             case 'Chart':
                 return (
-                    <Chart 
-                        observations={observationsFilteredByDateRange}
+                    <Chart
+                        observations={!isInAnimation ? getObservations(
+                            true,
+                            true,
+                            false,
+                            dateTimeRange
+                        ) : getObservations(
+                            true,
+                            true,
+                            false,
+                            { "startDate": animationSliderRange.current[0], "endDate": animationSliderRange.current[1] }
+                        )}
                         typeColors={typeColors}
-                        onBarClick={handleBarSelected}
-                        selectedBarIndex={chartSelectedIndex}
+                        onBarClick={handleChartBarSelected}
+                        selectedBarIndex={barChartSelectedIndex}
                         customAttributeKeys={customAttributeKeys}
-                        selectedObjectId={selectedObjectId}
                     />
                 );
             case 'View2D':
                 return (
                     <MapView
                         className="mapview"
-                        observations={observationsFilteredByChartSelected}
+                        observations={getObservations(
+                            true,
+                            true,
+                            true,
+                            dateTimeRange
+                        )}
                         setBoundingBox={setBoundingBox}
                         typeColors={typeColors}
                         selectedObjectId={selectedObjectId}
@@ -137,7 +276,12 @@ function Dashboard({ layout, observations, typeColors, dateRange, setDateRange, 
             case 'Table':
                 return (
                     <Table
-                        observations={observationsFilteredByChartSelected}
+                        observations={getObservations(
+                            true,
+                            false,
+                            true,
+                            dateTimeRange
+                        )}
                         customAttributeKeys={customAttributeKeys}
                         selectedObjectId={selectedObjectId}
                         setSelectedObjectId={setSelectedObjectId}

@@ -1,10 +1,20 @@
-import Slider from '@mui/material/Slider';
-
 import './ObservationSlider.css'
-import { Box, Stack, Switch } from '@mui/material';
+import { Box, CircularProgress, IconButton, Slider, Stack, Switch } from '@mui/material';
+import PlayCircle from '@mui/icons-material/PlayCircle';
+import StopCircle from '@mui/icons-material/StopCircle';
+import NumberField from '../../mui-components/NumberField';
 
-export default function ObservationSlider({ includedDateTimes, sliderRange, handleSliderRangeChange }) {
-
+export default function ObservationSlider({ 
+    includedDateTimes,
+    sliderRange,
+    handleSliderRangeChange,
+    isInAnimation,
+    animationSliderRange,
+    secondsPerFrame,
+    setSecondsPerFrame,
+    handlePlayButton,
+    isPreloadingImages
+}) {
     const handleSwitchChange = (event) => {
         if (event.target.checked) {
             // Switch to range mode
@@ -19,8 +29,12 @@ export default function ObservationSlider({ includedDateTimes, sliderRange, hand
             // Switch to single mode
             handleSliderRangeChange([sliderRange[1]]);
         }
-    }
+    };
 
+    const handleSliderClick = (newValue) => {
+        if(!isInAnimation) { handleSliderRangeChange(newValue) }
+    };
+    
     return includedDateTimes.length > 1 ? (
         <div className='slider-container'>
             <Box className='slider-options'>
@@ -29,6 +43,29 @@ export default function ObservationSlider({ includedDateTimes, sliderRange, hand
                     <Switch checked={sliderRange.length === 1 ? false : true} onChange={handleSwitchChange} />
                     <span>Range</span>
                 </Stack>
+                <div>
+                    <NumberField 
+                        label="Seconds per Frame"
+                        min={0.1}
+                        max={100}
+                        size='small'
+                        value={secondsPerFrame}
+                        onValueChange={(newValue) => setSecondsPerFrame(newValue)}
+                    />
+                </div>
+                <div className='play-button-container'>
+                    <IconButton 
+                        className='play-button'
+                        onClick={() => handlePlayButton(includedDateTimes)}
+                    > 
+                        {isInAnimation ? <StopCircle /> : (<PlayCircle />)}
+                    </IconButton>
+                    {isPreloadingImages && (
+                        <CircularProgress
+                            className='preloading-animation'
+                        />
+                    )}
+                </div>
             </Box>
             <Slider
                 getAriaValueText={(dateTime) => {
@@ -55,8 +92,8 @@ export default function ObservationSlider({ includedDateTimes, sliderRange, hand
                 })}
                 min={Math.min(...includedDateTimes)}
                 max={Math.max(...includedDateTimes)}
-                value={sliderRange}
-                onChange={(_, newValue) => handleSliderRangeChange(newValue)}
+                value={isInAnimation ? [animationSliderRange[0], sliderRange[0], animationSliderRange[1]] : sliderRange}
+                onChange={(_, newValue) => handleSliderClick(newValue)}
                 disableSwap
                 className='observation-slider'
             />

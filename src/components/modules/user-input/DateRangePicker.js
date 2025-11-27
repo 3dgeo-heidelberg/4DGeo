@@ -18,7 +18,7 @@ import React from "react";
 
 import './DateRangePicker.css'
 
-export default function DateRangePicker({ includedDates, dateRange, handleDateRangeChange }) {
+export default function DateRangePicker({ includedDates, dateRange, handleDateRangeChange, isInAnimation }) {
     return (
         <AriaDateRangePicker 
             value={{
@@ -30,6 +30,7 @@ export default function DateRangePicker({ includedDates, dateRange, handleDateRa
                 endDate: item.end.toDate().getTime()
             })}
             granularity="day"
+            isDisabled={isInAnimation}
         >
             <Group>
                 <DateInput slot="start">

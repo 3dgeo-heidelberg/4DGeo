@@ -20,9 +20,8 @@ L.Icon.Default.mergeOptions({
 export default function View2D({ 
     observations,
     typeColors,
-    setBoundingBox,
-    selectedObjectId
- }) {
+    setBoundingBox
+}) {
     const clusteredLayer = useRef(null);
     const normalLayer = useRef(null);
 
@@ -70,21 +69,8 @@ export default function View2D({
 
             var deflateFeatures = L.deflate({minSize: 5, markerLayer: objectsToCluster, markerType: L.marker});
             deflateFeatures.addTo(clusteredLayer.current);
-
-            const filteredObservations = [];
-
-            if(selectedObjectId !== null) {
-                observations.forEach(observation => {
-                    filteredObservations.push({
-                        ...observation,
-                        geoObjects: observation.geoObjects.filter(geoObject => geoObject.id === selectedObjectId)
-                    });
-                })
-            } else {
-                filteredObservations.push(...observations);
-            }
             
-            Array.from(filteredObservations).forEach((observation) => Array.from(observation.geoObjects).forEach((geoObject) => {
+            Array.from(observations).forEach((observation) => Array.from(observation.geoObjects).forEach((geoObject) => {
                 switch(geoObject.geometry.type) {
                     case 'Polygon':
                         const leafletPolygon = new L.polygonClusterable(
