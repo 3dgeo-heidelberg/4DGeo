@@ -56,6 +56,17 @@ export default function Chart({ observations, typeColors, onBarClick, selectedBa
                     return accumulator;
                 }, {});
 
+                const errorsByType = observation.geoObjects.reduce((accumulator, geoObject) => {
+                    const { type } = geoObject;
+                    if(!accumulator[type]) {
+                        accumulator[type] = [];
+                    }
+
+                    if(geoObject.customAttributes[valueKey]) {
+                        
+                    }
+                })
+
                 Object.entries(valuesByType).forEach(([type, values]) => {
                     switch (operatorKey) {
                         case "Sum":
