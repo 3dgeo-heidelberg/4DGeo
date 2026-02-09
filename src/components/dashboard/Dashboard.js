@@ -36,7 +36,7 @@ function Dashboard({
 }) {
     const animationSliderRange = useRef();
 
-    const getCustomDataAttributes = (observations) => {
+    const getCustomObjectAttributesKeys = (observations) => {
         const customDataFields = new Set();
         observations.forEach((observation) => {
             observation.geoObjects.forEach((geoObject) => {
@@ -46,6 +46,16 @@ function Dashboard({
                     });
                 }
             });
+        });
+        return Array.from(customDataFields);
+    }
+
+    const getCustomObservationAttributeKeys = (observations) => {
+        const customDataFields = new Set();
+        observations.forEach((observation) => {
+            Object.keys(observation.customAttributes).forEach((key) => {
+                customDataFields.add(key);
+            })
         });
         return Array.from(customDataFields);
     }
@@ -207,7 +217,8 @@ function Dashboard({
     }
 
     const getGridItemContent = (moduleName) => {
-        const customAttributeKeys = getCustomDataAttributes(observations);
+        const customObjectAttributeKeys = getCustomObjectAttributesKeys(observations);
+        const customObservationAttributeKeys = getCustomObservationAttributeKeys(observations);
 
         const dateTimesOnSlider = Array.from(new Set(Array.from(filterObservationsByDateTimeRange(observations, dateRange.startDate, dateRange.endDate)).map(observation => new Date(Date.parse(observation.startDateTime)))));
 
@@ -255,7 +266,7 @@ function Dashboard({
                         typeColors={typeColors}
                         onBarClick={handleChartBarSelected}
                         selectedBarIndex={barChartSelectedIndex}
-                        customAttributeKeys={customAttributeKeys}
+                        customAttributeKeys={customObjectAttributeKeys}
                     />
                 );
             case 'View2D':
@@ -282,7 +293,7 @@ function Dashboard({
                             true,
                             dateTimeRange
                         )}
-                        customAttributeKeys={customAttributeKeys}
+                        customAttributeKeys={customObjectAttributeKeys}
                         selectedObjectId={selectedObjectId}
                         setSelectedObjectId={setSelectedObjectId}
                     />
